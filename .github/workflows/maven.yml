@@ -19,11 +19,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      DB_URL: ${{ secrets.DB_URL }}
-      DB_USERNAME: ${{ secrets.DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -32,15 +27,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Set up Environment Variables for Maven
-      run: |
-          echo "export spring.datasource.url=${DB_URL}" >> $GITHUB_ENV
-          echo "export spring.datasource.username=${DB_USERNAME}" >> $GITHUB_ENV
-          echo "export spring.datasource.password=${DB_PASSWORD}" >> $GITHUB_ENV
     - name: Build with Maven
-      run: |
-          source $GITHUB_ENV
-          mvn clean install
+      run: mvn clean install -Dspring.datasource.url=${{ secrets.DB_URL }} -Dspring.datasource.username=${{ secrets.DB_USERNAME }} -Dspring.datasource.password=${{ secrets.DB_PASSWORD }}
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
