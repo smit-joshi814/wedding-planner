@@ -19,7 +19,7 @@
 	</properties>
 	<dependencies>
 
-	
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -70,7 +70,7 @@
 			<artifactId>tomcat-jasper</artifactId>
 			<version>10.1.5</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -88,6 +88,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<fork>true</fork>
+					<jvmArguments>
+						<jvmArgument>-Dspring.datasource.url=${DB_URL}</jvmArgument>
+						<jvmArgument>-Dspring.datasource.username=${DB_USERNAME}</jvmArgument>
+						<jvmArgument>-Dspring.datasource.password=${DB_PASSWORD}</jvmArgument>
+					</jvmArguments>
 					<image>
 						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
 					</image>
