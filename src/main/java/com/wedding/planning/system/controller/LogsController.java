@@ -13,4 +13,7 @@ public class LogsController {
         return new ModelAndView("logs");
     }
     
+    
+    
+    
 }
