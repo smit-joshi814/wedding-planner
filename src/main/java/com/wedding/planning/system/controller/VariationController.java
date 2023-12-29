@@ -6,10 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/variations")
 public class VariationController {
 
-    @RequestMapping("/variations")  
+    @RequestMapping  
 	public ModelAndView variations(){
         return new ModelAndView("variations");
     }

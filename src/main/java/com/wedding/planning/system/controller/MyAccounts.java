@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/my-account")
 public class MyAccounts {
     
-    @RequestMapping("/my-account")
+    @RequestMapping
     public ModelAndView myAccount() {
         return new ModelAndView("my-account");
     }    

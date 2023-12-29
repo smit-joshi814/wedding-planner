@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/service-variation")
 public class ServiceVariationController {
     
-    @RequestMapping("/service-variation")
+    @RequestMapping
     public ModelAndView serviceVariation() {
         return new ModelAndView("service-variations");
     } 

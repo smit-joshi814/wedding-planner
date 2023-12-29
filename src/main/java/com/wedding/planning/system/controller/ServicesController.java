@@ -6,10 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/services")
 public class ServicesController {
 
-    @RequestMapping("/services")
+    @RequestMapping
     public ModelAndView services() {
         return new ModelAndView("services");
     }

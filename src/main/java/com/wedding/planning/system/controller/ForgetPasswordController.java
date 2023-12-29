@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/forgetPassword")
 public class ForgetPasswordController {
     
-    @RequestMapping("/forgetPassword")
+    @RequestMapping
     public ModelAndView forgetPassword() {
         return new ModelAndView("forgot-password");
     

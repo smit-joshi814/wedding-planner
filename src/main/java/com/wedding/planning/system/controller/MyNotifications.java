@@ -6,10 +6,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/my-notifications")
 public class MyNotifications {
 
-	@RequestMapping("/my-notifications")
+	@RequestMapping
 	public ModelAndView myNotifications() {
 		return new ModelAndView("my-notifications");
 	}

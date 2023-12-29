@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/vendors")
 public class VendorsController {
 
-    @RequestMapping("/vendors")
+    @RequestMapping
     public ModelAndView vendors(){
         return new ModelAndView("vendors");
     }
