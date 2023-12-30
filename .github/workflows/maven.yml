@@ -18,6 +18,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      # Store sensitive information as secrets
+      SPRING_DATASOURCE_URL: ${{ secrets.DATABASE_URL }}
+      SPRING_DATASOURCE_USERNAME: ${{ secrets.DATABASE_USER }}
+      SPRING_DATASOURCE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
 
     steps:
     - uses: actions/checkout@v3
@@ -28,14 +33,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean install -Dspring.datasource.url=${{ secrets.DB_URL }} -Dspring.datasource.username=${{ secrets.DB_USERNAME }} -Dspring.datasource.password=${{ secrets.DB_PASSWORD }}
+      run: mvn clean install
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
-      env:
-        # Store sensitive information as secrets
-        SPRING_DATASOURCE_URL: ${{ secrets.DATABASE_URL }}
-        SPRING_DATASOURCE_USERNAME: ${{ secrets.DATABASE_USER }}
-        SPRING_DATASOURCE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
       with:
         image: smit814/wedding-planning-images
         tags: v0.1, latest
