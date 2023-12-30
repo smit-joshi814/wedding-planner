@@ -31,6 +31,11 @@ jobs:
       run: mvn clean install -Dspring.datasource.url=${{ secrets.DB_URL }} -Dspring.datasource.username=${{ secrets.DB_USERNAME }} -Dspring.datasource.password=${{ secrets.DB_PASSWORD }}
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
+      env:
+        # Store sensitive information as secrets
+        SPRING_DATASOURCE_URL: ${{ secrets.DATABASE_URL }}
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.DATABASE_USER }}
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
       with:
         image: smit814/wedding-planning-images
         tags: v0.1, latest
