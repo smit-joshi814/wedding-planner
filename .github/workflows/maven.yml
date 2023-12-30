@@ -20,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Store sensitive information as secrets
-      SPRING_DATASOURCE_URL: ${{ secrets.DATABASE_URL }}
-      SPRING_DATASOURCE_USERNAME: ${{ secrets.DATABASE_USER }}
-      SPRING_DATASOURCE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      SPRING_DATASOURCE_URL: ${{ secrets.DB_URL }}
+      SPRING_DATASOURCE_USERNAME: ${{ secrets.DB_USERNAME }}
+      SPRING_DATASOURCE_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
     steps:
     - uses: actions/checkout@v3
