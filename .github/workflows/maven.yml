@@ -23,6 +23,9 @@ jobs:
       SPRING_DATASOURCE_URL: ${{ secrets.DB_URL }}
       SPRING_DATASOURCE_USERNAME: ${{ secrets.DB_USERNAME }}
       SPRING_DATASOURCE_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      IMGKIT_API_PUBLIC: ${{secrets.IMGKIT_API_PUBLIC}}
+      IMGKIT_API_PRIVATE: ${{secrets.IMGKIT_API_PRIVATE}}
+      IMGKIT_API_ENDPOINT: ${{secrets.IMGKIT_API_ENDPOINT}}
 
     steps:
     - uses: actions/checkout@v3

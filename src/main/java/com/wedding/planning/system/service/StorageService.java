@@ -1,36 +1,81 @@
 package com.wedding.planning.system.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import io.imagekit.sdk.ImageKit;
+import io.imagekit.sdk.exceptions.BadRequestException;
+import io.imagekit.sdk.exceptions.ForbiddenException;
+import io.imagekit.sdk.exceptions.InternalServerException;
+import io.imagekit.sdk.exceptions.TooManyRequestsException;
+import io.imagekit.sdk.exceptions.UnauthorizedException;
+import io.imagekit.sdk.exceptions.UnknownException;
+import io.imagekit.sdk.models.FileCreateRequest;
+import io.imagekit.sdk.models.results.Result;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wedding.planning.system.storage.Storage;
+import java.io.IOException;
 
 @Service
 public class StorageService {
 
-    public boolean storeFile(MultipartFile file, String path) throws IllegalStateException, IOException {
-        Path toStore = Paths.get(Storage.WEBAPP + path);
-        file.transferTo(toStore);
-        return true;
-    }
+	@Value("${imagekit.api-public}")
+	private String publicKey= env("IMGKIT_API_PUBLIC");
 
-    public boolean deleteFile(String path) throws Exception {
-        String toDelete=Storage.WEBAPP+path;
-        File fileToDelete = new File(toDelete);
+	@Value("${imagekit.api-private}")
+	private String privateKey = env("IMGKIT_API_PRIVATE");
 
-        if (fileToDelete.exists()) {
-            if (fileToDelete.delete()) {
-                return true;
-            } else {
-                throw new Exception("403");
-            }
-        } else {
-            throw new Exception("Error deleting File: File not found");
-        }
-    }
+	@Value("${imagekit.url-endpoint}")
+	private String urlEndPoint = env("IMGKIT_API_ENDPOINT");
+
+
+		
+	private static String env(String name) {
+		return System.getenv(name);
+	}
+
+
+	public String upload(MultipartFile file, String name, String FOLDER_NAME) throws IOException {
+
+		try {
+			ImageKit imageKit = getImageKit();
+			FileCreateRequest request = new FileCreateRequest(file.getBytes(), name);
+			request.folder = FOLDER_NAME;
+			Result response = imageKit.upload(request);
+			return response.getFileId();
+		} catch (InternalServerException | BadRequestException | UnknownException | ForbiddenException
+				| TooManyRequestsException | UnauthorizedException | IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	public String getImageUrl(String fileId) {
+		try {
+			ImageKit imageKit = getImageKit();
+			return imageKit.getFileDetail(fileId).getUrl();
+		} catch (ForbiddenException | TooManyRequestsException | InternalServerException | UnauthorizedException
+				| BadRequestException | UnknownException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	public boolean delete(String fileId) {
+		try {
+			ImageKit imageKit = getImageKit();
+			imageKit.deleteFile(fileId);
+			return false;
+		} catch (ForbiddenException | TooManyRequestsException | InternalServerException | UnauthorizedException
+				| BadRequestException | UnknownException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	private ImageKit getImageKit() {
+		ImageKit imageKit = ImageKit.getInstance();
+		imageKit.setConfig(new io.imagekit.sdk.config.Configuration(publicKey, privateKey, urlEndPoint));
+		return imageKit;
+	}
 }

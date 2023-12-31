@@ -1,7 +1,9 @@
 function showAlert(id, alertType, message) {
     $(id).addClass(alertType).find(".d-flex > div").text(message);
+    $("#spinner-on-submit").addClass("d-none");
     $("#add-service-category-msg").parent().removeClass("d-none").hide().fadeIn(500).delay(1500).animate({ height: 'toggle' }, 500, function () {
         $(this).addClass("d-none");
+        $(id).removeClass(alertType);
     });
 }
 
@@ -13,6 +15,7 @@ const ENDPOINT_BASE = "/service-categories"
 // ADD SERVICE CATEGORY
 $("#add-service-category").on("submit", function (e) {
     e.preventDefault();
+    $("#spinner-on-submit").removeClass("d-none");
     $.ajax({
         url: ENDPOINT_BASE + "/add-service-categories",
         type: "POST",
@@ -25,9 +28,9 @@ $("#add-service-category").on("submit", function (e) {
             200: () => $("#add-service-category").trigger("reset"),
             500: () => showAlert("#add-service-category-msg", "alert-danger", "Internal Server Error"),
         },
-        success: function (data) {
+        success: function () {
             showAlert("#add-service-category-msg", "alert-success", "Service Category Added Successfully");
-        }
+        },
     });
 });
 

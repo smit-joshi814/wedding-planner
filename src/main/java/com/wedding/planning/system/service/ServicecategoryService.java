@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.wedding.planning.system.dao.ServiceCategoriesDao;
 import com.wedding.planning.system.model.ServiceCategories;
@@ -23,31 +23,30 @@ public class ServicecategoryService {
     private StorageService service;
 
     public ResponseEntity<List<ServiceCategories>> getAllServiceCategories() {
-        return ResponseEntity.ok().body(dao.findAll());
+
+        return ResponseEntity.ok().body(dao.findAll().stream()
+                .peek(category -> category
+                        .setServiceCategoryIcon(service.getImageUrl(category.getServiceCategoryIcon())))
+                .collect(Collectors.toList()));
     }
 
     public ResponseEntity<ServiceCategories> addServiceCategories(String serviceCategoryName, MultipartFile icon,
             boolean isActive) {
-        String path = Storage.CATEGORY_DIR + UUID.randomUUID() + icon.getOriginalFilename();
-
+        String path = icon.getOriginalFilename();
         try {
-            service.storeFile(icon, path);
+            path = service.upload(icon, path, Storage.STORAGE_CATEGORIES);
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.internalServerError().body(null);
         }
 
-        return ResponseEntity.ok().body(dao.save(ServiceCategories.builder()
-                .serviceCategoryName(serviceCategoryName)
-                .serviceCategoryIcon(path.toString())
-                .isActive(isActive)
-                .build()));
-
+        return ResponseEntity.ok().body(dao.save(ServiceCategories.builder().serviceCategoryName(serviceCategoryName)
+                .serviceCategoryIcon(path).isActive(isActive).build()));
     }
 
     public ResponseEntity<String> deleteServiceCategories(int serviceCategoryId) {
         try {
-            service.deleteFile(dao.findById(serviceCategoryId).get().getServiceCategoryIcon());
+            service.delete(dao.findById(serviceCategoryId).get().getServiceCategoryIcon());
             dao.deleteById(serviceCategoryId);
             return ResponseEntity.ok().body("File Deleted Successfully");
         } catch (Exception e) {
@@ -59,5 +58,4 @@ public class ServicecategoryService {
             }
         }
     }
-
 }

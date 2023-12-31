@@ -73,17 +73,16 @@
 							<div class="card-footer d-flex justify-content-between">
 								<div class="d-none">
 									<div id="add-service-category-msg"
-										class="alert alert-important  alert-dismissible" role="alert">
+										class="alert alert-important alert-dismissible" role="alert">
 										<div class="d-flex">
 											<i class="ti-check ti icon"></i>
 											<div></div>
 										</div>
-										<a class="btn-close" data-bs-dismiss="alert"
-											aria-label="close"></a>
 									</div>
 								</div>
-								<div>
-									<button type="submit" class="btn btn-primary">Submit</button>
+								<div class="d-flex align-items-center">
+									<button type="submit" class="btn btn-primary">Submit</button> 
+									<div id="spinner-on-submit" class="d-none spinner-border spinner-border text-secondary ms-4" role="status"></div>
 								</div>
 							</div>
 						</form>
@@ -112,7 +111,7 @@
 												<td class="sort-name">
 													<div class="d-flex py-1 align-items-center">
 														<span class="avatar me-2"
-															style="background-image: url(<%=category.getServiceCategoryIcon().replace("\\", "/")%>)"></span>
+															style="background-image: url(<%=category.getServiceCategoryIcon()%>)"></span>
 														<div class="flex-fill">
 															<div class="font-weight-medium"><%=category.getServiceCategoryName()%></div>
 														</div>
