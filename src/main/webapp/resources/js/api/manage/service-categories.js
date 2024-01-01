@@ -1,3 +1,4 @@
+// UTIL
 function showAlert(id, alertType, message) {
     $(id).addClass(alertType).find(".d-flex > div").text(message);
     $(document).find(".spinner-show").addClass("d-none");
@@ -10,14 +11,14 @@ function showAlert(id, alertType, message) {
 // APIs REQUESTS FOR SERVICE CATEGORIES
 
 // ENDPOINT: service-categories/add-service-category
-const ENDPOINT_BASE = "/service-categories"
+const SERVICE_CATEGORY = "/service-categories"
 
 // ADD SERVICE CATEGORY
 $("#add-service-category").on("submit", function (e) {
     e.preventDefault();
     $(document).find(".spinner-show").removeClass("d-none");
     $.ajax({
-        url: ENDPOINT_BASE + "/add-service-categories",
+        url: SERVICE_CATEGORY + "/add-service-categories",
         type: "POST",
         data: new FormData(this),
         enctype: "multipart/form-data",
@@ -41,7 +42,7 @@ $(document).on("click", ".delete-service-category", function () {
     let id = $(this).data("id");
     let element = this;
     $.ajax({
-        url: ENDPOINT_BASE + "/delete-service-categories/" + id,
+        url: SERVICE_CATEGORY + "/delete-service-categories/" + id,
         type: "DELETE",
         statusCode: {
             403: function (data) {
@@ -103,7 +104,7 @@ $("#edit-service-category-form").on("submit", function (e) {
     e.preventDefault();
     $(document).find(".spinner-show").removeClass("d-none");
     $.ajax({
-        url: ENDPOINT_BASE + "/edit-service-categories",
+        url: SERVICE_CATEGORY + "/edit-service-categories",
         type: "PUT",
         data: new FormData(this),
         enctype: "multipart/form-data",

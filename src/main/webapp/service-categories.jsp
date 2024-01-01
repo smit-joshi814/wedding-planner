@@ -175,8 +175,7 @@
 		  <h5 class="modal-title">Edit Service Category</h5>
 		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
-		<div class="modal-body">
-			
+		<div class="modal-body">	
 		  <div class="mb-3">
 				<label class="form-label">Category Name</label>
 				<input type="text" name="edit-service-category-name" id="edit-service-category-name" class="form-control" />
