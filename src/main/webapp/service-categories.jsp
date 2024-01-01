@@ -82,7 +82,7 @@
 								</div>
 								<div class="d-flex align-items-center">
 									<button type="submit" class="btn btn-primary">Submit</button> 
-									<div id="spinner-on-submit" class="d-none spinner-border spinner-border text-secondary ms-4" role="status"></div>
+									<div class="d-none spinner-show spinner-border spinner-border text-secondary ms-4" role="status"></div>
 								</div>
 							</div>
 						</form>
@@ -110,8 +110,7 @@
 												<td class="sort-id" class="text-secondary"><%=category.getServiceCategoryId()%></td>
 												<td class="sort-name">
 													<div class="d-flex py-1 align-items-center">
-														<span class="avatar me-2"
-															style="background-image: url(<%=category.getServiceCategoryIcon()%>)"></span>
+														<img class="avatar me-2" src="<%=category.getServiceCategoryIcon()%>"></img>
 														<div class="flex-fill">
 															<div class="font-weight-medium"><%=category.getServiceCategoryName()%></div>
 														</div>
@@ -133,7 +132,10 @@
 													<div class="btn-list flex-nowrap">
 														<button
 															data-id="<%=category.getServiceCategoryId()%>"
-															class="btn edit-service-category">Edit</button>
+															data-name="<%=category.getServiceCategoryName()%>"
+															data-image="<%=category.getServiceCategoryIcon()%>"
+															data-active="<%=category.isActive()%>"
+															class="btn edit-service-category" data-bs-toggle="modal" data-bs-target="#modal-edit" >Edit</button>
 														<button
 															data-id="<%=category.getServiceCategoryId()%>"
 															class="btn delete-service-category">Delete</button>
@@ -163,6 +165,67 @@
 			<jsp:include page="components/footer.jsp" />
 		</div>
 	</div>
+<!-- MODELS -->
+
+<div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	<form id="edit-service-category-form">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title">Edit Service Category</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			
+		  <div class="mb-3">
+				<label class="form-label">Category Name</label>
+				<input type="text" name="edit-service-category-name" id="edit-service-category-name" class="form-control" />
+		  </div>
+		  <div class="mb-3">
+			<label class="form-label">Image</label>
+			<input type="file" accept="image/*" name="edit-category-image" class="form-control" >
+		  </div>
+		  <div class="mb-3">
+			<label class="form-label">Status</label>
+			<div class="d-flex justify-content-around">
+				<label class="form-check"> <input
+					class="form-check-input" name="edit-service-category-status" id="edit-service-category-active" value="1"
+					type="radio" checked required /> <span
+					class="form-check-label">Active</span>
+				</label> <label class="form-check"> <input
+					class="form-check-input" name="edit-service-category-status" id="edit-service-category-inactive" value="0"
+					type="radio" /><span class="form-check-label">In
+						Active</span>
+				</label>
+			</div>
+		</div>
+		  <div class="mb-3 d-flex justify-content-center">
+			<img src="" alt="" class="img rounded" style="max-width: 300px;" id="edit-service-category-image">
+		  </div>
+		  <div class="mb-3">
+			<div class="d-none">
+				<div id="edit-service-category-msg"
+					class="alert alert-important alert-dismissible" role="alert">
+					<div class="d-flex">
+						<i class="ti-check ti icon"></i>
+						<div></div>
+					</div>
+				</div>
+			</div>
+		  </div>
+		</div>
+		<div class="modal-footer">
+			<input type="hidden" id="edit-service-category-id" name="edit-service-category-id" value="" />
+		  <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+		  <div class="d-none spinner-show spinner-border spinner-border text-secondary ms-4" role="status"></div>
+		  <button type="submit" class="btn btn-primary">Update Service Category</button>
+		</div>
+	  </div>
+	  </form>
+	</div>
+  </div>
+
+
 	<jsp:include page="components/footer-imports.jsp" />
 
 	<!-- FILE SPECIFIC IMPORTS -->

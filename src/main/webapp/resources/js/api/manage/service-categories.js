@@ -1,7 +1,7 @@
 function showAlert(id, alertType, message) {
     $(id).addClass(alertType).find(".d-flex > div").text(message);
-    $("#spinner-on-submit").addClass("d-none");
-    $("#add-service-category-msg").parent().removeClass("d-none").hide().fadeIn(500).delay(1500).animate({ height: 'toggle' }, 500, function () {
+    $(document).find(".spinner-show").addClass("d-none");
+    $(id).parent().removeClass("d-none").hide().fadeIn(500).delay(1500).animate({ height: 'toggle' }, 500, function () {
         $(this).addClass("d-none");
         $(id).removeClass(alertType);
     });
@@ -15,7 +15,7 @@ const ENDPOINT_BASE = "/service-categories"
 // ADD SERVICE CATEGORY
 $("#add-service-category").on("submit", function (e) {
     e.preventDefault();
-    $("#spinner-on-submit").removeClass("d-none");
+    $(document).find(".spinner-show").removeClass("d-none");
     $.ajax({
         url: ENDPOINT_BASE + "/add-service-categories",
         type: "POST",
@@ -75,5 +75,46 @@ $(document).on("click", ".delete-service-category", function () {
                     $(this).fadeOut(500); // Remove the row after the animation
                 });
         }
+    });
+});
+
+// .edit-service-category on click 
+$(document).on("click", ".edit-service-category", function () {
+    let id = $(this).data("id");
+    let name = $(this).data("name");
+    let image = $(this).data("image");
+    let active = $(this).data("active");
+
+    $("#edit-service-category-id").val(id);
+    $("#edit-service-category-name").val(name);
+    $("#edit-service-category-image").attr("src", image);
+
+    if (active == 1) {
+        $("#edit-service-category-active").prop("checked", true);
+        $("#edit-service-category-inactive").prop("checked", false);
+    } else {
+        $("#edit-service-category-active").prop("checked", false);
+        $("#edit-service-category-inactive").prop("checked", true);
+    }
+});
+
+// #edit-service-category-form on submit
+$("#edit-service-category-form").on("submit", function (e) {
+    e.preventDefault();
+    $(document).find(".spinner-show").removeClass("d-none");
+    $.ajax({
+        url: ENDPOINT_BASE + "/edit-service-categories",
+        type: "PUT",
+        data: new FormData(this),
+        enctype: "multipart/form-data",
+        cache: false,
+        contentType: false,
+        processData: false,
+        statusCode: {
+            500: () => showAlert("#edit-service-category-msg", "alert-danger", "Internal Server Error"),
+        },
+        success: function () {
+            showAlert("#edit-service-category-msg", "alert-success", "Service Category Edited Successfully");
+        },
     });
 });

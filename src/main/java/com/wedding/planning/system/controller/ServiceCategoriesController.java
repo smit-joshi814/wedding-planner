@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 @RequestMapping("/service-categories")
@@ -40,13 +41,22 @@ public class ServiceCategoriesController {
 	public ResponseEntity<ServiceCategories> addServiceCategories(
 			@RequestParam("serviceCategoryName") String serviceCategoryName,
 			@RequestParam("serviceCategoryIcon") MultipartFile serviceCategoryIcon,
-			@RequestParam("isActive") boolean isActive) {
+			@RequestParam(name = "isActive",required = false,defaultValue = "1") boolean isActive) {
 		return service.addServiceCategories(serviceCategoryName, serviceCategoryIcon, isActive);
 	}
 
 	@DeleteMapping("/delete-service-categories/{id}")
 	public ResponseEntity<String> deleteServiceCategories(@PathVariable("id") int serviceCategoryId) {
 		return service.deleteServiceCategories(serviceCategoryId);
+	}
+
+	@PutMapping("/edit-service-categories")
+	public ResponseEntity<ServiceCategories> editServiceCategories(
+			@RequestParam("edit-service-category-id") Integer serviceCategoryId,
+			@RequestParam("edit-service-category-name") String serviceCategoryName,
+			@RequestParam(name="edit-category-image",required = false) MultipartFile serviceCategoryIcon,
+			@RequestParam("edit-service-category-status") boolean isActive) {
+		return service.editServiceCategories(serviceCategoryId, serviceCategoryName, serviceCategoryIcon, isActive);
 	}
 
 }

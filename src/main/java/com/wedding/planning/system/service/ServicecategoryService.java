@@ -12,8 +12,8 @@ import com.wedding.planning.system.storage.Storage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
-
 
 @Service
 public class ServicecategoryService {
@@ -58,5 +58,27 @@ public class ServicecategoryService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
             }
         }
+    }
+
+    public ResponseEntity<ServiceCategories> editServiceCategories(Integer serviceCategoryId,
+            String serviceCategoryName,
+            MultipartFile serviceCategoryIcon, boolean isActive) {
+
+        ServiceCategories dbCategory = dao.findById(serviceCategoryId).get();
+        if (Objects.nonNull(isActive)) {
+            dbCategory.setActive(isActive);
+        }
+         if (Objects.nonNull(serviceCategoryName) && !"".equalsIgnoreCase(serviceCategoryName)) {
+            dbCategory.setServiceCategoryName(serviceCategoryName);
+        }
+         if(Objects.nonNull(serviceCategoryIcon) && !"".equalsIgnoreCase(serviceCategoryIcon.getOriginalFilename())) {
+            System.err.println("IN SERVICE");
+            try {
+                dbCategory.setServiceCategoryIcon(service.upload(serviceCategoryIcon, serviceCategoryIcon.getOriginalFilename(), Storage.STORAGE_CATEGORIES));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return ResponseEntity.ok().body(dao.save(dbCategory));
     }
 }
