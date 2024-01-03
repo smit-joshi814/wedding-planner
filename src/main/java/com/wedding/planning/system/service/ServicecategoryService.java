@@ -49,10 +49,10 @@ public class ServicecategoryService {
         try {
             service.delete(dao.findById(serviceCategoryId).get().getServiceCategoryIcon());
             dao.deleteById(serviceCategoryId);
-            return ResponseEntity.ok().body("File Deleted Successfully");
+            return ResponseEntity.ok().body("Category Deleted Successfully");
         } catch (Exception e) {
             if (e.getMessage().equals("403")) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Error deleting File: Permission Denied");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Error deleting Category Image: Permission Denied");
             } else {
                 dao.deleteById(serviceCategoryId);
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

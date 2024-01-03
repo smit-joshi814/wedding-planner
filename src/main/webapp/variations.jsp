@@ -1,3 +1,7 @@
+<%@page
+	import="com.fasterxml.jackson.databind.ser.std.ObjectArraySerializer"%>
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
+<%@page import="java.util.stream.Collectors"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.wedding.planning.system.model.VariationOption"%>
 <%@page import="com.wedding.planning.system.model.Variation"%>
@@ -131,17 +135,18 @@
 											<tr>
 												<th><button class="table-sort" data-sort="sort-id">Id</button>
 												</th>
-												<th><button class="table-sort" data-sort="sort-Vname">Variation
-														Name</button></th>
-												<th><button class="table-sort" data-sort="sort-Voption">Variation
+												<th><button class="table-sort"
+														data-sort="sort-variation-name">Variation Name</button></th>
+												<th><button class="table-sort"
+														data-sort="sort-variation-option">Variation
 														Option</button></th>
 												<th><button class="table-sort"
 														data-sort="sort-category">Category</button></th>
-												<th><button class="table-sort" data-sort="sort-actions">Actions</button></th>
+												<th><button class="table-sort" data-sort="sort-actions">Actions</button>
+												</th>
 											</tr>
 										</thead>
 										<tbody class="table-tbody">
-
 											<%
 											List<Variation> variations = (List<Variation>) request.getAttribute("variationList");
 											List<VariationOption> options = (List<VariationOption>) request.getAttribute("variationOptionList");
@@ -149,7 +154,7 @@
 											%>
 											<tr>
 												<td class="sort-id" class="text-secondary"><%=variation.getVariationId()%></td>
-												<td class="sort-Vname">
+												<td class="sort-variation-name">
 													<div class="d-flex py-1 align-items-center">
 														<div class="flex-fill">
 															<div class="font-weight-medium"><%=variation.getVariationName()%></div>
@@ -157,14 +162,20 @@
 													</div>
 												</td>
 
-												<td class="sort-Voption">
+												<td class="sort-variation-option">
 													<div class="d-flex py-1 align-items-center">
 														<div class="flex-fill">
 															<ul class="font-weight-medium list">
 																<%
-																for (VariationOption option : options) {
-																	if (option.getVariationId().getVariationId() == variation.getVariationId())
-																		out.print("<li class='list-item'>" + option.getVariationOptionName() + "</li>");
+																List<VariationOption> filteredOptions = options.stream()
+																		.filter(option -> option.getVariationId().getVariationId() == variation.getVariationId())
+																		.map(option -> VariationOption.builder().variationOptionId(option.getVariationOptionId())
+																		.variationOptionName(option.getVariationOptionName()).build())
+																		.collect(Collectors.toList());
+
+																// Printing the filtered options
+																for (VariationOption optionName : filteredOptions) {
+																	out.print("<li class='list-item'>" + optionName.getVariationOptionName() + "</li>");
 																}
 																%>
 															</ul>
@@ -181,8 +192,12 @@
 
 												<td class="sort-actions">
 													<div class="btn-list flex-nowrap">
-														<a href="#" class="btn"> Edit </a> <a href="#" class="btn">
-															Delete </a>
+														<button class="btn edit-variation" data-bs-toggle="modal"
+															data-options='<%=new ObjectMapper().writeValueAsString(filteredOptions)%>'
+															data-variation-id="<%=variation.getVariationId()%>"
+															data-variation-name="<%=variation.getVariationName()%>"
+															data-bs-target="#modal-edit">Edit</button>
+														<button class="btn delete-variation" data-variation-id="<%=variation.getVariationId()%>">Delete</button>
 													</div>
 												</td>
 											</tr>
@@ -195,13 +210,15 @@
 											<tr>
 												<th><button class="table-sort" data-sort="sort-id">Id</button>
 												</th>
-												<th><button class="table-sort" data-sort="sort-Vname">Variation
-														Name</button></th>
-												<th><button class="table-sort" data-sort="sort-Voption">Variation
+												<th><button class="table-sort"
+														data-sort="sort-variation-name">Variation Name</button></th>
+												<th><button class="table-sort"
+														data-sort="sort-variation-option">Variation
 														Option</button></th>
 												<th><button class="table-sort"
 														data-sort="sort-category">Category</button></th>
-												<th><button class="table-sort" data-sort="sort-actions">Actions</button></th>
+												<th><button class="table-sort" data-sort="sort-actions">Actions</button>
+												</th>
 											</tr>
 
 										</tfoot>
@@ -215,21 +232,91 @@
 			<jsp:include page="components/footer.jsp" />
 		</div>
 	</div>
+
+
+	<!-- MODELS  -->
+
+	<div class="modal modal-blur fade" id="modal-edit" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+
+			<div class="modal-content">
+				<form id="edit-variation-form">
+					<div class="modal-header">
+						<h5 class="modal-title">Edit Variation</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+
+					<div class="modal-body">
+						<div class="mb-3">
+							<label class="form-label required">Variation Name</label>
+							<div>
+								<input type="text" class="form-control"
+									placeholder="Enter Variation Name" id="edit-variation-name"
+									name="edit-variation-name" required />
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<div id="table-options-wrapper" class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th><button class="table-sort"
+													data-sort="sort-option-id">option Id</button></th>
+											<th><button class="table-sort"
+													data-sort="sort-option-name">option Name</button></th>
+											<th><button class="table-sort" data-sort="sort-action">action</button></th>
+										</tr>
+									</thead>
+									<tbody id="model-table-body"
+										class="table-tbody table-options-body">
+										<!-- Dynamic Bounding -->
+									</tbody>
+									<tfoot>
+										<tr>
+											<th><button class="table-sort"
+													data-sort="sort-option-id">option Id</button></th>
+											<th><button class="table-sort"
+													data-sort="sort-option-name">option Name</button></th>
+											<th><button class="table-sort" data-sort="sort-action">action</button></th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="d-none">
+								<div id="edit-variation-msg"
+									class="alert alert-important alert-dismissible" role="alert">
+									<div class="d-flex">
+										<i class="ti-check ti icon"></i>
+										<div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" id="edit-variation-id"
+							name="edit-variation-id" value="" />
+						<button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+						<div
+							class="d-none spinner-show spinner-border spinner-border text-secondary ms-4"
+							role="status"></div>
+						<button id="update-variation-btn" class="btn btn-primary">Update
+							Variation</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 	<jsp:include page="components/footer-imports.jsp" />
 
 	<!-- FILE SPECIFIC IMPORTS -->
 	<script src="resources/js/api/manage/variations.js"></script>
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			const list = new List("table-default", {
-				sortClass : "table-sort",
-				listClass : "table-tbody",
-				valueNames : [ "sort-id", "sort-Vname", "sort-Voption",
-						"sort-category", "sort-action" ],
-			});
-		});
-	</script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

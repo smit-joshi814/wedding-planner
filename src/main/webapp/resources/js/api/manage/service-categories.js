@@ -37,7 +37,6 @@ $("#add-service-category").on("submit", function (e) {
 
 
 // DELETE SERVICE CATEGORY
-// Delete Faculty
 $(document).on("click", ".delete-service-category", function () {
     let id = $(this).data("id");
     let element = this;
@@ -67,8 +66,8 @@ $(document).on("click", ".delete-service-category", function () {
                     });
             },
         },
-        success: function () {
-            $(element).closest("tr").html("<td colspan='4' class='alert alert-success' role='alert'>Category Deleted Successfully</td>")
+        success: function (data) {
+            $(element).closest("tr").html("<td colspan='4' class='alert alert-success' role='alert'>"+data+"</td>")
                 .hide() // Initially hide the row
                 .fadeIn(500) // Fade in the row with a 500-millisecond animation
                 .delay(1000) // Wait for 1 second
