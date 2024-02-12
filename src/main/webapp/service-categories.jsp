@@ -1,5 +1,5 @@
 <%@page import="jakarta.servlet.jsp.tagext.TryCatchFinally"%>
-<%@page import="com.wedding.planning.system.model.ServiceCategories"%>
+<%@page import="com.wedding.planning.system.entity.ServiceCategories"%>
 <%@page import="java.util.List"%>
 <%@page import="com.wedding.planning.system.config.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -110,7 +110,7 @@
 												<td class="sort-id" class="text-secondary"><%=category.getServiceCategoryId()%></td>
 												<td class="sort-name">
 													<div class="d-flex py-1 align-items-center">
-														<img class="avatar me-2" src="<%=category.getServiceCategoryIcon()%>"></img>
+														<img class="avatar me-2" src="<%=category.getServiceCategoryIconPath()%>"></img>
 														<div class="flex-fill">
 															<div class="font-weight-medium"><%=category.getServiceCategoryName()%></div>
 														</div>
@@ -133,7 +133,7 @@
 														<button
 															data-id="<%=category.getServiceCategoryId()%>"
 															data-name="<%=category.getServiceCategoryName()%>"
-															data-image="<%=category.getServiceCategoryIcon()%>"
+															data-image="<%=category.getServiceCategoryIconPath()%>"
 															data-active="<%=category.isActive()%>"
 															class="btn edit-service-category" data-bs-toggle="modal" data-bs-target="#modal-edit" >Edit</button>
 														<button

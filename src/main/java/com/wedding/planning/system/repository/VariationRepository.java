@@ -1,9 +1,9 @@
-package com.wedding.planning.system.dao;
+package com.wedding.planning.system.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.wedding.planning.system.model.Variation;
+import com.wedding.planning.system.entity.Variation;
 
-public interface VariationDao extends JpaRepository<Variation,Integer>{
+public interface VariationRepository extends JpaRepository<Variation,Integer>{
     
 }

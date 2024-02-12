@@ -43,6 +43,17 @@
 										</div>
 									</div>
 									<div class="mb-3">
+										<label class="form-label required">Select Service
+											Category</label> <select class="form-select"
+											id="select-service-category" required>
+											<option value>Select Service</option>
+											<option value="2">Elon Musk</option>
+											<option value="3">PaweÅ Kuna</option>
+											<option value="4">Nikola Tesla</option>
+											<option value="1">Chuck Tesla</option>
+										</select>
+									</div>
+									<div class="mb-3">
 										<label class="form-label required">Service Description</label>
 										<div>
 											<textarea id="tinymce-default" required>Hello, <b>Service  Description</b>!</textarea>
@@ -137,7 +148,6 @@
 													<td class="sort-id" class="text-secondary">1</td>
 													<td class="sort-name"><div class="flex-fill">
 															<div class="font-weight-medium">Catering</div>
-														</div>
 														</div></td>
 
 													<td class="sort-status">
@@ -318,7 +328,51 @@
 							})
 		</script>
 
-
+		<script type="text/javascript">
+			// @formatter:off
+			document
+					.addEventListener(
+							"DOMContentLoaded",
+							function() {
+								var el;
+								window.TomSelect
+										&& new TomSelect(
+												(el = document
+														.getElementById("select-service-category")),
+												{
+													copyClassesToDropdown : false,
+													dropdownParent : "body",
+													controlInput : "<input>",
+													render : {
+														item : function(data,
+																escape) {
+															if (data.customProperties) {
+																return ('<div><span class="dropdown-item-indicator">'
+																		+ data.customProperties
+																		+ "</span>"
+																		+ escape(data.text) + "</div>");
+															}
+															return "<div>"
+																	+ escape(data.text)
+																	+ "</div>";
+														},
+														option : function(data,
+																escape) {
+															if (data.customProperties) {
+																return ('<div><span class="dropdown-item-indicator">'
+																		+ data.customProperties
+																		+ "</span>"
+																		+ escape(data.text) + "</div>");
+															}
+															return "<div>"
+																	+ escape(data.text)
+																	+ "</div>";
+														},
+													},
+												});
+							});
+			// @formatter:on
+		</script>
 
 		<script>
 			document.addEventListener("DOMContentLoaded", function() {
@@ -331,11 +385,11 @@
 			});
 		</script>
 
-<script type="text/javascript">
-	$(document).ready(function () {
-	  $("#nav-manage").addClass("active");
-	  $("#services").addClass("active");
-	});
-  </script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#nav-manage").addClass("active");
+				$("#services").addClass("active");
+			});
+		</script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="java.util.stream.Collectors"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="com.wedding.planning.system.model.VariationOption"%>
-<%@page import="com.wedding.planning.system.model.Variation"%>
+<%@page import="com.wedding.planning.system.entity.VariationOption"%>
+<%@page import="com.wedding.planning.system.entity.Variation"%>
 <%@page import="java.util.List"%>
 <%@page import="com.wedding.planning.system.config.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
