@@ -9,10 +9,10 @@
 		<version>3.2.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.wedding.planning.system</groupId>
-	<artifactId>WeddingPlanningSystem</artifactId>
+	<groupId>com.wedding.planner</groupId>
+	<artifactId>WeddingPlanner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>WeddingPlanningSystem</name>
+	<name>WeddingPlanner</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -96,5 +96,4 @@
 		</plugins>
 		<finalName>wedding-planner-image-new</finalName>
 	</build>
-
 </project>

@@ -1,4 +1,4 @@
-package com.wedding.planning.system.controller;
+package com.wedding.planner.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

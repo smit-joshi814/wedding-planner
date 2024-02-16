@@ -1,14 +1,16 @@
-package com.wedding.planning.system.entity;
+package com.wedding.planner.entity;
 
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,8 +26,10 @@ public class ServiceCategories {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer serviceCategoryId;
 	private String serviceCategoryName;
-	private String serviceCategoryIcon;
-	private String serviceCategoryIconPath;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Images categoryIcon;
+	
 	private boolean isActive;
 
 	@CreationTimestamp

@@ -1,4 +1,4 @@
-package com.wedding.planning.system.service.impl;
+package com.wedding.planner.service.impl;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,11 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wedding.planning.system.entity.ServiceCategories;
-import com.wedding.planning.system.repository.ServiceCategoriesRepository;
-import com.wedding.planning.system.service.ServicecategoryService;
-import com.wedding.planning.system.service.StorageService;
-import com.wedding.planning.system.storage.Storage;
+import com.wedding.planner.entity.Images;
+import com.wedding.planner.entity.ServiceCategories;
+import com.wedding.planner.repository.ServiceCategoriesRepository;
+import com.wedding.planner.service.ImageService;
+import com.wedding.planner.service.ServicecategoryService;
+import com.wedding.planner.service.StorageService;
+import com.wedding.planner.utils.Storage;
 
 @Service
 public class ServicecategoryServiceImpl implements ServicecategoryService {
@@ -24,6 +26,9 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 
 	@Autowired
 	private StorageService service;
+
+	@Autowired
+	private ImageService imageService;
 
 	@Override
 	public ResponseEntity<List<ServiceCategories>> getAllServiceCategories() {
@@ -38,10 +43,8 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 		ServiceCategories category = ServiceCategories.builder().serviceCategoryName(serviceCategoryName)
 				.isActive(isActive).build();
 		try {
-			path = service.upload(icon, path, Storage.STORAGE_CATEGORIES);
-			String[] data = path.split(",");
-			category.setServiceCategoryIcon(data[0]);
-			category.setServiceCategoryIconPath(data[1]);
+			Images image = service.upload(icon, path, Storage.STORAGE_CATEGORIES);
+			category.setCategoryIcon(image);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(null);
@@ -53,7 +56,8 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 	@Override
 	public ResponseEntity<String> deleteServiceCategories(int serviceCategoryId) {
 		try {
-			service.delete(dao.findById(serviceCategoryId).get().getServiceCategoryIcon());
+			ServiceCategories category = dao.findById(serviceCategoryId).get();
+			service.delete(category.getCategoryIcon());
 			dao.deleteById(serviceCategoryId);
 			return ResponseEntity.ok().body("Category Deleted Successfully");
 		} catch (Exception e) {
@@ -81,12 +85,12 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 		if (Objects.nonNull(serviceCategoryIcon) && !"".equalsIgnoreCase(serviceCategoryIcon.getOriginalFilename())) {
 			try {
 //				deleting old image
-				service.delete(dbCategory.getServiceCategoryIcon());
+				service.delete(dbCategory.getCategoryIcon());
 
-				String[] data = service.upload(serviceCategoryIcon, serviceCategoryIcon.getOriginalFilename(),
-						Storage.STORAGE_CATEGORIES).split(",");
-				dbCategory.setServiceCategoryIcon(data[0]);
-				dbCategory.setServiceCategoryIconPath(data[1]);
+				Images image = service.upload(serviceCategoryIcon, serviceCategoryIcon.getOriginalFilename(),
+						Storage.STORAGE_CATEGORIES);
+				image.setImageId(dbCategory.getCategoryIcon().getImageId());
+				dbCategory.setCategoryIcon(imageService.update(image).getBody());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

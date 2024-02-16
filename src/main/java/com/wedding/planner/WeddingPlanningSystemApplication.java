@@ -1,4 +1,4 @@
-package com.wedding.planning.system;
+package com.wedding.planner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,5 @@
-package com.wedding.planning.system.entity;
+package com.wedding.planner.entity;
 
-import java.sql.Clob;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,18 +27,26 @@ public class Services {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long serviceId;
+	
+	private String serviceName;
 
 	@Lob
-	private Clob serviceDescription;
+	private String serviceDescription;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id")
 	private ServiceCategories servicecategory;
-	
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "created_by")
+	private Users createdBy;
+
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
+	
+	private Boolean status;
 
 }

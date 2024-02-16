@@ -1,11 +1,66 @@
-<%@page import="com.wedding.planning.system.config.Configurations"%>
+<%@page import="com.wedding.planner.entity.ServiceCategories"%>
+<%@page import="java.util.List"%>
+<%@page import="com.wedding.planner.entity.Services"%>
+<%@page import="com.wedding.planner.config.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+List<Services> services = (List<Services>) request.getAttribute("services");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Services | <%=Configurations.name%></title>
 <jsp:include page="components/head-imports.jsp" />
+
+<style type="text/css">
+.custom-file-upload {
+	display: flex;
+	align-items: center;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.custom-file-upload input[type="file"] {
+	display: none;
+}
+
+.custom-file-upload label {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+}
+
+.custom-file-upload label:hover {
+	background-color: #eee;
+}
+
+.custom-file-upload i {
+	font-size: 20px;
+	margin-right: 10px;
+}
+
+#file-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#file-list li {
+	margin-bottom: 5px;
+}
+
+#file-list span {
+	margin-left: 10px;
+}
+</style>
 </head>
 <body>
 	<div class="page">
@@ -30,7 +85,7 @@
 				<div class="container-xl">
 					<div class="row g-5">
 						<div class="col-md-6">
-							<form class="card">
+							<form class="card" id="add-service">
 								<div class="card-header">
 									<h3 class="card-title">Add Service</h3>
 								</div>
@@ -38,69 +93,80 @@
 									<div class="mb-3">
 										<label class="form-label required">Service Name</label>
 										<div>
-											<input type="text" class="form-control"
+											<input type="text" class="form-control" name="service-name"
 												placeholder="Enter Service" required />
 										</div>
 									</div>
 									<div class="mb-3">
 										<label class="form-label required">Select Service
-											Category</label> <select class="form-select"
-											id="select-service-category" required>
-											<option value>Select Service</option>
-											<option value="2">Elon Musk</option>
-											<option value="3">PaweÅ Kuna</option>
-											<option value="4">Nikola Tesla</option>
-											<option value="1">Chuck Tesla</option>
+											Category</label> <select class="form-select" id="service-category"
+											name="service-category" required>
+											<option value>Select Service Category</option>
 										</select>
 									</div>
 									<div class="mb-3">
 										<label class="form-label required">Service Description</label>
 										<div>
-											<textarea id="tinymce-default" required>Hello, <b>Service  Description</b>!</textarea>
+											<textarea class="form-control" rows="6"
+												id="service-description" name="service-description"
+												placeholder="Service  Description!" required></textarea>
 										</div>
 									</div>
 									<div class="mb-3">
 										<label class="form-label">Status</label>
 										<div class="d-flex justify-content-around">
 											<label class="form-check"> <input
-												class="form-check-input" name="service-status" type="radio"
-												checked required /> <span class="form-check-label">Active</span>
+												class="form-check-input" name="service-status" value="1"
+												type="radio" checked required /> <span
+												class="form-check-label">Active</span>
 											</label> <label class="form-check"> <input
 												class="form-check-input" name="service-status" type="radio"
-												required /> <span class="form-check-label">In Active</span>
+												value="0" required /> <span class="form-check-label">In
+													Active</span>
 											</label>
 										</div>
 									</div>
 								</div>
-								<div class="card-footer text-end">
-									<button type="submit" class="btn btn-primary">Submit</button>
+								<div class="card-footer d-flex justify-content-between">
+									<div class="d-none">
+										<div id="add-service-msg"
+											class="alert alert-important alert-dismissible" role="alert">
+											<div class="d-flex">
+												<i class="ti-check ti icon"></i>
+												<div></div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<div
+											class="d-none spinner-show spinner-border spinner-border text-secondary ms-4"
+											role="status"></div>
+									</div>
 								</div>
 							</form>
 
 						</div>
 
 						<div class="col-md-6">
-							<form class="card">
-
+							<form class="card dropzone" id="add-service-item">
 								<div class="card-header">
 									<h3 class="card-title">Add Service Item</h3>
 								</div>
 								<div class="card-body">
 									<div class="mb-3">
 										<label class="form-label required">Select Service</label> <select
-											class="form-select" id="select-service" required>
+											class="form-select" id="select-service" name="select-service"
+											required>
 											<option value>Select Service</option>
-											<option value="2">Elon Musk</option>
-											<option value="3">PaweÅ Kuna</option>
-											<option value="4">Nikola Tesla</option>
-											<option value="1">Chuck Tesla</option>
 										</select>
 									</div>
 									<div class="mb-3">
 										<label class="form-label required">Service Item Name</label>
 										<div>
 											<input type="text" class="form-control"
-												placeholder="Enter Service Item Name" required />
+												placeholder="Enter Service Item Name"
+												name="service-item-name" required />
 										</div>
 									</div>
 									<div class="mb-3">
@@ -109,12 +175,41 @@
 											<span class="input-group-text"> <i
 												class="ti ti-currency-rupee icon"></i>
 											</span> <input type="number" class="form-control"
-												placeholder="Price" autocomplete="off" required />
+												name="service-item-price" placeholder="Price"
+												autocomplete="off" required />
+										</div>
+									</div>
+									<div class="mb-3">
+										<div class="card custom-file-upload">
+											<div class="card-header">
+												<input type="file" id="file-input" multiple accept="image/*"
+													name="item-images"> <label for="file-input">
+													<i class="ti icon ti-upload"></i> <span>Select Files</span>
+												</label>
+											</div>
+											<div class="card-body">
+												<ul id="file-list"></ul>
+											</div>
+											<div class="card-footer" id="file-list-alert"></div>
 										</div>
 									</div>
 								</div>
 								<div class="card-footer text-end">
-									<button type="submit" class="btn btn-primary">Submit</button>
+									<div class="d-none">
+										<div id="add-service-item-msg"
+											class="alert alert-important alert-dismissible" role="alert">
+											<div class="d-flex">
+												<i class="ti-check ti icon"></i>
+												<div></div>
+											</div>
+										</div>
+									</div>
+									<div class="d-flex align-items-center">
+										<button type="submit" class="btn btn-primary">Submit</button>
+										<div
+											class="d-none spinner-show spinner-border spinner-border text-secondary ms-4"
+											role="status"></div>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -144,67 +239,25 @@
 												</tr>
 											</thead>
 											<tbody class="table-tbody">
+												<%
+												for (Services service : services) {
+												%>
 												<tr>
-													<td class="sort-id" class="text-secondary">1</td>
+													<td class="sort-id" class="text-secondary"><%=service.getServiceId()%></td>
 													<td class="sort-name"><div class="flex-fill">
-															<div class="font-weight-medium">Catering</div>
+															<div class="font-weight-medium"><%=service.getServiceName()%></div>
 														</div></td>
-
-													<td class="sort-status">
-														<div class="d-flex py-1 align-items-center">
-															<div class="flex-fill">
-																<div class="font-weight-medium">Providing food and
-																	beverage services, menu planning, and catering staff
-																	for the wedding event.</div>
-															</div>
-														</div>
-													</td>
-													<td class="sort-status">
-														<div class="d-flex py-1 align-items-center">
-															<div class="flex-fill">
-																<div class="font-weight-medium">Ashok Varma</div>
-															</div>
-														</div>
-													</td>
-													<td class="sort-status">
-														<div class="d-flex py-1 align-items-center">
-															<div class="flex-fill">
-																<div class="font-weight-medium">
-																	<span class="badge bg-warning me-1"></span>&nbsp;In
-																	Active
-																</div>
-															</div>
-														</div>
-													</td>
-
-													<td class="sort-actions"><div
-															class="btn-list flex-nowrap">
-															<a href="#" class="btn"> Edit </a> <a href="#"
-																class="btn"> Delete </a>
-														</div></td>
-
-												</tr>
-
-												<tr>
-													<td class="sort-id" class="text-secondary">2</td>
-													<td class="sort-name"><div class="flex-fill">
-															<div class="font-weight-medium">Bridal Makeup</div>
-														</div>
-														</div></td>
-
 													<td class="sort-description">
 														<div class="d-flex py-1 align-items-center">
 															<div class="flex-fill">
-																<div class="font-weight-medium">Providing
-																	professional makeup artists and hairstylists for the
-																	bride.</div>
+																<div class="font-weight-medium"><%=service.getServiceDescription()%></div>
 															</div>
 														</div>
 													</td>
 													<td class="sort-created">
 														<div class="d-flex py-1 align-items-center">
 															<div class="flex-fill">
-																<div class="font-weight-medium">Ragini Mehta</div>
+																<div class="font-weight-medium"><%=service.getCreatedBy() != null ? service.getCreatedBy() : "Admin"%></div>
 															</div>
 														</div>
 													</td>
@@ -212,20 +265,29 @@
 														<div class="d-flex py-1 align-items-center">
 															<div class="flex-fill">
 																<div class="font-weight-medium">
-																	<span class="badge bg-success me-1"></span>&nbsp;Active
-																</div>
+																	<span
+																		class="badge me-1 <%=service.getStatus() ? "bg-success" : "bg-danger"%>"></span>&nbsp;<%=service.getStatus() ? "Active" : "In Active"%></div>
 															</div>
 														</div>
 													</td>
 
 													<td class="sort-actions"><div
 															class="btn-list flex-nowrap">
-															<a href="#" class="btn"> Edit </a> <a href="#"
-																class="btn"> Delete </a>
+
+															<button data-service-id="<%=service.getServiceId()%>"
+																data-service-name="<%=service.getServiceName()%>"
+																data-service-description="<%=service.getServiceDescription()%>"
+																data-status="<%=service.getStatus()%>"
+																data-category="<%=service.getServicecategory().getServiceCategoryId()%>"
+																class="btn edit-service" data-bs-toggle="modal"
+																data-bs-target="#modal-edit">Edit</button>
+															<button data-service-id="<%=service.getServiceId()%>"
+																class="btn delete-service">Delete</button>
 														</div></td>
 												</tr>
-
-
+												<%
+												}
+												%>
 											</tbody>
 											<tfoot>
 												<tr>
@@ -247,149 +309,203 @@
 						</div>
 					</div>
 				</div>
-				<jsp:include page="components/footer.jsp" />
 			</div>
+
+			<jsp:include page="components/footer.jsp" />
 		</div>
+	</div>
 
-		<jsp:include page="components/footer-imports.jsp" />
+	<!-- Models -->
 
-		<script>
-			// @formatter:off
-			document
-					.addEventListener(
-							"DOMContentLoaded",
-							function() {
-								var el;
-								window.TomSelect
-										&& new TomSelect(
-												(el = document
-														.getElementById("select-service")),
-												{
-													copyClassesToDropdown : false,
-													dropdownParent : "body",
-													controlInput : "<input>",
-													render : {
-														item : function(data,
-																escape) {
-															if (data.customProperties) {
-																return ('<div><span class="dropdown-item-indicator">'
-																		+ data.customProperties
-																		+ "</span>"
-																		+ escape(data.text) + "</div>");
-															}
-															return "<div>"
-																	+ escape(data.text)
-																	+ "</div>";
-														},
-														option : function(data,
-																escape) {
-															if (data.customProperties) {
-																return ('<div><span class="dropdown-item-indicator">'
-																		+ data.customProperties
-																		+ "</span>"
-																		+ escape(data.text) + "</div>");
-															}
-															return "<div>"
-																	+ escape(data.text)
-																	+ "</div>";
-														},
-													},
-												});
-							});
-			// @formatter:on
-		</script>
+	<!-- edit Service Model -->
+	<div class="modal modal-blur fade" id="modal-edit" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<form id="edit-service-form">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Edit Service</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label class="form-label required">Service Name</label> <input
+								type="text" name="edit-service-name" id="edit-service-name"
+								placeholder="Service Name" class="form-control" required />
+						</div>
+						<div class="mb-3">
+							<label class="form-label required">Select Service
+								Category</label> <select class="form-select" id="edit-service-category"
+								name="edit-service-category" required>
+								<option value>Select Service</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label required">Service Description</label>
+							<div>
+								<textarea class="form-control" rows="6"
+									id="edit-service-description" name="edit-service-description"
+									placeholder="Service Description!" required></textarea>
+							</div>
+						</div>
+						<div class="mb-5">
+							<label class="form-label">Status</label>
+							<div class="d-flex justify-content-around">
+								<label class="form-check"> <input
+									class="form-check-input" name="edit-service-status"
+									id="edit-service-active" value="1" type="radio" checked
+									required /> <span class="form-check-label">Active</span>
+								</label> <label class="form-check"> <input
+									class="form-check-input" name="edit-service-status"
+									id="edit-service-inactive" value="0" type="radio" /><span
+									class="form-check-label">In Active</span>
+								</label>
+							</div>
+						</div>
+						<div class="mb-3">
+							<h3 class="h3 border-bottom">Service Items</h3>
+						</div>
+						<div class="mb-3">
+							<div id="table-service-items-wrapper" class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th><button class="table-sort"
+													data-sort="sort-service-item-id">Service Item Id</button></th>
+											<th><button class="table-sort"
+													data-sort="sort-service-item-name">Service Item
+													Name</button></th>
+											<th><button class="table-sort" data-sort="sort-action">action</button></th>
+										</tr>
+									</thead>
+									<tbody id="model-table-body"
+										class="table-tbody table-service-item-body">
+										<!-- Dynamic Binding -->
+									</tbody>
+									<tfoot>
+										<tr>
+											<th><button class="table-sort"
+													data-sort="sort-service-item-id">Service Item Id</button></th>
+											<th><button class="table-sort"
+													data-sort="sort-service-item-name">service Item
+													Name</button></th>
+											<th><button class="table-sort" data-sort="sort-action">action</button></th>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+						</div>
 
+						<div class="mb-3">
+							<div class="d-none">
+								<div id="edit-service-msg"
+									class="alert alert-important alert-dismissible" role="alert">
+									<div class="d-flex">
+										<i class="ti-check ti icon"></i>
+										<div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" id="edit-service-id" name="edit-service-id"
+							value="" />
+						<button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+						<div
+							class="d-none spinner-show spinner-border spinner-border text-secondary ms-4"
+							role="status"></div>
+						<button type="button" id="update-service-btn"
+							class="btn btn-primary">Update Service</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
-		<script>
-			document
-					.addEventListener(
-							"DOMContentLoaded",
-							function() {
-								let options = {
-									selector : '#tinymce-default',
-									height : 300,
-									menubar : false,
-									statusbar : false,
-									plugins : [
-											'advlist autolink lists link image charmap print preview anchor',
-											'searchreplace visualblocks code fullscreen',
-											'insertdatetime media table paste code help wordcount' ],
-									toolbar : 'undo redo | formatselect | '
-											+ 'bold italic backcolor | alignleft aligncenter '
-											+ 'alignright alignjustify | bullist numlist outdent indent | '
-											+ 'removeformat',
-									content_style : 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
-								}
-								if (localStorage.getItem("tablerTheme") === 'dark') {
-									options.skin = 'oxide-dark';
-									options.content_css = 'dark';
-								}
-								tinyMCE.init(options);
-							})
-		</script>
+	<!-- view Service Items -->
+	<div class="modal modal-blur fade" id="modal-edit-item" tabindex="-1"
+		role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<form id="edit-service-item">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Update Service Item</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="mb-3">
+							<label class="form-label required">Select Service</label> <select
+								class="form-select" id="edit-select-service"
+								name="edit-select-service" required>
+								<option value>Select Service</option>
+							</select>
+						</div>
+						<div class="mb-3">
+							<label class="form-label required">Service Item Name</label>
+							<div>
+								<input type="text" class="form-control"
+									placeholder="Enter Service Item Name"
+									name="edit-service-item-name" id="edit-service-item-name"
+									required />
+							</div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label required">Approx. Price</label>
+							<div class="input-group">
+								<span class="input-group-text"> <i
+									class="ti ti-currency-rupee icon"></i>
+								</span> <input type="number" class="form-control"
+									id="edit-service-item-price" name="edit-service-item-price"
+									placeholder="Price" autocomplete="off" required />
+							</div>
+						</div>
+						<div class="mb-3">
+							<h3 class="h3 border-bottom">Images</h3>
+							<div class="d-flex justify-content-around" id="service-item-images">
+								<!-- Dynamic Binding -->
+							</div>
+						</div>
+						<div class="mb-3">
+							<div class="d-none">
+								<div id="edit-service-item-msg"
+									class="alert alert-important alert-dismissible" role="alert">
+									<div class="d-flex">
+										<i class="ti-check ti icon"></i>
+										<div></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="hidden" id="edit-service-item-id"
+							name="edit-service-item-id" />
+						<button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+						<div
+							class="d-none spinner-show spinner-border spinner-border text-secondary ms-4"
+							role="status"></div>
+						<button type="submit" id="update-service-item"
+							class="btn btn-primary">Update Service Item</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
 
-		<script type="text/javascript">
-			// @formatter:off
-			document
-					.addEventListener(
-							"DOMContentLoaded",
-							function() {
-								var el;
-								window.TomSelect
-										&& new TomSelect(
-												(el = document
-														.getElementById("select-service-category")),
-												{
-													copyClassesToDropdown : false,
-													dropdownParent : "body",
-													controlInput : "<input>",
-													render : {
-														item : function(data,
-																escape) {
-															if (data.customProperties) {
-																return ('<div><span class="dropdown-item-indicator">'
-																		+ data.customProperties
-																		+ "</span>"
-																		+ escape(data.text) + "</div>");
-															}
-															return "<div>"
-																	+ escape(data.text)
-																	+ "</div>";
-														},
-														option : function(data,
-																escape) {
-															if (data.customProperties) {
-																return ('<div><span class="dropdown-item-indicator">'
-																		+ data.customProperties
-																		+ "</span>"
-																		+ escape(data.text) + "</div>");
-															}
-															return "<div>"
-																	+ escape(data.text)
-																	+ "</div>";
-														},
-													},
-												});
-							});
-			// @formatter:on
-		</script>
+	<jsp:include page="components/footer-imports.jsp" />
 
-		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-				const list = new List("table-default", {
-					sortClass : "table-sort",
-					listClass : "table-tbody",
-					valueNames : [ "sort-id", "sort-name", "sort-description",
-							"sort-created", "sort-status", "sort-action" ],
-				});
-			});
-		</script>
+	<script src="api/manage/services.js"></script>
 
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#nav-manage").addClass("active");
-				$("#services").addClass("active");
-			});
-		</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#nav-manage").addClass("active");
+			$("#services").addClass("active");
+
+		});
+	</script>
+
 </body>
 </html>

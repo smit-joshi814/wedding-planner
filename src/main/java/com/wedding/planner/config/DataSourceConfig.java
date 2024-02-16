@@ -1,4 +1,4 @@
-package com.wedding.planning.system.config;
+package com.wedding.planner.config;
 
 import javax.sql.DataSource;
 

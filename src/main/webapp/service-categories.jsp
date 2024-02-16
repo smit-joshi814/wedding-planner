@@ -1,7 +1,7 @@
 <%@page import="jakarta.servlet.jsp.tagext.TryCatchFinally"%>
-<%@page import="com.wedding.planning.system.entity.ServiceCategories"%>
+<%@page import="com.wedding.planner.entity.ServiceCategories"%>
 <%@page import="java.util.List"%>
-<%@page import="com.wedding.planning.system.config.Configurations"%>
+<%@page import="com.wedding.planner.config.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -110,7 +110,7 @@
 												<td class="sort-id" class="text-secondary"><%=category.getServiceCategoryId()%></td>
 												<td class="sort-name">
 													<div class="d-flex py-1 align-items-center">
-														<img class="avatar me-2" src="<%=category.getServiceCategoryIconPath()%>"></img>
+														<img class="avatar me-2" src="<%=category.getCategoryIcon().getUrl()%>"></img>
 														<div class="flex-fill">
 															<div class="font-weight-medium"><%=category.getServiceCategoryName()%></div>
 														</div>
@@ -133,7 +133,7 @@
 														<button
 															data-id="<%=category.getServiceCategoryId()%>"
 															data-name="<%=category.getServiceCategoryName()%>"
-															data-image="<%=category.getServiceCategoryIconPath()%>"
+															data-image="<%=category.getCategoryIcon().getUrl()%>"
 															data-active="<%=category.isActive()%>"
 															class="btn edit-service-category" data-bs-toggle="modal" data-bs-target="#modal-edit" >Edit</button>
 														<button
@@ -165,8 +165,9 @@
 			<jsp:include page="components/footer.jsp" />
 		</div>
 	</div>
+	
+	
 <!-- MODELS -->
-
 <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 	<form id="edit-service-category-form">
@@ -228,7 +229,7 @@
 	<jsp:include page="components/footer-imports.jsp" />
 
 	<!-- FILE SPECIFIC IMPORTS -->
-	<script src="resources/js/api/manage/service-categories.js"></script>
+	<script src="api/manage/service-categories.js"></script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

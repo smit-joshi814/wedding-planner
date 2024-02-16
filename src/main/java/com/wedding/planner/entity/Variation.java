@@ -1,4 +1,4 @@
-package com.wedding.planning.system.entity;
+package com.wedding.planner.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -22,7 +22,7 @@ public class Variation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer variationId;
     private String variationName;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="service_category_id")
     private ServiceCategories serviceCategoryId;
 }

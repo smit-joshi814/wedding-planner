@@ -1,4 +1,4 @@
-package com.wedding.planning.system.service.impl;
+package com.wedding.planner.service.impl;
 
 import java.util.List;
 import java.util.Objects;
@@ -8,11 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.wedding.planning.system.entity.ServiceCategories;
-import com.wedding.planning.system.entity.Variation;
-import com.wedding.planning.system.repository.VariationRepository;
-import com.wedding.planning.system.service.VariationOptionService;
-import com.wedding.planning.system.service.VariationService;
+import com.wedding.planner.entity.ServiceCategories;
+import com.wedding.planner.entity.Variation;
+import com.wedding.planner.repository.VariationRepository;
+import com.wedding.planner.service.VariationOptionService;
+import com.wedding.planner.service.VariationService;
 
 @Service
 public class VariationServiceImpl implements VariationService {

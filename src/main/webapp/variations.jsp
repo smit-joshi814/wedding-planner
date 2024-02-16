@@ -3,10 +3,10 @@
 <%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 <%@page import="java.util.stream.Collectors"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="com.wedding.planning.system.entity.VariationOption"%>
-<%@page import="com.wedding.planning.system.entity.Variation"%>
+<%@page import="com.wedding.planner.entity.VariationOption"%>
+<%@page import="com.wedding.planner.entity.Variation"%>
 <%@page import="java.util.List"%>
-<%@page import="com.wedding.planning.system.config.Configurations"%>
+<%@page import="com.wedding.planner.config.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -316,7 +316,7 @@
 	<jsp:include page="components/footer-imports.jsp" />
 
 	<!-- FILE SPECIFIC IMPORTS -->
-	<script src="resources/js/api/manage/variations.js"></script>
+	<script src="api/manage/variations.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

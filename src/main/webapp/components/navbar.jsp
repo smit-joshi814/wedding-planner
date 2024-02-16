@@ -1,4 +1,4 @@
-<%@page import="com.wedding.planning.system.config.Configurations"%>
+<%@page import="com.wedding.planner.config.Configurations"%>
 <header class="navbar navbar-expand-md d-print-none">
 	<div class="container-xl">
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"

@@ -1,4 +1,4 @@
-package com.wedding.planning.system.controller;
+package com.wedding.planner.controller;
 
 import java.util.List;
 
@@ -14,75 +14,79 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wedding.planning.system.entity.ServiceCategories;
-import com.wedding.planning.system.entity.Variation;
-import com.wedding.planning.system.entity.VariationOption;
-import com.wedding.planning.system.service.VariationOptionService;
-import com.wedding.planning.system.service.VariationService;
+import com.wedding.planner.entity.ServiceCategories;
+import com.wedding.planner.entity.Variation;
+import com.wedding.planner.entity.VariationOption;
+import com.wedding.planner.service.VariationOptionService;
+import com.wedding.planner.service.VariationService;
 
 @Controller
 @RequestMapping("/variations")
 public class VariationController {
 
-    @Autowired
-    private VariationService service;
+	@Autowired
+	private VariationService service;
 
-    @Autowired
-    private VariationOptionService optionService;
+	@Autowired
+	private VariationOptionService optionService;
 
-    @RequestMapping
-    public ModelAndView variations() {
-        return new ModelAndView("variations").addObject("variationList", service.getVariations().getBody())
-                .addObject("variationOptionList", optionService.getVariationOptions().getBody());
-    }
+	@RequestMapping
+	public ModelAndView variations() {
+		return new ModelAndView("variations").addObject("variationList", service.getVariations().getBody())
+				.addObject("variationOptionList", optionService.getVariationOptions().getBody());
+	}
 
-    /* VARIATION APIs */
+	/********************************************************************
+	 * Variations
+	 *******************************************************************/
 
-    // add variations
-    @PostMapping("/add-variations")
-    public ResponseEntity<Variation> addVariation(@RequestParam("variation-name") String variationName,
-            @RequestParam("service-category") ServiceCategories category) {
-        return service.addVariation(variationName, category);
-    }
+	// add variations
+	@PostMapping("/add-variations")
+	public ResponseEntity<Variation> addVariation(@RequestParam("variation-name") String variationName,
+			@RequestParam("service-category") ServiceCategories category) {
+		return service.addVariation(variationName, category);
+	}
 
-    // get all available variations
-    @GetMapping("/variations")
-    public ResponseEntity<List<Variation>> getVariations() {
-        return service.getVariations();
-    }
+	// get all available variations
+	@GetMapping("/variations")
+	public ResponseEntity<List<Variation>> getVariations() {
+		return service.getVariations();
+	}
 
-    // edit variation
-    @PutMapping("edit-variations")
-    public ResponseEntity<Variation> editVariation(@RequestParam("variationId") Integer variationId,
-            @RequestParam("variationName") String variationName) {
-        return service.editVariation(variationId, variationName);
-    }
+	// edit variation
+	@PutMapping("edit-variations")
+	public ResponseEntity<Variation> editVariation(@RequestParam("variationId") Integer variationId,
+			@RequestParam("variationName") String variationName) {
+		return service.editVariation(variationId, variationName);
+	}
+
+	@DeleteMapping("/delete-variations/{id}")
+	public ResponseEntity<String> deleteVariation(@PathVariable("id") Variation variation) {
+		return service.deleteVariation(variation);
+	}
+
+	/********************************************************************
+	 * Variation Options
+	 *******************************************************************/
 
 
-    @DeleteMapping("/delete-variations/{id}")
-    public ResponseEntity<String> deleteVariation(@PathVariable("id") Variation variation) {
-        return service.deleteVariation(variation);
-    }
+	// add variation option
+	@PostMapping("/add-variation-options")
+	public ResponseEntity<VariationOption> addVariationOption(@RequestParam("variations-select") Variation variation,
+			@RequestParam("variation-option-name") String variationOption) {
+		return optionService.addVariationOption(variation, variationOption);
+	}
 
-    /* VARIATION OPTION APIs */
+	// get all available variation options
+	@GetMapping("/variation-options")
+	public ResponseEntity<List<VariationOption>> getVariationOptions() {
+		return optionService.getVariationOptions();
+	}
 
-    // add variation option
-    @PostMapping("/add-variation-options")
-    public ResponseEntity<VariationOption> addVariationOption(@RequestParam("variations-select") Variation variation,
-            @RequestParam("variation-option-name") String variationOption) {
-        return optionService.addVariationOption(variation, variationOption);
-    }
-
-    // get all available variation options
-    @GetMapping("/variation-options")
-    public ResponseEntity<List<VariationOption>> getVariationOptions() {
-        return optionService.getVariationOptions();
-    }
-
-    // delete variation option
-    @DeleteMapping("/delete-variation-option/{id}")
-    public ResponseEntity<String> deleteVariationOption(@PathVariable("id") Integer optionId) {
-        return optionService.deleteVariationOption(optionId);
-    }
+	// delete variation option
+	@DeleteMapping("/delete-variation-option/{id}")
+	public ResponseEntity<String> deleteVariationOption(@PathVariable("id") Integer optionId) {
+		return optionService.deleteVariationOption(optionId);
+	}
 
 }

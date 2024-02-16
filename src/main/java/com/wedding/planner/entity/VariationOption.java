@@ -1,4 +1,4 @@
-package com.wedding.planning.system.entity;
+package com.wedding.planner.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
