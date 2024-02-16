@@ -27,7 +27,7 @@ public class ServiceCategories {
 	private Integer serviceCategoryId;
 	private String serviceCategoryName;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Images categoryIcon;
 	
 	private boolean isActive;
