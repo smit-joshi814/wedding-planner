@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.wedding.planner.entity.ServiceCategories;
+import com.wedding.planner.entity.Services;
 import com.wedding.planner.entity.Variation;
 
 public interface VariationService {
@@ -42,4 +43,10 @@ public interface VariationService {
 	 */
 	ResponseEntity<String> deleteVariation(Variation variation);
 
+	/**
+	 * returns All the Available Variations for some {@link Services}
+	 * @param service
+	 * @return {@link ResponseEntity<List<Variation>>} list of {@link Variation}
+	 */
+	ResponseEntity<List<Variation>> getVariations(Services service);
 }

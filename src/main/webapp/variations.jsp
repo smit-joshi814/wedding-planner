@@ -41,7 +41,7 @@
 			<div class="page-body">
 				<div class="container-xl">
 					<div class="row g-5">
-						<div class="col-xl-4">
+						<div class="col-xl-6">
 							<form class="card" id="add-variation">
 								<div class="card-header">
 									<h3 class="card-title">Add Variation</h3>
@@ -82,7 +82,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="col-xl-4">
+						<div class="col-xl-6">
 							<form class="card" id="add-variation-option">
 								<div class="card-header">
 									<h3 class="card-title">Add Variation Option</h3>
@@ -168,7 +168,7 @@
 															<ul class="font-weight-medium list">
 																<%
 																List<VariationOption> filteredOptions = options.stream()
-																		.filter(option -> option.getVariationId().getVariationId() == variation.getVariationId())
+																		.filter(option -> option.getVariation().getVariationId() == variation.getVariationId())
 																		.map(option -> VariationOption.builder().variationOptionId(option.getVariationOptionId())
 																		.variationOptionName(option.getVariationOptionName()).build())
 																		.collect(Collectors.toList());
@@ -185,7 +185,7 @@
 												<td class="sort-category">
 													<div class="d-flex py-1 align-items-center">
 														<div class="flex-fill">
-															<div class="font-weight-medium"><%=variation.getServiceCategoryId().getServiceCategoryName()%></div>
+															<div class="font-weight-medium"><%=variation.getServiceCategory().getServiceCategoryName()%></div>
 														</div>
 													</div>
 												</td>

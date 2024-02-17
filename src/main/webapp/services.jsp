@@ -38,10 +38,6 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 	transition: all 0.2s ease-in-out;
 }
 
-.custom-file-upload label:hover {
-	background-color: #eee;
-}
-
 .custom-file-upload i {
 	font-size: 20px;
 	margin-right: 10px;
@@ -84,7 +80,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 
 				<div class="container-xl">
 					<div class="row g-5">
-						<div class="col-md-6">
+						<div class="col-xl-6">
 							<form class="card" id="add-service">
 								<div class="card-header">
 									<h3 class="card-title">Add Service</h3>
@@ -148,7 +144,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-xl-6">
 							<form class="card dropzone" id="add-service-item">
 								<div class="card-header">
 									<h3 class="card-title">Add Service Item</h3>
@@ -183,7 +179,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 										<div class="card custom-file-upload">
 											<div class="card-header">
 												<input type="file" id="file-input" multiple accept="image/*"
-													name="item-images"> <label for="file-input">
+													name="item-images"> <label class="btn btn-outline-primary" for="file-input">
 													<i class="ti icon ti-upload"></i> <span>Select Files</span>
 												</label>
 											</div>
@@ -191,6 +187,20 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 												<ul id="file-list"></ul>
 											</div>
 											<div class="card-footer" id="file-list-alert"></div>
+										</div>
+									</div>
+									<div class="mb-3">
+										<label class="form-label required">Status</label>
+										<div class="d-flex justify-content-around">
+											<label class="form-check"> <input
+												class="form-check-input" name="service-item-status"
+												value="1" type="radio" checked required /> <span
+												class="form-check-label">Active</span>
+											</label> <label class="form-check"> <input
+												class="form-check-input" name="service-item-status"
+												type="radio" value="0" required /> <span
+												class="form-check-label">In Active</span>
+											</label>
 										</div>
 									</div>
 								</div>
@@ -463,8 +473,23 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 							</div>
 						</div>
 						<div class="mb-3">
+							<label class="form-label">Status</label>
+							<div class="d-flex justify-content-around">
+								<label class="form-check"> <input
+									class="form-check-input" name="edit-service-item-status"
+									id="edit-service-item-active" value="1" type="radio"
+									required /> <span class="form-check-label">Active</span>
+								</label> <label class="form-check"> <input
+									class="form-check-input" name="edit-service-item-status"
+									id="edit-service-item-inactive" type="radio" value="0"
+									required /> <span class="form-check-label">In Active</span>
+								</label>
+							</div>
+						</div>
+						<div class="mb-3">
 							<h3 class="h3 border-bottom">Images</h3>
-							<div class="d-flex justify-content-around" id="service-item-images">
+							<div class="d-flex justify-content-around"
+								id="service-item-images">
 								<!-- Dynamic Binding -->
 							</div>
 						</div>

@@ -16,24 +16,32 @@ import com.wedding.planner.service.VariationOptionService;
 public class VariationOptionServiceImpl implements VariationOptionService {
 
 	@Autowired
-	VariationOptionRepository dao;
+	VariationOptionRepository optionRepo;
 
 	public ResponseEntity<List<VariationOption>> getVariationOptions() {
-		return ResponseEntity.ok().body(dao.findAll());
+		return ResponseEntity.ok().body(optionRepo.findAll());
 	}
 
-	public ResponseEntity<List<VariationOption>> getVariationOptions(Variation variationId) {
-		return ResponseEntity.ok().body(dao.findByVariationId(variationId));
+	public ResponseEntity<List<VariationOption>> getVariationOptions(Variation variation) {
+		try {
+			List<VariationOption> options = optionRepo.findByVariation(variation);
+			if (options.size() == 0) {
+				throw new Exception("No VariationOptions Found");
+			}
+			return ResponseEntity.ok(options);
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	public ResponseEntity<VariationOption> getVariationOption(Integer optionId) {
-		return ResponseEntity.ok().body(dao.findById(optionId).get());
+		return ResponseEntity.ok().body(optionRepo.findById(optionId).get());
 	}
 
 	public ResponseEntity<VariationOption> addVariationOption(Variation variation, String variationOption) {
 		try {
-			return ResponseEntity.ok().body(dao.save(
-					VariationOption.builder().variationOptionName(variationOption).variationId(variation).build()));
+			return ResponseEntity.ok().body(optionRepo
+					.save(VariationOption.builder().variationOptionName(variationOption).variation(variation).build()));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -41,17 +49,16 @@ public class VariationOptionServiceImpl implements VariationOptionService {
 
 	public ResponseEntity<String> deleteVariationOption(Integer optionId) {
 		try {
-			dao.deleteById(optionId);
+			optionRepo.deleteById(optionId);
 			return ResponseEntity.ok().body("Variation Option Deleted");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Variation Option Not Found");
 		}
 	}
 
-	public ResponseEntity<Boolean> deleteVariationOptionsBy(Variation variationId) {
+	public ResponseEntity<Boolean> deleteVariationOptionsBy(Variation variation) {
 		try {
-
-			dao.deleteAll(dao.findByVariationId(variationId));
+			optionRepo.deleteAll(optionRepo.findByVariation(variation));
 			return ResponseEntity.ok().body(true);
 		} catch (Exception e) {
 			return ResponseEntity.ok().body(false);

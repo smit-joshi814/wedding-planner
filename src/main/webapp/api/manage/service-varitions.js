@@ -9,9 +9,9 @@ function showAlert(id, alertType, message) {
 }
 
 function tomSelectInit(id) {
-	var el;
+	var el, instance;
 	if (window.TomSelect) {
-		new TomSelect((el = $(id)), {
+		instance = new TomSelect((el = $(id)), {
 			copyClassesToDropdown: false,
 			dropdownParent: "body",
 			controlInput: "<input>",
@@ -30,39 +30,21 @@ function tomSelectInit(id) {
 				}
 			},
 		});
+
+		// Store reference to the original destroy method
+		var originalDestroy = instance.destroy;
+
+		// Override destroy method
+		instance.destroy = function() {
+			originalDestroy.call(instance); // Call the original destroy method
+			instance = null; // Reset the instance
+		};
+
+		return instance;
 	}
 }
 
 function loadDropDowns() {
-	// Loads Service Categories
-	$.ajax({
-		url: SERVICE_CATEGORY + "/categories",
-		type: "GET",
-		beforeSend: function() {
-			$(document).find(".spinner-show").removeClass("d-none");
-		},
-		success: function(categories) {
-			categories.forEach(category => {
-				if (category.active == true) {
-					$("#service-category").append(`
-                        <option value="${category.serviceCategoryId}">${category.serviceCategoryName}</option>
-                    `);
-					$("#edit-service-category").append(`
-                        <option value="${category.serviceCategoryId}">${category.serviceCategoryName}</option>
-                    `);
-				}
-			});
-		},
-		error: function(error) {
-			console.log(error);
-		},
-		complete: function() {
-			// tomSelectInit("#edit-service-category"); // don't enable it not working in models
-			tomSelectInit("#service-category");
-			$(document).find(".spinner-show").addClass("d-none");
-		}
-	});
-
 	// Loads Services
 	$.ajax({
 		url: SERVICES + "/services",
@@ -72,19 +54,24 @@ function loadDropDowns() {
 		},
 		success: function(services) {
 			services.forEach(service => {
-				$("#select-service").append(`
+				if (service.status == true) {
+					$("#select-service").append(`
                         <option value="${service.serviceId}">${service.serviceName}</option>
-                 `);
-				$("#edit-select-service").append(`
-                        <option value="${service.serviceId}">${service.serviceName}</option>
-                 `);
+                    `);
+					/*
+					$("#edit-select-service").append(`
+						<option value="${service.serviceId}">${service.serviceName}</option>
+					`);
+					*/
+				}
 			});
 		},
 		error: function(error) {
 			console.log(error);
 		},
 		complete: function() {
-			tomSelectInit("#select-service");
+			// tomSelectInit("#edit-select-service"); // don't enable it not working in models
+			servicesDropdown = tomSelectInit("#select-service");
 			$(document).find(".spinner-show").addClass("d-none");
 		}
 	});
@@ -98,148 +85,205 @@ function initDatatable(id, sortClass, listClass, values) {
 	});
 }
 
-// ENDPOINT: service-categories
-const SERVICE_CATEGORY = "/service-categories"
+// ENDPOINT: variations
+const VARIATIONS = "/variations";
 
-const SERVICES = "/services"
+// ENDPOINT: services
+const SERVICES = "/services";
+
+// ENDPOINT: service-variation
+const SERVICE_VARIATION = "/service-variation";
 
 // Get All service-categories & services
 $(document).ready(function() {
 	loadDropDowns();
-	initDatatable("table-default", "table-sort", "table-tbody", ["sort-id", "sort-name", "sort-description",
-		"sort-created", "sort-status", "sort-action"]);
+	initDatatable("table-default", "table-sort", "table-tbody", ["sort-map-id", "sort-service", "sort-service-items",
+		"sort-service-variations", "sort-action"]);
+	serviceItemDropdown = tomSelectInit("#select-service-item");
+	variationDropdown = tomSelectInit("#select-variation");
+	variationOptionsDropdown = tomSelectInit("#select-variation-option");
 });
 
-// ADD SERVICE FOR CATEGORY
-$("#add-service").on("submit", function(e) {
+// SERVICE DROPDOWN INSTANCE
+let servicesDropdown;
+let serviceItemDropdown;
+let variationDropdown;
+let variationOptionsDropdown;
+
+$("#select-service").on('change', function() {
+	serviceItemDropdown.destroy();
+	variationDropdown.destroy();
+	variationOptionsDropdown.destroy();
+	$("#select-variation-option").html(`
+		<option value>Select Variation First</option>
+	`)
+	variationOptionsDropdown = tomSelectInit("#select-variation-option");
+
+	let service = $(this).val();
+	// Loads Service Items
+	loadServiceItems(service);
+	loadVariations(service);
+});
+
+$("#select-variation").on('change', function() {
+	variationOptionsDropdown.destroy();
+	let variation = $(this).val();
+	loadvariationOption(variation);
+});
+
+// loads Services
+function loadServiceItems(service) {
+	$.ajax({
+		url: SERVICES + "/service-items/" + service,
+		type: "GET",
+		beforeSend: function() {
+			$(document).find(".spinner-show").removeClass("d-none");
+		},
+		statusCode: {
+			404: () => {
+				$("#select-service-item").html(`
+				<option class="text-danger" value>No Items Found</option>
+				`);
+			}
+		},
+		success: function(items) {
+			$("#select-service-item").html(`
+				<option class="text-danger" value>Select Service Item</option>
+				`);
+			items.forEach(item => {
+				$("#select-service-item").append(`
+                        <option value="${item.serviceItemId}">${item.itemName}</option>
+                    `);
+				/*
+				$("#edit-select-service").append(`
+					<option value="${service.serviceId}">${service.serviceName}</option>
+				`);
+				*/
+			});
+		},
+		error: function(error) {
+			console.log(error);
+		},
+		complete: function() {
+			// tomSelectInit("#edit-select-service"); // don't enable it not working in models
+			serviceItemDropdown = tomSelectInit("#select-service-item");
+			$(document).find(".spinner-show").addClass("d-none");
+		}
+	});
+}
+
+// loads Variations 
+function loadVariations(service) {
+	$.ajax({
+		url: VARIATIONS + "/variations/" + service,
+		type: "GET",
+		beforeSend: function() {
+			$(document).find(".spinner-show").removeClass("d-none");
+		},
+		statusCode: {
+			404: () => {
+				$("#select-variation").html(`
+				<option class="text-danger" value>No Variations Available</option>
+				`);
+			}
+		},
+		success: function(variations) {
+			$("#select-variation").html(`
+				<option class="text-danger" value>Select Variation</option>
+				`);
+			variations.forEach(variation => {
+				$("#select-variation").append(`
+                        <option value="${variation.variationId}">${variation.variationName}</option>
+                    `);
+				/*
+				$("#edit-select-service").append(`
+					<option value="${service.serviceId}">${service.serviceName}</option>
+				`);
+				*/
+			});
+		},
+		error: function(error) {
+			console.log(error);
+		},
+		complete: function() {
+			// tomSelectInit("#edit-select-service"); // don't enable it not working in models
+			variationDropdown = tomSelectInit("#select-variation");
+			$(document).find(".spinner-show").addClass("d-none");
+		}
+	});
+}
+
+// loads Variation Options
+function loadvariationOption(variation) {
+	$.ajax({
+		url: VARIATIONS + "/variation-options/" + variation,
+		type: "GET",
+		beforeSend: function() {
+			$(document).find(".spinner-show").removeClass("d-none");
+		},
+		statusCode: {
+			404: () => {
+				$("#select-variation-option").html(`
+				<option class="text-danger" value>No Variation Options Available</option>
+				`);
+			}
+		},
+		success: function(options) {
+			$("#select-variation-option").html(`
+				<option class="text-danger" value>Select Option</option>
+			`);
+			options.forEach(option => {
+				$("#select-variation-option").append(`
+                        <option value="${option.variationOptionId}">${option.variationOptionName}</option>
+                    `);
+				/*
+				$("#edit-select-service").append(`
+					<option value="${service.serviceId}">${service.serviceName}</option>
+				`);
+				*/
+			});
+		},
+		error: function(error) {
+			console.log(error);
+		},
+		complete: function() {
+			// tomSelectInit("#edit-select-service"); // don't enable it not working in models
+			variationOptionsDropdown = tomSelectInit("#select-variation-option");
+			$(document).find(".spinner-show").addClass("d-none");
+		}
+	});
+}
+
+
+// ADD SERVICE VARIATION MAPPING
+$("#add-service-variation").on("submit", function(e) {
 	e.preventDefault();
 	$.ajax({
 		beforeSend: function() {
 			$(document).find(".spinner-show").removeClass("d-none");
 		},
-		url: SERVICES + "/add",
+		url: SERVICE_VARIATION + "/add",
 		type: "POST",
 		data: $(this).serialize(),
 		statusCode: {
-			200: () => $("#add-service").trigger("reset"),
-			500: () => showAlert("#add-service-msg", "alert-danger", "Internal Server Error"),
-		},
-		success: function() {
-			showAlert("#add-service-msg", "alert-success", "Service Added Successfully");
-		},
-		error: function(data) {
-			console.log(data);
-		}
-	});
-});
-
-
-const maxFiles = 5; // Maximum number of files allowed
-let storedFiles = []; // Maintains the files list
-$('#file-input').change(function(event) {
-	const newFiles = event.target.files;
-
-	// Check for maximum file limit
-	if (newFiles.length + storedFiles.length > maxFiles) {
-		$("#file-list-alert").html('<div class="alert alert-important alert-danger alert-dismissible" role="alert"><div class="d-flex"><div>You can only select up to ' + maxFiles + ' images at a time. Please remove ' + ((newFiles.length + storedFiles.length) - maxFiles) + ' files and try again.</div></div><a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a></div>');
-		return;
-	}
-
-	// Combine new files with stored files
-	let combinedFiles = [...storedFiles, ...newFiles];
-
-	// Validate file types before adding to combinedFiles
-	const validFiles = [];
-	for (const file of combinedFiles) {
-		if (file.type.startsWith('image/')) {
-			validFiles.push(file);
-		} else {
-			$("#file-list-alert").html('<div class="alert alert-important alert-danger alert-dismissible" role="alert"><div class="d-flex"><div>Invalid file: "' + file.name + '". Please select only image files.</div></div><a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a></div>');
-		}
-	}
-	combinedFiles = validFiles;
-
-	// Update file list and image previews
-	$('#file-list').empty();
-	for (const file of combinedFiles) {
-		const listItem = $('<li></li>');
-		const imagePreview = $('<img class="avatar avatar-sm">');
-		const fileNameSpan = $('<span></span>');
-		const fileInfoSpan = $('<span></span>');
-		const removeButton = $('<button class="ms-2 btn btn-sm btn-danger">Remove</button>');
-
-		// Create image preview using FileReader
-		const reader = new FileReader();
-		reader.onload = function(event) {
-			imagePreview.attr('src', event.target.result);
-		};
-		reader.readAsDataURL(file);
-
-		fileNameSpan.text(file.name.length > 6 ? file.name.substring(0, 6) + '...' : file.name);
-		fileInfoSpan.text('(' + Math.ceil(file.size / 1024) + ' KB)');
-		removeButton.click(function() {
-			// Remove from storedFiles and update UI
-			const index = combinedFiles.indexOf(file);
-			combinedFiles.splice(index, 1);
-			storedFiles = combinedFiles;
-			listItem.remove();
-		});
-
-		listItem.append(imagePreview);
-		listItem.append(fileNameSpan);
-		listItem.append(fileInfoSpan);
-		listItem.append(removeButton);
-
-		$('#file-list').append(listItem);
-	}
-	// Store the combined files for future use
-	storedFiles = combinedFiles;
-});
-
-// ADD SERVICE ITEM
-$('#add-service-item').on("submit", function(event) {
-	event.preventDefault(); // Prevent form submission
-
-	if (storedFiles.length == 0) {
-		showAlert("#add-service-item-msg", "alert-danger", "No Images Selected, Please Select atleast 1 Image");
-		return;
-	}
-
-	// Gather form data
-	let formData = new FormData(this);
-
-	console.log(formData);
-	// Add stored files to form data
-	for (const file of storedFiles) {
-		formData.append('files[]', file);
-	}
-	console.log(storedFiles);
-	// Perform AJAX submission
-	$.ajax({
-		beforeSend: function() {
-			$(document).find(".spinner-show").removeClass("d-none");
-		},
-		url: SERVICES + '/add-item',
-		method: 'POST',
-		data: formData,
-		processData: false,
-		contentType: false,
-		statusCode: {
 			200: () => {
-				$("#add-service-item").trigger("reset");
-				$("#file-list").empty();
-				storedFiles = [];
+				$("#add-service-variation").trigger("reset");
+				servicesDropdown.destroy();
+				serviceItemDropdown.destroy();
+				variationDropdown.destroy();
+				variationOptionsDropdown.destroy();
+				servicesDropdown = tomSelectInit("#select-service");
+				serviceItemDropdown = tomSelectInit("#select-service-item");
+				variationDropdown = tomSelectInit("#select-variation");
+				variationOptionsDropdown = tomSelectInit("#select-variation-option");
 			},
-			500: () => showAlert("#add-service-item-msg", "alert-danger", "Internal Server Error"),
+			500: () => showAlert("#add-service-variation-msg", "alert-danger", "Internal Server Error"),
 		},
 		success: function() {
-			showAlert("#add-service-item-msg", "alert-success", "Service Item Added Successfully");
+			showAlert("#add-service-variation-msg", "alert-success", "Service Variation Added Successfully");
 		},
 		error: function(data) {
 			console.log(data);
-		},
-		complete: function() {
-			console.log("Complete Called");
 		}
 	});
 });
@@ -275,6 +319,7 @@ $(document).on("click", ".edit-service", function() {
 			`)
 		},
 		success: function(serviceItems) {
+			console.log(serviceItems);
 			let bodyData = "";
 			$.each(serviceItems, function(index, value) {
 				bodyData += ` 
@@ -304,7 +349,7 @@ $(document).on("click", ".edit-service", function() {
 	});
 });
 
-// to prevent auto submission on model whicle clicking on data table
+// to prevent auto submission on model while clicking on data table
 $("#edit-service-form").on("submit", function(e) {
 	e.preventDefault();
 });
@@ -327,12 +372,12 @@ $("#update-service-btn").on("click", function() {
 	});
 });
 
-// delete service
-$(document).on("click", ".delete-service", function() {
-	let id = $(this).data("service-id");
+// DELETE MAPPING
+$(document).on("click", ".delete-service-variation", function() {
+	let id = $(this).data("map-id");
 	let element = this;
 	$.ajax({
-		url: SERVICES + "/delete/" + id,
+		url: SERVICE_VARIATION + "/delete/" + id,
 		type: "DELETE",
 		statusCode: {
 			404: function(data) {
@@ -406,17 +451,11 @@ $(document).on("click", ".edit-service-item", function() {
 		url: SERVICES + "/service-item/" + serviceItem,
 		type: "GET",
 		success: function(data) {
+			console.log(data);
 			$("#edit-service-item-id").val(data.serviceItemId);
 			$('#edit-select-service option[value="' + data.service.serviceId + '"]').attr("selected", "selected");
 			$("#edit-service-item-name").val(data.itemName);
 			$("#edit-service-item-price").val(data.approxPrice);
-			if (data.status == 1) {
-				$("#edit-service-item-active").prop("checked", true);
-				$("#edit-service-item-inactive").prop("checked", false);
-			} else {
-				$("#edit-service-item-active").prop("checked", false);
-				$("#edit-service-item-inactive").prop("checked", true);
-			}
 
 			let images = "";
 			$.each(data.images, function(index, value) {

@@ -8,5 +8,5 @@ import com.wedding.planner.entity.Variation;
 import com.wedding.planner.entity.VariationOption;
 
 public interface VariationOptionRepository extends JpaRepository<VariationOption, Integer> {
-    List<VariationOption> findByVariationId(Variation variationId);
+	List<VariationOption> findByVariation(Variation variation);
 }

@@ -54,13 +54,13 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 	}
 
 	@Override
-	public ResponseEntity<ServiceItem> add(String itemName, Services service, Double approxPrice,
+	public ResponseEntity<ServiceItem> add(String itemName, Services service, Double approxPrice, Boolean status,
 			MultipartFile[] itemImages) {
 		try {
 			List<Images> images = storage.upload(itemImages, itemName, Storage.STORAGE_SERVICE_ITEMS);
 
 			ServiceItem item = ServiceItem.builder().itemName(itemName).service(service).approxPrice(approxPrice)
-					.images(images).build();
+					.status(status).images(images).build();
 
 			ServiceItem savedItem = itemRepo.save(item);
 			return ResponseEntity.ok(savedItem);
@@ -85,6 +85,10 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 
 			if (Objects.nonNull(item.getService())) {
 				dbItem.setService(item.getService());
+			}
+
+			if (Objects.nonNull(item.getStatus())) {
+				dbItem.setStatus(item.getStatus());
 			}
 
 //			for future use

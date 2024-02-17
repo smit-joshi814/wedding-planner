@@ -99,16 +99,18 @@ public class ServicesController {
 	public ResponseEntity<ServiceItem> addItem(@RequestParam("select-service") Services service,
 			@RequestParam("service-item-name") String serviceItemName,
 			@RequestParam("service-item-price") Double serviceItemPrice,
+			@RequestParam("service-item-status") Boolean status,
 			@RequestParam("item-images") MultipartFile[] itemImages) {
-		return itemService.add(serviceItemName, service, serviceItemPrice, itemImages);
+		return itemService.add(serviceItemName, service, serviceItemPrice, status, itemImages);
 	}
 
 	@PutMapping("update-item")
 	public ResponseEntity<ServiceItem> updateItem(@RequestParam("edit-service-item-id") Long serviceItemId,
 			@RequestParam("edit-select-service") Services service,
 			@RequestParam("edit-service-item-name") String itemName,
-			@RequestParam("edit-service-item-price") Double approxPrice) {
-		ServiceItem item = ServiceItem.builder().serviceItemId(serviceItemId).itemName(itemName)
+			@RequestParam("edit-service-item-price") Double approxPrice,
+			@RequestParam("edit-service-item-status") Boolean status) {
+		ServiceItem item = ServiceItem.builder().serviceItemId(serviceItemId).itemName(itemName).status(status)
 				.approxPrice(approxPrice).service(service).build();
 		return itemService.update(item);
 	}

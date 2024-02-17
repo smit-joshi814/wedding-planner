@@ -34,7 +34,7 @@ public interface ServiceItemService {
 	 * @param itemImages
 	 * @return {@link ResponseEntity<ServiceItem>} added {@link ServiceItem}
 	 */
-	ResponseEntity<ServiceItem> add(String itemName, Services service, Double approxPrice, MultipartFile[] itemImages);
+	ResponseEntity<ServiceItem> add(String itemName, Services service, Double approxPrice,Boolean status ,MultipartFile[] itemImages);
 
 	/**
 	 * Deletes the Service Item From The database

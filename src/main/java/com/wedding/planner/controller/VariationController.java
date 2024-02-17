@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.wedding.planner.entity.ServiceCategories;
+import com.wedding.planner.entity.Services;
 import com.wedding.planner.entity.Variation;
 import com.wedding.planner.entity.VariationOption;
 import com.wedding.planner.service.VariationOptionService;
@@ -40,17 +41,22 @@ public class VariationController {
 	 * Variations
 	 *******************************************************************/
 
+	// get all available variations
+	@GetMapping("/variations")
+	public ResponseEntity<List<Variation>> getVariations() {
+		return service.getVariations();
+	}
+
+	@GetMapping("/variations/{service}")
+	public ResponseEntity<List<Variation>> getVariations(@PathVariable("service") Services service) {
+		return this.service.getVariations(service);
+	}
+
 	// add variations
 	@PostMapping("/add-variations")
 	public ResponseEntity<Variation> addVariation(@RequestParam("variation-name") String variationName,
 			@RequestParam("service-category") ServiceCategories category) {
 		return service.addVariation(variationName, category);
-	}
-
-	// get all available variations
-	@GetMapping("/variations")
-	public ResponseEntity<List<Variation>> getVariations() {
-		return service.getVariations();
 	}
 
 	// edit variation
@@ -69,18 +75,22 @@ public class VariationController {
 	 * Variation Options
 	 *******************************************************************/
 
+	// get all available variation options
+	@GetMapping("/variation-options")
+	public ResponseEntity<List<VariationOption>> getVariationOptions() {
+		return optionService.getVariationOptions();
+	}
+
+	@GetMapping("/variation-options/{variation}")
+	public ResponseEntity<List<VariationOption>> getvariationOptions(@PathVariable("variation") Variation variation) {
+		return optionService.getVariationOptions(variation);
+	}
 
 	// add variation option
 	@PostMapping("/add-variation-options")
 	public ResponseEntity<VariationOption> addVariationOption(@RequestParam("variations-select") Variation variation,
 			@RequestParam("variation-option-name") String variationOption) {
 		return optionService.addVariationOption(variation, variationOption);
-	}
-
-	// get all available variation options
-	@GetMapping("/variation-options")
-	public ResponseEntity<List<VariationOption>> getVariationOptions() {
-		return optionService.getVariationOptions();
 	}
 
 	// delete variation option

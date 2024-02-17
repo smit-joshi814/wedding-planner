@@ -24,5 +24,5 @@ public class Variation {
     private String variationName;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="service_category_id")
-    private ServiceCategories serviceCategoryId;
+    private ServiceCategories serviceCategory;
 }

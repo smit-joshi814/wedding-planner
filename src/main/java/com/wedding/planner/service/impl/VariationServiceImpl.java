@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.wedding.planner.entity.ServiceCategories;
+import com.wedding.planner.entity.Services;
 import com.wedding.planner.entity.Variation;
 import com.wedding.planner.repository.VariationRepository;
 import com.wedding.planner.service.VariationOptionService;
@@ -18,40 +19,52 @@ import com.wedding.planner.service.VariationService;
 public class VariationServiceImpl implements VariationService {
 
 	@Autowired
-	VariationRepository dao;
+	VariationRepository variationRepo;
 
 	@Autowired
 	VariationOptionService optionService;
 
 	public ResponseEntity<List<Variation>> getVariations() {
-		return ResponseEntity.ok().body(dao.findAll());
+		return ResponseEntity.ok().body(variationRepo.findAll());
+	}
+
+	@Override
+	public ResponseEntity<List<Variation>> getVariations(Services service) {
+		try {
+			List<Variation> variations = variationRepo.findByServiceCategory(service.getServicecategory());
+			if (variations.size() == 0) {
+				throw new Exception("No Variations Exist");
+			}
+			return ResponseEntity.ok(variations);
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	public ResponseEntity<Variation> addVariation(String variationName, ServiceCategories category) {
 		try {
-			return ResponseEntity.ok().body(
-					dao.save(Variation.builder().variationName(variationName).serviceCategoryId(category).build()));
+			return ResponseEntity.ok().body(variationRepo
+					.save(Variation.builder().variationName(variationName).serviceCategory(category).build()));
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 
 	public ResponseEntity<Variation> editVariation(Integer variationId, String variationName) {
-		Variation dbVariation = dao.findById(variationId).get();
+		Variation dbVariation = variationRepo.findById(variationId).get();
 		if (Objects.nonNull(variationName) && !"".equals(variationName)) {
 			dbVariation.setVariationName(variationName);
 		}
-		return ResponseEntity.ok().body(dao.save(dbVariation));
+		return ResponseEntity.ok().body(variationRepo.save(dbVariation));
 	}
 
 	public ResponseEntity<String> deleteVariation(Variation variation) {
 		try {
 			optionService.deleteVariationOptionsBy(variation);
-			dao.delete(variation);
+			variationRepo.delete(variation);
 			return ResponseEntity.ok().body("Variation Deleted Successfully");
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Variation Not Found");
 		}
 	}
-
 }

@@ -26,16 +26,13 @@ public class ServiceItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long serviceItemId;
-
 	private String itemName;
-
 	@ManyToOne
 	@JoinColumn(name = "service_id")
 	private Services service;
-
 	private Double approxPrice;
-
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "service_item_images", joinColumns = @JoinColumn(name = "service_item_id"), inverseJoinColumns = @JoinColumn(name = "image_id"))
 	private List<Images> images;
+	private Boolean status;
 }

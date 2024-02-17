@@ -1,7 +1,6 @@
 package com.wedding.planner.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,15 +13,17 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class VariationOption {
+public class ServiceVariation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer variationOptionId;
-	String variationOptionName;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "variation_id")
-	Variation variation;
+	private Long mapId;
+	@ManyToOne
+	@JoinColumn(name = "variation_option_id")
+	private VariationOption option;
+	@ManyToOne
+	@JoinColumn(name = "service_item_id")
+	private ServiceItem item;
 }
