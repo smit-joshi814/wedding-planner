@@ -75,7 +75,7 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 		try {
 			ServiceItem dbItem = itemRepo.findById(item.getServiceItemId()).get();
 
-			if (Objects.nonNull(item.getItemName()) && !"".equalsIgnoreCase("")) {
+			if (Objects.nonNull(item.getItemName()) && !"".equalsIgnoreCase(item.getItemName())) {
 				dbItem.setItemName(item.getItemName());
 			}
 
