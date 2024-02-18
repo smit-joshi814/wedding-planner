@@ -94,6 +94,13 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 										</div>
 									</div>
 									<div class="mb-3">
+										<label class="form-label required">Service Location</label>
+										<div>
+											<input type="text" class="form-control" name="service-location"
+												placeholder="Enter Service Location" required />
+										</div>
+									</div>
+									<div class="mb-3">
 										<label class="form-label required">Select Service
 											Category</label> <select class="form-select" id="service-category"
 											name="service-category" required>

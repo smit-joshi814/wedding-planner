@@ -72,6 +72,9 @@ function loadDropDowns() {
 		complete: function() {
 			// tomSelectInit("#edit-select-service"); // don't enable it not working in models
 			servicesDropdown = tomSelectInit("#select-service");
+			serviceItemDropdown = tomSelectInit("#select-service-item");
+			variationDropdown = tomSelectInit("#select-variation");
+			variationOptionsDropdown = tomSelectInit("#select-variation-option");
 			$(document).find(".spinner-show").addClass("d-none");
 		}
 	});
@@ -99,9 +102,6 @@ $(document).ready(function() {
 	loadDropDowns();
 	initDatatable("table-default", "table-sort", "table-tbody", ["sort-map-id", "sort-service", "sort-service-items",
 		"sort-service-variations", "sort-action"]);
-	serviceItemDropdown = tomSelectInit("#select-service-item");
-	variationDropdown = tomSelectInit("#select-variation");
-	variationOptionsDropdown = tomSelectInit("#select-variation-option");
 });
 
 // SERVICE DROPDOWN INSTANCE

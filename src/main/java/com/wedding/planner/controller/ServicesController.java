@@ -53,9 +53,10 @@ public class ServicesController {
 	public ResponseEntity<Services> add(@RequestParam("service-name") String serviceName,
 			@RequestParam("service-category") ServiceCategories category,
 			@RequestParam("service-description") String serviceDescription,
-			@RequestParam("service-status") boolean status) {
+			@RequestParam("service-location") String serviceLocation, @RequestParam("service-status") boolean status) {
 		Services service = Services.builder().serviceName(serviceName).servicecategory(category)
-				.serviceDescription(serviceDescription).status(status).createdBy(null).build();
+				.serviceLocation(serviceLocation).serviceDescription(serviceDescription).status(status).createdBy(null)
+				.build();
 
 		return servicesService.add(service);
 	}

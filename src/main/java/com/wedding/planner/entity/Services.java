@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -27,11 +28,14 @@ public class Services {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long serviceId;
-	
+
 	private String serviceName;
 
 	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String serviceDescription;
+	
+	private String serviceLocation;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id")
@@ -46,7 +50,7 @@ public class Services {
 
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
+
 	private Boolean status;
 
 }

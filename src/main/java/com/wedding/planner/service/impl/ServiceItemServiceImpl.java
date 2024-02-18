@@ -91,11 +91,6 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 				dbItem.setStatus(item.getStatus());
 			}
 
-//			for future use
-			if (Objects.nonNull(dbItem.getImages())) {
-				dbItem.setImages(item.getImages());
-			}
-
 			return ResponseEntity.ok(itemRepo.save(dbItem));
 		} catch (Exception e) {
 			return ResponseEntity.notFound().build();

@@ -20,9 +20,9 @@ import lombok.NoArgsConstructor;
 public class VariationOption {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer variationOptionId;
-	String variationOptionName;
+	private Integer variationOptionId;
+	private String variationOptionName;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "variation_id")
-	Variation variation;
+	private Variation variation;
 }
