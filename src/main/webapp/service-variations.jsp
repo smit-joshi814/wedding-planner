@@ -3,9 +3,7 @@
 <%@page import="com.wedding.planner.config.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-List<ServiceVariation> serviceVariations = (List<ServiceVariation>) request.getAttribute("serviceVariations");
-%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,82 +95,6 @@ List<ServiceVariation> serviceVariations = (List<ServiceVariation>) request.getA
 								</div>
 							</div>
 						</form>
-					</div>
-					<div class="col-md-12 mt-5">
-						<div class="card">
-							<div class="card-body">
-								<div id="table-default" class="table-responsive">
-									<table class="table">
-										<thead>
-											<tr>
-												<th>
-													<button class="table-sort" data-sort="sort-map-id">
-														Id</button>
-												</th>
-												<th>
-													<button class="table-sort" data-sort="sort-service">
-														Service</button>
-												</th>
-												<th>
-													<button class="table-sort" data-sort="sort-service-items">
-														Service Items</button>
-												</th>
-												<th>
-													<button class="table-sort"
-														data-sort="sort-service-variations">Mappings</button>
-												</th>
-												<th>
-													<button class="table-sort" data-sort="sort-action">
-														Action</button>
-												</th>
-											</tr>
-										</thead>
-										<tbody class="table-tbody">
-											<%
-											for (ServiceVariation variation : serviceVariations) {
-											%>
-											<tr>
-												<td class="sort-map-id"><%=variation.getMapId()%></td>
-												<td class="sort-service"><%=variation.getItem().getService().getServiceName()%></td>
-												<td class="sort-service-items"><%=variation.getItem().getItemName()%></td>
-												<td class="sort-service-variations"><%=variation.getOption().getVariationOptionName()%></td>
-												<td class="sort-action">
-													<button class="btn delete-service-variation"
-														data-map-id="<%=variation.getMapId()%>">Delete</button>
-												</td>
-											</tr>
-											<%
-											}
-											%>
-										</tbody>
-										<tfoot>
-											<tr>
-												<th>
-													<button class="table-sort" data-sort="sort-map-id">
-														Id</button>
-												</th>
-												<th>
-													<button class="table-sort" data-sort="sort-service">
-														Service</button>
-												</th>
-												<th>
-													<button class="table-sort" data-sort="sort-service-items">
-														Service Items</button>
-												</th>
-												<th>
-													<button class="table-sort"
-														data-sort="sort-service-variations">Mappings</button>
-												</th>
-												<th>
-													<button class="table-sort" data-sort="sort-action">
-														Action</button>
-												</th>
-											</tr>
-										</tfoot>
-									</table>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>

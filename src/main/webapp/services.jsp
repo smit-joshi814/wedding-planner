@@ -96,8 +96,9 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 									<div class="mb-3">
 										<label class="form-label required">Service Location</label>
 										<div>
-											<input type="text" class="form-control" name="service-location"
-												placeholder="Enter Service Location" required />
+											<input type="text" class="form-control"
+												name="service-location" placeholder="Enter Service Location"
+												required />
 										</div>
 									</div>
 									<div class="mb-3">
@@ -186,8 +187,9 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 										<div class="card custom-file-upload">
 											<div class="card-header">
 												<input type="file" id="file-input" multiple accept="image/*"
-													name="item-images"> <label class="btn btn-outline-primary" for="file-input">
-													<i class="ti icon ti-upload"></i> <span>Select Files</span>
+													name="item-images"> <label
+													class="btn btn-outline-primary" for="file-input"> <i
+													class="ti icon ti-upload"></i> <span>Select Files</span>
 												</label>
 											</div>
 											<div class="card-body">
@@ -267,7 +269,13 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 													<td class="sort-description">
 														<div class="d-flex py-1 align-items-center">
 															<div class="flex-fill">
-																<div class="font-weight-medium"><%=service.getServiceDescription()%></div>
+																<div class="font-weight-medium">
+																	<%=
+																	service.getServiceDescription().length() > 20
+																		? service.getServiceDescription().substring(0, 20)+"..."
+																		: service.getServiceDescription()
+																	%>
+																</div>
 															</div>
 														</div>
 													</td>
@@ -383,6 +391,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 						<div class="mb-3">
 							<h3 class="h3 border-bottom">Service Items</h3>
 						</div>
+
 						<div class="mb-3">
 							<div id="table-service-items-wrapper" class="table-responsive">
 								<table class="table">
@@ -484,12 +493,12 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 							<div class="d-flex justify-content-around">
 								<label class="form-check"> <input
 									class="form-check-input" name="edit-service-item-status"
-									id="edit-service-item-active" value="1" type="radio"
-									required /> <span class="form-check-label">Active</span>
+									id="edit-service-item-active" value="1" type="radio" required />
+									<span class="form-check-label">Active</span>
 								</label> <label class="form-check"> <input
 									class="form-check-input" name="edit-service-item-status"
-									id="edit-service-item-inactive" type="radio" value="0"
-									required /> <span class="form-check-label">In Active</span>
+									id="edit-service-item-inactive" type="radio" value="0" required />
+									<span class="form-check-label">In Active</span>
 								</label>
 							</div>
 						</div>
@@ -498,6 +507,35 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 							<div class="d-flex justify-content-around"
 								id="service-item-images">
 								<!-- Dynamic Binding -->
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<div id="table-options-wrapper" class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th><button class="table-sort"
+													data-sort="sort-option-id">Option Id</button></th>
+											<th><button class="table-sort"
+													data-sort="sort-option-name">Option Name</button></th>
+											<th><button class="table-sort" data-sort="sort-action">action</button></th>
+										</tr>
+									</thead>
+									<tbody id="model-table-options-body"
+										class="table-tbody table-options-body">
+										<!-- Dynamic Binding -->
+									</tbody>
+									<tfoot>
+										<tr>
+											<th><button class="table-sort"
+													data-sort="sort-option-id">Option Id</button></th>
+											<th><button class="table-sort"
+													data-sort="sort-option-name">Option Name</button></th>
+											<th><button class="table-sort" data-sort="sort-action">action</button></th>
+										</tr>
+									</tfoot>
+								</table>
 							</div>
 						</div>
 						<div class="mb-3">

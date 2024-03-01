@@ -99,9 +99,11 @@ function initDatatable(id, sortClass, listClass, values) {
 }
 
 // ENDPOINT: service-categories
-const SERVICE_CATEGORY = "/service-categories"
+const SERVICE_CATEGORY = "/service-categories";
 
-const SERVICES = "/services"
+const SERVICES = "/services";
+
+const SERVICE_VARIATION = "/service-variation";
 
 // Get All service-categories & services
 $(document).ready(function() {
@@ -208,12 +210,11 @@ $('#add-service-item').on("submit", function(event) {
 	// Gather form data
 	let formData = new FormData(this);
 
-	console.log(formData);
 	// Add stored files to form data
 	for (const file of storedFiles) {
 		formData.append('files[]', file);
 	}
-	console.log(storedFiles);
+	
 	// Perform AJAX submission
 	$.ajax({
 		beforeSend: function() {
@@ -238,9 +239,6 @@ $('#add-service-item').on("submit", function(event) {
 		error: function(data) {
 			console.log(data);
 		},
-		complete: function() {
-			console.log("Complete Called");
-		}
 	});
 });
 
@@ -335,20 +333,19 @@ $(document).on("click", ".delete-service", function() {
 		url: SERVICES + "/delete/" + id,
 		type: "DELETE",
 		statusCode: {
-			404: function(data) {
-				$(element).closest("tr").fadeOut("slow");
-				$(element).closest("tbody").append("<tr><td colspan='3' class='alert alert-danger' role='alert'>" + data.responseText + "</td></tr>");
+			500: function(data) {
+				$(element).closest("tbody").append("<tr><td colspan='6' class='alert alert-danger' role='alert'>Please, delete service items before deleting service</td></tr>");
 				$(element).closest("tbody").find("tr:last-child")
 					.hide()
 					.fadeIn(500)
 					.delay(1000)
-					.animate({ opacity: 0, height: 'toggle' }, 500, function() {
+					.animate({ opacity: 1, height: 'toggle' }, 5000, function() {
 						$(this).fadeOut(500);
 					});
 			},
 		},
 		success: function(data) {
-			$(element).closest("tr").html("<td colspan='3' class='alert alert-success' role='alert'>" + data + "</td>")
+			$(element).closest("tr").html("<td colspan='6' class='alert alert-success' role='alert'>" + data + "</td>")
 				.hide() // Initially hide the row
 				.fadeIn(500) // Fade in the row with a 500-millisecond animation
 				.delay(1000) // Wait for 1 second
@@ -372,20 +369,19 @@ $(document).on("click", ".delete-service-item", function() {
 		url: SERVICES + "/delete-item/" + id,
 		type: "DELETE",
 		statusCode: {
-			404: function(data) {
-				$(element).closest("tr").fadeOut("slow");
-				$(element).closest("tbody").append("<tr><td colspan='5' class='alert alert-danger' role='alert'>" + data.responseText + "</td></tr>");
+			500: function(data) {
+				$(element).closest("tbody").append("<tr><td colspan='3' class='alert alert-danger' role='alert'>" + data.responseText + "</td></tr>");
 				$(element).closest("tbody").find("tr:last-child")
 					.hide()
 					.fadeIn(500)
 					.delay(1000)
-					.animate({ opacity: 0, height: 'toggle' }, 500, function() {
+					.animate({ opacity: 0, height: 'toggle' }, 5000, function() {
 						$(this).fadeOut(500);
 					});
 			},
 		},
 		success: function(data) {
-			$(element).closest("tr").html("<td colspan='5' class='alert alert-success' role='alert'>" + data + "</td>")
+			$(element).closest("tr").html("<td colspan='3' class='alert alert-success' role='alert'>" + data + "</td>")
 				.hide() // Initially hide the row
 				.fadeIn(500) // Fade in the row with a 500-millisecond animation
 				.delay(1000) // Wait for 1 second
@@ -402,6 +398,8 @@ $(document).on("click", ".delete-service-item", function() {
 // load Service Item Model
 $(document).on("click", ".edit-service-item", function() {
 	let serviceItem = $(this).data("service-item-id");
+	$("#table-options-wrapper").hide();
+
 	$.ajax({
 		url: SERVICES + "/service-item/" + serviceItem,
 		type: "GET",
@@ -426,9 +424,34 @@ $(document).on("click", ".edit-service-item", function() {
 				</div>
 				`;
 			});
-
 			$("#service-item-images").html(images);
 
+			if (data.variations.length == 0) {
+				$("#table-options-wrapper").hide();
+			} else {
+				let bodyData = '';
+				$.each(data.variations, function(index, value) {
+					bodyData += ` 
+			        <tr>
+			            <td class="sort-option-id" class="text-secondary">${value.variationOptionId}</td>
+			            <td class="sort-option-name">
+			                <div class="d-flex py-1 align-items-center">
+			                    <div class="flex-fill">
+			                        <div class="font-weight-medium">${value.variationOptionName}</div>
+			                    </div>
+			                </div>
+			            </td>
+			            <td>
+			                <div class="btn-list flex-nowrap">
+			                    <button class="btn delete-service-option" data-service-item-id="${serviceItem}" data-option-id="${value.variationOptionId}">Delete</button>
+			                </div>
+			            </td>
+			        </tr>`
+				});
+				$("#model-table-options-body").html(bodyData);
+				initDatatable("table-options-wrapper", "table-sort", "table-options-body", ["sort-option-id", "sort-option-name", "sort-action"]);
+				$("#table-options-wrapper").fadeIn();
+			}
 		},
 		error: function(data) {
 			console.log(data);
@@ -439,13 +462,17 @@ $(document).on("click", ".edit-service-item", function() {
 // update Service Item
 $("#edit-service-item").on("submit", function(e) {
 	e.preventDefault();
+
+});
+
+$("#update-service-item").on("click", function() {
 	$.ajax({
 		beforeSend: function() {
 			$(document).find(".spinner-show").removeClass("d-none");
 		},
 		url: SERVICES + "/update-item",
 		type: "PUT",
-		data: $(this).serialize(),
+		data: $("edit-service-item").serialize(),
 		statusCode: {
 			500: () => showAlert("#edit-service-item-msg", "alert-danger", "Internal Server Error"),
 		},
@@ -453,4 +480,44 @@ $("#edit-service-item").on("submit", function(e) {
 			showAlert("#edit-service-item-msg", "alert-success", "Service Updated Successfully");
 		}
 	});
-})
+});
+
+
+// delete service item Option
+$(document).on("click", ".delete-service-option", function() {
+	let item = $(this).data("service-item-id");
+	let option = $(this).data("option-id");
+	let element = this;
+	// let actionStatus;
+	$.ajax({
+		beforeSend: function() {
+			//	actionStatus = $(element).closest("tbody").append("<tr><td colspan='5' class='alert alert-warning' role='alert'>Please wait while we delete service item...</td></tr>");
+		},
+		url: SERVICE_VARIATION + "/delete/item/" + item + "/option/" + option,
+		type: "DELETE",
+		statusCode: {
+			500: function(data) {
+				$(element).closest("tbody").append("<tr><td colspan='3' class='alert alert-danger' role='alert'>" + data.responseText + "</td></tr>");
+				$(element).closest("tbody").find("tr:last-child")
+					.hide()
+					.fadeIn(500)
+					.delay(1000)
+					.animate({ opacity: 0, height: 'toggle' }, 5000, function() {
+						$(this).fadeOut(500);
+					});
+			},
+		},
+		success: function(data) {
+			$(element).closest("tr").html("<td colspan='3' class='alert alert-success' role='alert'>" + data + "</td>")
+				.hide() // Initially hide the row
+				.fadeIn(500) // Fade in the row with a 500-millisecond animation
+				.delay(1000) // Wait for 1 second
+				.animate({ opacity: 0, height: 'toggle' }, 500, function() {
+					$(this).fadeOut(500); // Remove the row after the animation
+				});
+		},
+		complete: function() {
+			//	$(actionStatus).hide();
+		}
+	});
+});

@@ -1,5 +1,7 @@
 package com.wedding.planner.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.wedding.planner.entity.Images;
@@ -29,5 +31,13 @@ public interface ImageService {
 	 * @return {@link ResponseEntity<Boolean>} whether the image entity is deleted
 	 */
 	ResponseEntity<Boolean> delete(Images image);
+
+	/**
+	 * deletes if the @param images exists in the database
+	 * 
+	 * @param images
+	 * @return {@link ResponseEntity<Boolean>} whether the images are deleted
+	 */
+	ResponseEntity<Boolean> delete(List<Images> images);
 
 }

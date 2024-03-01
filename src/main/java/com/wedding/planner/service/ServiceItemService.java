@@ -2,10 +2,12 @@ package com.wedding.planner.service;
 
 import java.util.List;
 
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wedding.planner.entity.ServiceItem;
+import com.wedding.planner.entity.ServiceVariation;
 import com.wedding.planner.entity.Services;
 
 public interface ServiceItemService {
@@ -34,7 +36,8 @@ public interface ServiceItemService {
 	 * @param itemImages
 	 * @return {@link ResponseEntity<ServiceItem>} added {@link ServiceItem}
 	 */
-	ResponseEntity<ServiceItem> add(String itemName, Services service, Double approxPrice,Boolean status ,MultipartFile[] itemImages);
+	ResponseEntity<ServiceItem> add(String itemName, Services service, Double approxPrice, Boolean status,
+			MultipartFile[] itemImages);
 
 	/**
 	 * Deletes the Service Item From The database
@@ -43,6 +46,15 @@ public interface ServiceItemService {
 	 * @return {@link ResponseEntity<String>} response text
 	 */
 	ResponseEntity<String> delete(ServiceItem item);
+	
+	/**
+	 * Deletes the Service Variation From The database
+	 * 
+	 * @param item
+	 * @return {@link ResponseEntity<String>} response text
+	 */
+	ResponseEntity<String> delete(ServiceVariation variation);
+	
 
 	/**
 	 * Gets Service Item For Given ServiceItemId
@@ -61,4 +73,12 @@ public interface ServiceItemService {
 	 * @return {@link ResponseEntity<ServiceItem>} updates {@link ServiceItem}
 	 */
 	ResponseEntity<ServiceItem> update(ServiceItem item);
+
+	/**
+	 * Updates existing Service Item and Adds Variation
+	 * 
+	 * @param variation
+	 * @return
+	 */
+	ResponseEntity<ServiceVariation> update(ServiceVariation variation);
 }

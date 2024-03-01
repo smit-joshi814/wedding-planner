@@ -11,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wedding.planner.entity.Images;
 import com.wedding.planner.entity.ServiceItem;
+import com.wedding.planner.entity.ServiceVariation;
 import com.wedding.planner.entity.Services;
+import com.wedding.planner.entity.VariationOption;
 import com.wedding.planner.repository.ServiceItemRepository;
 import com.wedding.planner.service.ServiceItemService;
 import com.wedding.planner.service.StorageService;
@@ -98,14 +100,44 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 	}
 
 	@Override
-	public ResponseEntity<String> delete(ServiceItem item) {
+	public ResponseEntity<ServiceVariation> update(ServiceVariation variation) {
 		try {
-			ServiceItem dbItem = itemRepo.findById(item.getServiceItemId()).get();
-			storage.delete(dbItem.getImages());
-			itemRepo.delete(dbItem);
+			ServiceItem dbItem = itemRepo.findById(variation.getItem()).get();
+			if (Objects.nonNull(variation.getOption())) {
+				List<VariationOption> options = dbItem.getVariations();
+				options.add(variation.getOption());
+			}
+			itemRepo.save(dbItem);
+			return ResponseEntity.ok(variation);
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
+	@Override
+	public ResponseEntity<String> delete(ServiceVariation variation) {
+		try {
+			ServiceItem dbItem = itemRepo.findById(variation.getItem()).get();
+			if (Objects.nonNull(variation.getOption())) {
+				List<VariationOption> options = dbItem.getVariations();
+				options.remove(variation.getOption());
+			}
+			itemRepo.save(dbItem);
 			return ResponseEntity.ok("Service Item Deleted Successfully");
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
+		}
+	}
+
+	@Override
+	public ResponseEntity<String> delete(ServiceItem item) {
+		try {
+			ServiceItem dbItem = itemRepo.findById(item.getServiceItemId()).get();
+			itemRepo.delete(dbItem);
+			storage.delete(dbItem.getImages());
+			return ResponseEntity.ok("Service Item Deleted Successfully");
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().body(e.getMessage());
 		}
 	}
 }

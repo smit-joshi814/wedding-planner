@@ -8,8 +8,8 @@
 		</button>
 		<h1
 			class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-			<a href="/home"> <img src="<%=Configurations.logo%>" width="110" height="32"
-				alt="Tabler" class="navbar-brand-image" />
+			<a href="/home"> <img src="<%=Configurations.logo%>" width="110"
+				height="32" alt="Tabler" class="navbar-brand-image" />
 			</a>
 		</h1>
 		<div class="navbar-nav flex-row order-md-last">
@@ -122,8 +122,8 @@
 					</div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-					<a href="/my-account" id="settings" class="dropdown-item">Settings</a> <a
-						href="/sign-in" class="dropdown-item">Logout</a>
+					<a href="/my-account" id="settings" class="dropdown-item">Settings</a>
+					<a href="/sign-in" class="dropdown-item">Logout</a>
 				</div>
 			</div>
 		</div>
@@ -151,22 +151,30 @@
 						<div class="dropdown-menu">
 							<div class="dropdown-menu-columns">
 								<div class="dropdown-menu-column">
-									<a class="dropdown-item" id="service-categories" href="/service-categories">
-										Service Categories </a> <a class="dropdown-item" id="variations"
-										href="/variations"> Variations </a>
+									<a class="dropdown-item" id="service-categories"
+										href="/service-categories"> Service Categories </a> <a
+										class="dropdown-item" id="variations" href="/variations">
+										Variations </a>
 								</div>
 								<div class="dropdown-menu-column">
-									<a class="dropdown-item" id="services" href="/services"> Services </a> <a
-										class="dropdown-item" id="service-variation" href="/service-variation">Services Variations</a>
+									<a class="dropdown-item" id="services" href="/services">
+										Services </a> <a class="dropdown-item" id="service-variation"
+										href="/service-variation">Services Variations</a>
 								</div>
 							</div>
 						</div></li>
-					<li class="nav-item" id="vendors"><a class="nav-link" href="/vendors">
-							<span class="nav-link-icon d-md-none d-lg-inline-block"> <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
+					<li class="nav-item" id="vendors"><a class="nav-link"
+						href="/vendors"> <span
+							class="nav-link-icon d-md-none d-lg-inline-block"> <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
 								<i class="ti icon ti-briefcase"></i>
 						</span> <span class="nav-link-title"> Vendors </span>
 					</a></li>
-
+					<li class="nav-item" id="chats"><a class="nav-link"
+						href="/chats"> <span
+							class="nav-link-icon d-md-none d-lg-inline-block"> <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
+								<i class="ti icon ti-message-circle"></i>
+						</span> <span class="nav-link-title"> Chats </span>
+					</a></li>
 					<li class="nav-item dropdown" id="help"><a
 						class="nav-link dropdown-toggle" href="#navbar-help"
 						data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -176,8 +184,9 @@
 						</span> <span class="nav-link-title"> Help </span>
 					</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="#" id="documentation"> Documentation </a> <a
-								class="dropdown-item" href="logs" id="logs"> Logs </a>
+							<a class="dropdown-item" href="#" id="documentation">
+								Documentation </a> <a class="dropdown-item" href="logs" id="logs">
+								Logs </a>
 						</div></li>
 				</ul>
 				<div

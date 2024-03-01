@@ -65,7 +65,7 @@ public class ServicesServiceImpl implements ServicesService {
 			servicesRepo.delete(service);
 			return ResponseEntity.ok("Service Deleted Successfully");
 		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.internalServerError().body(e.getMessage());
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,6 @@ import com.wedding.planner.api.v1.service.ApiVariationOptionService;
 import com.wedding.planner.entity.Variation;
 import com.wedding.planner.entity.VariationOption;
 import com.wedding.planner.repository.VariationOptionRepository;
-import org.springframework.http.HttpStatus;
 
 @Service
 public class ApiVariationOptionServiceImpl implements ApiVariationOptionService {

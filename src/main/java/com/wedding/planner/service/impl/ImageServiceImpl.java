@@ -1,5 +1,6 @@
 package com.wedding.planner.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +14,29 @@ import com.wedding.planner.service.ImageService;
 import jakarta.transaction.Transactional;
 
 @Service
-public class ImageServiceImpl implements ImageService{
-	
+public class ImageServiceImpl implements ImageService {
+
 	@Autowired
 	private ImagesRepository imageRepo;
 
 	@Override
 	@Transactional
 	public ResponseEntity<Images> addImage(Images image) {
-		
+
 		return ResponseEntity.ok(imageRepo.save(image));
 	}
 
 	@Override
 	public ResponseEntity<Images> update(Images image) {
-		Images dbImage=imageRepo.findById(image.getImageId()).get();
-		if(Objects.nonNull(image.getFileId())&& !"".equalsIgnoreCase(image.getFileId())) {
+		Images dbImage = imageRepo.findById(image.getImageId()).get();
+		if (Objects.nonNull(image.getFileId()) && !"".equalsIgnoreCase(image.getFileId())) {
 			dbImage.setFileId(image.getFileId());
 		}
-		
-		if(Objects.nonNull(image.getUrl())&& !"".equalsIgnoreCase(image.getUrl())) {
+
+		if (Objects.nonNull(image.getUrl()) && !"".equalsIgnoreCase(image.getUrl())) {
 			dbImage.setUrl(image.getUrl());
 		}
-		
+
 		return ResponseEntity.ok(imageRepo.save(image));
 	}
 
@@ -44,7 +45,17 @@ public class ImageServiceImpl implements ImageService{
 		try {
 			imageRepo.delete(image);
 			return ResponseEntity.ok(true);
-		}catch (Exception e) {
+		} catch (Exception e) {
+			return ResponseEntity.ok(false);
+		}
+	}
+
+	@Override
+	public ResponseEntity<Boolean> delete(List<Images> images) {
+		try {
+			imageRepo.deleteAll(images);
+			return ResponseEntity.ok(true);
+		} catch (Exception e) {
 			return ResponseEntity.ok(false);
 		}
 	}

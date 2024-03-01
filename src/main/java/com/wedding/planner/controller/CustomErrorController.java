@@ -1,7 +1,6 @@
 package com.wedding.planner.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

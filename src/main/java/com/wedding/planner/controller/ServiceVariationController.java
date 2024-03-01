@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wedding.planner.entity.ServiceItem;
 import com.wedding.planner.entity.ServiceVariation;
 import com.wedding.planner.entity.VariationOption;
 import com.wedding.planner.service.ServiceVariationService;
@@ -25,7 +24,6 @@ public class ServiceVariationController {
 	@RequestMapping
 	public ModelAndView serviceVariation(ModelAndView mv) {
 		mv.setViewName("service-variations");
-		mv.addObject("serviceVariations", serviceVarService.getAll().getBody());
 		return mv;
 	}
 
@@ -35,15 +33,16 @@ public class ServiceVariationController {
 
 //	Adds Service Variation
 	@PostMapping("add")
-	ResponseEntity<ServiceVariation> add(@RequestParam("select-service-item") ServiceItem item,
+	ResponseEntity<ServiceVariation> add(@RequestParam("select-service-item") Long item,
 			@RequestParam("select-variation-option") VariationOption option) {
 		ServiceVariation serviceVar = ServiceVariation.builder().item(item).option(option).build();
 		return serviceVarService.add(serviceVar);
 	}
 
 //	Delete Service Variation
-	@DeleteMapping("delete/{serviceVariation}")
-	ResponseEntity<String> delete(@PathVariable("serviceVariation") ServiceVariation serviceVariation) {
-		return serviceVarService.delete(serviceVariation);
+	@DeleteMapping("delete/item/{item}/option/{option}")
+	ResponseEntity<String> delete(@PathVariable("item") Long item, @PathVariable("option") VariationOption option) {
+		ServiceVariation serviceVar = ServiceVariation.builder().item(item).option(option).build();
+		return serviceVarService.delete(serviceVar);
 	}
 }

@@ -101,6 +101,6 @@ public class StorageServiceImpl implements StorageService {
 				throw new RuntimeException(e);
 			}
 		});
-		return true;
+		return imageService.delete(images).getBody();
 	}
 }

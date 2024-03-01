@@ -415,5 +415,10 @@
 	</div>
 	<!-- Libs JS -->
 	<jsp:include page="components/footer-imports.jsp" />
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#chats").addClass("active");
+	});
+	</script>
 </body>
 </html>
