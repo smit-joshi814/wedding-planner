@@ -32,7 +32,7 @@ public class ServicesController {
 	private ServiceItemService itemService;
 
 	@RequestMapping
-	public ModelAndView services(ModelAndView mv) {
+	public ModelAndView servicesHome(ModelAndView mv) {
 		mv.addObject("services", servicesService.getAll().getBody());
 		mv.setViewName("services");
 		return mv;
