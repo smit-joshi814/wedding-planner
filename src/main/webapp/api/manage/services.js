@@ -472,7 +472,7 @@ $("#update-service-item").on("click", function() {
 		},
 		url: SERVICES + "/update-item",
 		type: "PUT",
-		data: $("edit-service-item").serialize(),
+		data: $("#edit-service-item").serialize(),
 		statusCode: {
 			500: () => showAlert("#edit-service-item-msg", "alert-danger", "Internal Server Error"),
 		},
