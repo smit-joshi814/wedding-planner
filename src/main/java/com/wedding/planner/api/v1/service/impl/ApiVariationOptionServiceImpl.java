@@ -20,73 +20,71 @@ import com.wedding.planner.repository.VariationOptionRepository;
 @Service
 public class ApiVariationOptionServiceImpl implements ApiVariationOptionService {
 
-    @Autowired
-    private VariationOptionRepository optionRepo;
+	@Autowired
+	private VariationOptionRepository optionRepo;
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions() {
-        List<VariationOption> options = optionRepo.findAll();
-        if (options.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = optionRepo.count();
-        Integer page = 0;
-        Integer perPage = 10;
-        Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
+	@Override
+	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions() {
+		List<VariationOption> options = optionRepo.findAll();
+		if (options.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = optionRepo.count();
+		Integer page = 0;
+		Integer perPage = 10;
+		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
 
-        ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords, page,
-                perPage, totalPages);
+		ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords, page,
+				perPage, totalPages);
 
-        return ResponseEntity.ok(data);
-    }
+		return ResponseEntity.ok(data);
+	}
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Pageable page) {
-        List<VariationOption> options = optionRepo.findAll(page).toList();
-        if (options.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = optionRepo.count();
-        Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
+	@Override
+	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Pageable page) {
+		List<VariationOption> options = optionRepo.findAll(page).toList();
+		if (options.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = optionRepo.count();
+		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
 
-        ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords,
-                page.getPageNumber(),
-                page.getPageSize(), totalPages);
+		ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords,
+				page.getPageNumber(), page.getPageSize(), totalPages);
 
-        return ResponseEntity.ok(data);
-    }
+		return ResponseEntity.ok(data);
+	}
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation) {
-        List<VariationOption> options = optionRepo.findByVariation(variation);
-        if (options.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = optionRepo.count();
-        Integer page = 0;
-        Integer perPage = 10;
-        Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
+	@Override
+	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation) {
+		List<VariationOption> options = optionRepo.findByVariation(variation);
+		if (options.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = optionRepo.countByVariation(variation);
+		Integer page = 0;
+		Integer perPage = 10;
+		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
 
-        ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords, page,
-                perPage, totalPages);
+		ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords, page,
+				perPage, totalPages);
 
-        return ResponseEntity.ok(data);
-    }
+		return ResponseEntity.ok(data);
+	}
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation, Pageable page) {
-        List<VariationOption> options = optionRepo.findByVariation(variation, page);
-        if (options.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = optionRepo.count();
-        Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
+	@Override
+	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation, Pageable page) {
+		List<VariationOption> options = optionRepo.findByVariation(variation, page);
+		if (options.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = optionRepo.countByVariation(variation);
+		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
 
-        ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords,
-                page.getPageNumber(),
-                page.getPageSize(), totalPages);
+		ResponseDTO<List<VariationOptionDTO>> data = new ResponseDTO<>(convertToDTO(options), totalRecords,
+				page.getPageNumber(), page.getPageSize(), totalPages);
 
-        return ResponseEntity.ok(data);
-    }
+		return ResponseEntity.ok(data);
+	}
 
 }

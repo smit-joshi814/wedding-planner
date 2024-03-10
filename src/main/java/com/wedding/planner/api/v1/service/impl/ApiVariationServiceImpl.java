@@ -57,7 +57,7 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		if (variations.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		Long totalRecords = variationRepo.count();
+		Long totalRecords = variationRepo.countByServiceCategory(category);
 		Integer page = 0;
 		Integer perPage = 10;
 		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
@@ -72,7 +72,7 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		if (variations.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		Long totalRecords = variationRepo.count();
+		Long totalRecords = variationRepo.countByServiceCategory(category);
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
 		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<List<VariationDTO>>(convertToDTO(variations),
 				totalRecords, page.getPageNumber(), page.getPageSize(), totalPages);

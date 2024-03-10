@@ -9,6 +9,8 @@ import com.wedding.planner.entity.ServiceCategories;
 import com.wedding.planner.entity.Variation;
 
 public interface VariationRepository extends JpaRepository<Variation, Integer> {
+	
+	Long countByServiceCategory(ServiceCategories serviceCategory);
 
 	List<Variation> findByServiceCategory(ServiceCategories serviceCategory);
 	

@@ -98,7 +98,7 @@ public class ApiServiceServiceImpl implements ApiServiceService {
             }
         });
         services.removeAll(toRemove);
-        Long totalRecords = serviceRepo.count();
+        Long totalRecords = serviceRepo.countByServicecategory(category);
         Integer page = 0;
         Integer perPage = 10;
         Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
@@ -124,7 +124,7 @@ public class ApiServiceServiceImpl implements ApiServiceService {
             }
         });
         services.removeAll(toRemove);
-        Long totalRecords = serviceRepo.count();
+        Long totalRecords = serviceRepo.countByServicecategory(category);
         Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
         ResponseDTO<List<ServiceDTO>> Res = new ResponseDTO<>(convertToDTO(services, images), totalRecords,
                 page.getPageNumber(),

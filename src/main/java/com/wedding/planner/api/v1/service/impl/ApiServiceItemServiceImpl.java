@@ -2,6 +2,7 @@ package com.wedding.planner.api.v1.service.impl;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,65 +21,63 @@ import com.wedding.planner.repository.ServiceItemRepository;
 @Service
 public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 
-    @Autowired
-    private ServiceItemRepository serviceItemRepo;
+	@Autowired
+	private ServiceItemRepository serviceItemRepo;
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems() {
-        List<ServiceItem> items = serviceItemRepo.findByStatus(true);
-        if (items.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = serviceItemRepo.count();
-        Integer page = 0;
-        Integer perPage = 10;
-        Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-        ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords, page, perPage,
-                totalPages);
-        return ResponseEntity.ok(data);
-    }
+	@Override
+	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems() {
+		List<ServiceItem> items = serviceItemRepo.findByStatus(true);
+		if (items.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = serviceItemRepo.count();
+		Integer page = 0;
+		Integer perPage = 10;
+		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
+		ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords, page, perPage,
+				totalPages);
+		return ResponseEntity.ok(data);
+	}
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Pageable page) {
-        List<ServiceItem> items = serviceItemRepo.findByStatus(true, page);
-        if (items.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = serviceItemRepo.count();
-        Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-        ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords,
-                page.getPageNumber(), page.getPageSize(),
-                totalPages);
-        return ResponseEntity.ok(data);
-    }
+	@Override
+	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Pageable page) {
+		List<ServiceItem> items = serviceItemRepo.findByStatus(true, page);
+		if (items.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = serviceItemRepo.count();
+		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
+		ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords,
+				page.getPageNumber(), page.getPageSize(), totalPages);
+		return ResponseEntity.ok(data);
+	}
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service) {
-        List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true);
-        if (items.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = serviceItemRepo.count();
-        Integer page = 0;
-        Integer perPage = 10;
-        Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-        ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords, page, perPage,
-                totalPages);
-        return ResponseEntity.ok(data);
-    }
+	@Override
+	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service) {
+		List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true);
+		if (items.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = serviceItemRepo.countByService(service);
+		Integer page = 0;
+		Integer perPage = 10;
+		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
+		ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords, page, perPage,
+				totalPages);
+		return ResponseEntity.ok(data);
+	}
 
-    @Override
-    public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service, Pageable page) {
-        List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true, page);
-        if (items.isEmpty()) {
-            throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-        }
-        Long totalRecords = serviceItemRepo.count();
-        Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-        ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords,
-                page.getPageNumber(), page.getPageSize(),
-                totalPages);
-        return ResponseEntity.ok(data);
-    }
+	@Override
+	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service, Pageable page) {
+		List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true, page);
+		if (items.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
+		Long totalRecords = serviceItemRepo.countByService(service);
+		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
+		ResponseDTO<List<ServiceItemDTO>> data = new ResponseDTO<>(convertToDTO(items), totalRecords,
+				page.getPageNumber(), page.getPageSize(), totalPages);
+		return ResponseEntity.ok(data);
+	}
 
 }
