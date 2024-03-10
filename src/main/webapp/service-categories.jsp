@@ -1,7 +1,7 @@
 <%@page import="jakarta.servlet.jsp.tagext.TryCatchFinally"%>
 <%@page import="com.wedding.planner.entity.ServiceCategories"%>
 <%@page import="java.util.List"%>
-<%@page import="com.wedding.planner.config.Configurations"%>
+<%@page import="com.wedding.planner.config.general.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>

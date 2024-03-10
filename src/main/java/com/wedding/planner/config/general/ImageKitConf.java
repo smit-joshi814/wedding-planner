@@ -1,4 +1,4 @@
-package com.wedding.planner.config;
+package com.wedding.planner.config.general;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

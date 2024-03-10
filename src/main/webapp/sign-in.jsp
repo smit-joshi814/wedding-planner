@@ -1,4 +1,4 @@
-<%@page import="com.wedding.planner.config.Configurations"%>
+<%@page import="com.wedding.planner.config.general.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!doctype html>
@@ -22,11 +22,11 @@
 						<div class="card card-md">
 							<div class="card-body">
 								<h2 class="h2 text-center mb-4">Login to your account</h2>
-								<form action="/home" method="get" autocomplete="off"
+								<form action="sign-in" method="POST" autocomplete="off"
 									novalidate>
 									<div class="mb-3">
 										<label class="form-label">Email address</label> <input
-											type="email" class="form-control" name="emailId" id="emailId"
+											type="email" class="form-control" name="username" id="username"
 											placeholder="your@email.com" autocomplete="off">
 									</div>
 									<div class="mb-2">
@@ -47,12 +47,16 @@
 											</span>
 										</div>
 									</div>
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
+									<!-- 
 									<div class="mb-2">
 										<label class="form-check"> <input type="checkbox"
 											class="form-check-input" /> <span class="form-check-label">Remember
 												me on this device</span>
 										</label>
 									</div>
+									 -->
 									<div class="form-footer">
 										<button type="submit" class="btn btn-primary w-100">Sign
 											in</button>

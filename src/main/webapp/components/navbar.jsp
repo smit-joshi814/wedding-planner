@@ -1,4 +1,4 @@
-<%@page import="com.wedding.planner.config.Configurations"%>
+<%@page import="com.wedding.planner.config.general.Configurations"%>
 <header class="navbar navbar-expand-md d-print-none">
 	<div class="container-xl">
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -123,7 +123,11 @@
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 					<a href="/my-account" id="settings" class="dropdown-item">Settings</a>
-					<a href="/sign-in" class="dropdown-item">Logout</a>
+					<form action="/logout" method="POST">
+						<button class="dropdown-item">Logout</button>
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+					</form>
 				</div>
 			</div>
 		</div>

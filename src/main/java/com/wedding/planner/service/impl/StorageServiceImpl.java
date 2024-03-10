@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.wedding.planner.config.ImageKitConf;
+import com.wedding.planner.config.general.ImageKitConf;
 import com.wedding.planner.entity.Images;
 import com.wedding.planner.service.ImageService;
 import com.wedding.planner.service.StorageService;

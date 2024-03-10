@@ -13,4 +13,18 @@ public interface UserService {
 	 */
 	ResponseEntity<Users> getUser();
 	
+	/**
+	 * updates the login status for user
+	 * @param email
+	 * @param status
+	 * @return
+	 */
+	ResponseEntity<Boolean> updateLoginStatus(String email,Boolean status);
+	
+	/**
+	 * Gets the user by email
+	 * @param email
+	 * @return
+	 */
+	ResponseEntity<Users> getUser(String email);
 }

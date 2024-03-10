@@ -1,4 +1,4 @@
-package com.wedding.planner.config;
+package com.wedding.planner.config.general;
 
 public class Configurations {
 	public static final String name = "Wedding Planning";
