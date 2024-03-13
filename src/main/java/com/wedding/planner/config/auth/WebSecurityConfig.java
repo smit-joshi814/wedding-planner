@@ -108,8 +108,8 @@ public class WebSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((requests) -> requests
 				.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
-				.requestMatchers("/resources/**", "/static/**",
-						"/sign-in.jsp","/sign-up","/sign-up.jsp","/forgetPassword","/forgot-password.jsp","/service-worker.js","webmanifest.json","/terms-of-service","/terms-of-service.jsp","favicon.ico")
+				.requestMatchers("/resources/**", "/static/**","/cities",
+						"/sign-in.jsp","/sign-up/**","/sign-up.jsp","/forgetPassword","/forgot-password.jsp","/service-worker.js","webmanifest.json","/terms-of-service","/terms-of-service.jsp","favicon.ico")
 				.permitAll()
 				.requestMatchers("/api/**").denyAll()
 				.anyRequest()

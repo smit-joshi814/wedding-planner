@@ -1,6 +1,11 @@
+<%@page import="com.wedding.planner.entity.States"%>
+<%@page import="java.util.List"%>
 <%@page import="com.wedding.planner.config.general.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+List<States> states = (List<States>) request.getAttribute("states");
+%>
 <html lang="en">
 <head>
 <title>Sign up <%=Configurations.name%></title>
@@ -15,7 +20,7 @@
 					class="navbar-brand-image">
 				</a>
 			</div>
-			<form class="card" action="add-new-bank" method="POST">
+			<form class="card" id="register-vendor" method="POST">
 				<div class="card-header">
 					<h3 class="card-title">Register as Vendor</h3>
 				</div>
@@ -42,7 +47,7 @@
 							<div class="mb-3">
 								<label class="form-label required">Email address</label> <input
 									type="email" class="form-control" placeholder="Email"
-									name="email" maxlength="30" required>
+									name="email" autocomplete="username" maxlength="30" required>
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-6">
@@ -54,9 +59,18 @@
 						</div>
 						<div class="col-sm-6 col-md-6">
 							<div class="mb-3">
-								<label class="form-label required">Password</label> <input
-									type="password" class="form-control" placeholder="Password"
-									maxlength="30" name="password" required>
+								<label class="form-label required">Password</label>
+								<div class="input-group input-group-flat">
+									<input type="password" class="form-control"
+										placeholder="Password" maxlength="30" name="password" id="password"
+										autocomplete="current-password" required> <span
+										class="input-group-text"> <a
+										class="link-secondary text-decoration-none" id="showPassword"
+										title="Show password" data-bs-toggle="tooltip"> <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+											<i id="eye-icon" class="ti icon ti-eye"></i>
+									</a>
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -94,17 +108,23 @@
 						<div class="col-sm-6 col-md-6">
 							<div class="mb-3">
 								<div class="form-label required">State</div>
-								<select class="form-select" name="state" required>
-									<option selected>Gujarat</option>
-									<option>Utter Pradesh</option>
+								<select class="form-select" name="state" id="states" required>
+									<option>Select State</option>
+									<%
+									for (States state : states) {
+									%>
+									<option value="<%=state.getStateId()%>"><%=state.getStateName()%></option>
+									<%
+									}
+									%>
 								</select>
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-6">
 							<div class="mb-3">
 								<div class="form-label required">City</div>
-								<select class="form-select" name="city" required>
-									<option>Ahmedabad</option>
+								<select class="form-select" name="city" id="cities" required>
+									<option>Select State First</option>
 								</select>
 							</div>
 						</div>
@@ -146,22 +166,6 @@
 	</div>
 
 	<jsp:include page="components/footer-imports.jsp"></jsp:include>
-
-	<script type="text/javascript">
-		// Password Box Visibility 
-		$(document).ready(function() {
-			$("#showPassword").on("click", function() {
-				if ($("#password").attr("type") == "password") {
-					$("#password").attr("type", "text");
-					$("#eye-icon").removeClass("ti-eye");
-					$("#eye-icon").addClass("ti-eye-closed");
-				} else {
-					$("#password").attr("type", "password");
-					$("#eye-icon").removeClass("ti-eye-closed");
-					$("#eye-icon").addClass("ti-eye");
-				}
-			});
-		});
-	</script>
+	<script type="text/javascript" src="resources/sign-up/sign-up.js"></script>
 </body>
 </html>

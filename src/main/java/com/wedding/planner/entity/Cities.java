@@ -22,8 +22,6 @@ public class Cities {
 	
 	private String cityName;
 	
-	private String postalCode;
-	
 	@ManyToOne
 	@JoinColumn(name = "state_id")
 	private States state;

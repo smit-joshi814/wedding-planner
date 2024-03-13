@@ -17,7 +17,7 @@ import com.wedding.planner.entity.VariationOption;
 import com.wedding.planner.repository.ServiceItemRepository;
 import com.wedding.planner.service.ServiceItemService;
 import com.wedding.planner.service.StorageService;
-import com.wedding.planner.utils.Storage;
+import com.wedding.planner.utils.impl.Storage;
 
 @Service
 public class ServiceItemServiceImpl implements ServiceItemService {

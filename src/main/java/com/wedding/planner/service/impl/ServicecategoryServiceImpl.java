@@ -16,7 +16,7 @@ import com.wedding.planner.repository.ServiceCategoriesRepository;
 import com.wedding.planner.service.ImageService;
 import com.wedding.planner.service.ServicecategoryService;
 import com.wedding.planner.service.StorageService;
-import com.wedding.planner.utils.Storage;
+import com.wedding.planner.utils.impl.Storage;
 
 @Service
 public class ServicecategoryServiceImpl implements ServicecategoryService {
