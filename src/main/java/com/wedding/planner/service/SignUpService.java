@@ -2,7 +2,6 @@ package com.wedding.planner.service;
 
 import org.springframework.http.ResponseEntity;
 
-
 import com.wedding.planner.entity.Cities;
 import com.wedding.planner.entity.Vendor;
 

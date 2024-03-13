@@ -7,8 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wedding.planner.api.v1.dto.ResponseDTO;
@@ -35,12 +35,12 @@ public class ApiServiceController {
     }
 
     @GetMapping("category")
-    public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(@RequestBody ServiceCategories category) {
+    public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(@RequestParam("category") ServiceCategories category) {
         return serviceService.services(category);
     }
 
     @GetMapping("category/page/{page}/size/{size}")
-    public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(@RequestBody ServiceCategories category,
+    public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(@RequestParam("category") ServiceCategories category,
             @PathVariable("page") Integer page, @PathVariable("size") Integer size) {
         return serviceService.services(category, PageRequest.of(page, size));
     }
