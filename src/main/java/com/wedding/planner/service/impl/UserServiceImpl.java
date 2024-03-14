@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
 			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
 			user.setLoggedIn(false);
 			user.setStatus(true);
-			System.err.print(user);
 			user = usersRepo.save(user);
 			return ResponseEntity.ok().body(user);
 		} catch (Exception e) {
