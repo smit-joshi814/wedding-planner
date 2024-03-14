@@ -13,62 +13,62 @@ import com.wedding.planner.entity.Services;
 
 public interface ApiServiceService {
 
-    /**
-     * converts Service to ServiceDTO
-     * 
-     * @param service
-     * @param serviceImage
-     * @return
-     */
-    default ServiceDTO convertToDTO(Services service, String serviceImage) {
-        return new ServiceDTO(service.getServiceId(), service.getServiceName(), service.getServiceDescription(),
-                service.getServiceLocation(), serviceImage);
-    }
+	/**
+	 * converts Service to ServiceDTO
+	 * 
+	 * @param service
+	 * @param serviceImage
+	 * @return
+	 */
+	default ServiceDTO convertToDTO(Services service, String serviceImage) {
+		return new ServiceDTO(service.getServiceId(), service.getCreatedBy().getUserId(), service.getServiceName(),
+				service.getServiceDescription(), service.getServiceLocation(), serviceImage);
+	}
 
-    /**
-     * Converts List of Service to List of ServiceDTO
-     * 
-     * @param services
-     * @param images
-     * @return
-     */
-    default List<ServiceDTO> convertToDTO(List<Services> services, List<String> images) {
-        return services.stream().map(service -> convertToDTO(service, images.get(services.indexOf(service))))
-                .collect(Collectors.toList());
-    }
+	/**
+	 * Converts List of Service to List of ServiceDTO
+	 * 
+	 * @param services
+	 * @param images
+	 * @return
+	 */
+	default List<ServiceDTO> convertToDTO(List<Services> services, List<String> images) {
+		return services.stream().map(service -> convertToDTO(service, images.get(services.indexOf(service))))
+				.collect(Collectors.toList());
+	}
 
-    /**
-     * returns All the available services in {@link ServiceDTO}
-     * 
-     * @return
-     */
-    ResponseEntity<ResponseDTO<List<ServiceDTO>>> services();
+	/**
+	 * returns All the available services in {@link ServiceDTO}
+	 * 
+	 * @return
+	 */
+	ResponseEntity<ResponseDTO<List<ServiceDTO>>> services();
 
-    /**
-     * returns All the available services in {@link ServiceDTO} with pagination
-     * 
-     * @param page
-     * @return
-     */
-    ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(Pageable page);
+	/**
+	 * returns All the available services in {@link ServiceDTO} with pagination
+	 * 
+	 * @param page
+	 * @return
+	 */
+	ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(Pageable page);
 
-    /**
-     * returns All the available services in {@link ServiceDTO} of
-     * {@link ServiceCategories}
-     * 
-     * @param category
-     * @return
-     */
-    ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category);
+	/**
+	 * returns All the available services in {@link ServiceDTO} of
+	 * {@link ServiceCategories}
+	 * 
+	 * @param category
+	 * @return
+	 */
+	ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category);
 
-    /**
-     * returns All the available services in {@link ServiceDTO} of
-     * {@link ServiceCategories} with pagination
-     * 
-     * @param category
-     * @param page
-     * @return
-     */
-    ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category, Pageable page);
+	/**
+	 * returns All the available services in {@link ServiceDTO} of
+	 * {@link ServiceCategories} with pagination
+	 * 
+	 * @param category
+	 * @param page
+	 * @return
+	 */
+	ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category, Pageable page);
 
 }

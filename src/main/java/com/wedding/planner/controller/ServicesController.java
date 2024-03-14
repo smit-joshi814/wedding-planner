@@ -20,6 +20,8 @@ import com.wedding.planner.entity.ServiceItem;
 import com.wedding.planner.entity.Services;
 import com.wedding.planner.service.ServiceItemService;
 import com.wedding.planner.service.ServicesService;
+import com.wedding.planner.service.UserService;
+import com.wedding.planner.utils.UtilityService;
 
 @Controller
 @RequestMapping("/services")
@@ -30,6 +32,12 @@ public class ServicesController {
 
 	@Autowired
 	private ServiceItemService itemService;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UtilityService utility;
 
 	@RequestMapping
 	public ModelAndView servicesHome(ModelAndView mv) {
@@ -55,8 +63,8 @@ public class ServicesController {
 			@RequestParam("service-description") String serviceDescription,
 			@RequestParam("service-location") String serviceLocation, @RequestParam("service-status") boolean status) {
 		Services service = Services.builder().serviceName(serviceName).servicecategory(category)
-				.serviceLocation(serviceLocation).serviceDescription(serviceDescription).status(status).createdBy(null)
-				.build();
+				.serviceLocation(serviceLocation).serviceDescription(serviceDescription).status(status)
+				.createdBy(userService.getUser(utility.getCurrentUsername()).getBody()).build();
 
 		return servicesService.add(service);
 	}

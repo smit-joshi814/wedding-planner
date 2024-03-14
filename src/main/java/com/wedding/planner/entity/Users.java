@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,6 +53,10 @@ public class Users {
 	private Boolean status;
 
 	private Boolean loggedIn;
+
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_icon")
+	private Images avatar;
 
 	@CreationTimestamp
 	private LocalDateTime createdAt;

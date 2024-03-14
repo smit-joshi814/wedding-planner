@@ -1,4 +1,11 @@
+<%@page import="com.wedding.planner.entity.Users"%>
 <%@page import="com.wedding.planner.config.general.Configurations"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%
+Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
+%>
+<sec:authorize access="hasAnyRole('ADMIN','VENDOR')">
 <header class="navbar navbar-expand-md d-print-none">
 	<div class="container-xl">
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -117,8 +124,16 @@
 					class="avatar avatar-sm"
 					style="background-image: url(static/avatars/000m.jpg);"></span>
 					<div class="d-none d-xl-block ps-2">
-						<div>Smit Joshi</div>
-						<div class="mt-1 small text-secondary">Admin</div>
+						<sec:authorize access="isAuthenticated()">
+							<div class="d-none d-xl-block ps-2">
+								<div>
+									<%=user.getFirstName() + " " + user.getLastName()%>
+								</div>
+								<div class="mt-1 small text-secondary">
+									<sec:authentication property="principal.authorities" />
+								</div>
+							</div>
+						</sec:authorize>
 					</div>
 				</a>
 				<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -154,25 +169,31 @@
 					</a>
 						<div class="dropdown-menu">
 							<div class="dropdown-menu-columns">
+							<sec:authorize access="hasRole('ADMIN')">
 								<div class="dropdown-menu-column">
 									<a class="dropdown-item" id="service-categories"
 										href="/service-categories"> Service Categories </a> <a
 										class="dropdown-item" id="variations" href="/variations">
 										Variations </a>
 								</div>
+								</sec:authorize>
+								<sec:authorize access="hasAnyRole('ADMIN','VENDOR')">
 								<div class="dropdown-menu-column">
 									<a class="dropdown-item" id="services" href="/services">
 										Services </a> <a class="dropdown-item" id="service-variation"
 										href="/service-variation">Services Variations</a>
 								</div>
+								</sec:authorize>
 							</div>
 						</div></li>
+					<sec:authorize access="hasRole('ADMIN')">						
 					<li class="nav-item" id="vendors"><a class="nav-link"
 						href="/vendors"> <span
 							class="nav-link-icon d-md-none d-lg-inline-block"> <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
 								<i class="ti icon ti-briefcase"></i>
 						</span> <span class="nav-link-title"> Vendors </span>
 					</a></li>
+					</sec:authorize>
 					<li class="nav-item" id="chats"><a class="nav-link"
 						href="/chats"> <span
 							class="nav-link-icon d-md-none d-lg-inline-block"> <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
@@ -189,8 +210,11 @@
 					</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="#" id="documentation">
-								Documentation </a> <a class="dropdown-item" href="logs" id="logs">
+								Documentation </a>
+								<sec:authorize access="hasRole('ADMIN')">
+								<a class="dropdown-item" href="logs" id="logs">
 								Logs </a>
+								</sec:authorize>
 						</div></li>
 				</ul>
 				<div
@@ -208,3 +232,4 @@
 		</div>
 	</div>
 </header>
+</sec:authorize>
