@@ -24,7 +24,7 @@ public class Vendor {
 
 	private String businessName;
 
-	private String busnessContact;
+	private String businessContact;
 
 	private String gstNumber;
 

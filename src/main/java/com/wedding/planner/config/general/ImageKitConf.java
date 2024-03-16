@@ -21,7 +21,7 @@ public class ImageKitConf {
 		return System.getenv(name);
 	}
 
-	
+
 	public static ImageKit getImageKitConf() {
 		ImageKit imageKit = ImageKit.getInstance();
 		imageKit.setConfig(new io.imagekit.sdk.config.Configuration(publicKey, privateKey, urlEndPoint));

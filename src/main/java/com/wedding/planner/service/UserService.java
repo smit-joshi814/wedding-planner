@@ -10,7 +10,7 @@ public interface UserService {
 
 	/**
 	 * Adds user into database
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -18,7 +18,7 @@ public interface UserService {
 
 	/**
 	 * updates old user to provided user
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -26,14 +26,14 @@ public interface UserService {
 
 	/**
 	 * gets the Users list
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<List<Users>> getUsers();
 
 	/**
 	 * updates the login status for user
-	 * 
+	 *
 	 * @param email
 	 * @param status
 	 * @return
@@ -42,7 +42,7 @@ public interface UserService {
 
 	/**
 	 * Gets the user by email
-	 * 
+	 *
 	 * @param email
 	 * @return
 	 */
@@ -50,7 +50,7 @@ public interface UserService {
 
 	/**
 	 * Deletes given User
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */

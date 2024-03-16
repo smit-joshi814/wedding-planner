@@ -64,7 +64,7 @@ public class ApiAuthController {
 
 	@GetMapping("/login")
 	public ResponseEntity<String> authenticateUser() {
-		return new ResponseEntity<String>("Login Using Get Request Is Not Supported", HttpStatus.METHOD_NOT_ALLOWED);
+		return new ResponseEntity<>("Login Using Get Request Is Not Supported", HttpStatus.METHOD_NOT_ALLOWED);
 	}
 
 }

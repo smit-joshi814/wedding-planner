@@ -21,9 +21,9 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long addressId;
-	
+
 	private String addressLine1;
-	
+
 	private String addressLine2;
 
 	@ManyToOne

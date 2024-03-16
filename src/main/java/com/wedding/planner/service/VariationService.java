@@ -12,14 +12,14 @@ public interface VariationService {
 
 	/**
 	 * gets All the Variations from database
-	 * 
+	 *
 	 * @return {@link ResponseEntity<List<Variation>>}
 	 */
 	ResponseEntity<List<Variation>> getVariations();
 
 	/**
 	 * adds {@link Variation} to the database
-	 * 
+	 *
 	 * @param variationName
 	 * @param category
 	 * @return {@link ResponseEntity<Variation>} added {@link Variation}
@@ -28,7 +28,7 @@ public interface VariationService {
 
 	/**
 	 * updates the existing variation
-	 * 
+	 *
 	 * @param variationId
 	 * @param variationName
 	 * @return {@link ResponseEntity<Variation>} updated {@link Variation}
@@ -37,7 +37,7 @@ public interface VariationService {
 
 	/**
 	 * Deletes the provided {@link Variation} from the database
-	 * 
+	 *
 	 * @param variation
 	 * @return {@link ResponseEntity<String>}
 	 */

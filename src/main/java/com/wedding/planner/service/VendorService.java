@@ -11,13 +11,15 @@ public interface VendorService {
 
 	/**
 	 * Adds Vendor to db
+	 *
 	 * @param vendor
 	 * @return
 	 */
-	ResponseEntity<Vendor> addVendor(Users user,Vendor vendor);
+	ResponseEntity<Vendor> addVendor(Users user, Vendor vendor);
 
 	/**
 	 * updates given Vendor
+	 *
 	 * @param vendor
 	 * @return
 	 */
@@ -25,14 +27,24 @@ public interface VendorService {
 
 	/**
 	 * gets All the vendors
+	 *
 	 * @return
 	 */
 	ResponseEntity<List<Vendor>> getVendors();
 
 	/**
 	 * deletes the given vendor
+	 *
 	 * @param vendor
 	 * @return
 	 */
 	ResponseEntity<Boolean> deleteVendor(Vendor vendor);
+
+	/**
+	 * get vendor by Users
+	 *
+	 * @param user
+	 * @return
+	 */
+	ResponseEntity<Vendor> getvendor(Users user);
 }

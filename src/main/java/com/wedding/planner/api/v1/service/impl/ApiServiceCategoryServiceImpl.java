@@ -25,7 +25,7 @@ public class ApiServiceCategoryServiceImpl implements ApiServiceCategoryService 
 		Integer page = 0;
 		Integer perPage = 10;
 		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-		return ResponseEntity.ok(new ResponseDTO<List<ServiceCategoryDTO>>(convertToDTO(categoryRepo.findAll()),
+		return ResponseEntity.ok(new ResponseDTO<>(convertToDTO(categoryRepo.findAll()),
 				totalRecords, page, perPage, totalPages));
 	}
 
@@ -34,7 +34,7 @@ public class ApiServiceCategoryServiceImpl implements ApiServiceCategoryService 
 		Long totalRecords = categoryRepo.count();
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
 		return ResponseEntity
-				.ok(new ResponseDTO<List<ServiceCategoryDTO>>(convertToDTO(categoryRepo.findAll(page).toList()),
+				.ok(new ResponseDTO<>(convertToDTO(categoryRepo.findAll(page).toList()),
 						totalRecords, page.getPageNumber(), page.getPageSize(), totalPages));
 	}
 

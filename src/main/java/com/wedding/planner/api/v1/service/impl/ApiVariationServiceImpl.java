@@ -33,7 +33,7 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		Integer page = 0;
 		Integer perPage = 10;
 		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<List<VariationDTO>>(convertToDTO(variations),
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
 				totalRecords, page, perPage, totalPages);
 		return ResponseEntity.ok(dto);
 	}
@@ -46,7 +46,7 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		}
 		Long totalRecords = variationRepo.count();
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<List<VariationDTO>>(convertToDTO(variations),
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
 				totalRecords, page.getPageNumber(), page.getPageSize(), totalPages);
 		return ResponseEntity.ok(dto);
 	}
@@ -61,7 +61,7 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		Integer page = 0;
 		Integer perPage = 10;
 		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<List<VariationDTO>>(convertToDTO(variations),
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
 				totalRecords, page, perPage, totalPages);
 		return ResponseEntity.ok(dto);
 	}
@@ -74,7 +74,7 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		}
 		Long totalRecords = variationRepo.countByServiceCategory(category);
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<List<VariationDTO>>(convertToDTO(variations),
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
 				totalRecords, page.getPageNumber(), page.getPageSize(), totalPages);
 		return ResponseEntity.ok(dto);
 	}

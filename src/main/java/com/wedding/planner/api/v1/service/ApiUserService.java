@@ -14,7 +14,7 @@ public interface ApiUserService {
 
 	/**
 	 * converts to CityDTO
-	 * 
+	 *
 	 * @param city
 	 * @return
 	 */
@@ -24,7 +24,7 @@ public interface ApiUserService {
 
 	/**
 	 * Converts to AddressDTO
-	 * 
+	 *
 	 * @param address
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public interface ApiUserService {
 
 	/**
 	 * Returns User Related data
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -48,7 +48,7 @@ public interface ApiUserService {
 
 	/**
 	 * adds user
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -56,14 +56,14 @@ public interface ApiUserService {
 
 	/**
 	 * gets current logged in user
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<UserDTO> getUser();
 
 	/**
 	 * updates User
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -71,7 +71,7 @@ public interface ApiUserService {
 
 	/**
 	 * delete User
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */

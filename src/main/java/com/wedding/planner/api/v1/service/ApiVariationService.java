@@ -15,7 +15,7 @@ public interface ApiVariationService {
 
 	/**
 	 * Converts {@link Variation} to {@link VariationDTO}
-	 * 
+	 *
 	 * @param variation
 	 * @return {@link VariationDTO}
 	 */
@@ -25,7 +25,7 @@ public interface ApiVariationService {
 
 	/**
 	 * Converts {@link List} of {@link Variation} to {@link List<VariationDTO>}
-	 * 
+	 *
 	 * @param variations
 	 * @return {@link List} of {@link VariationDTO}
 	 */
@@ -35,14 +35,14 @@ public interface ApiVariationService {
 
 	/**
 	 * returns All the available variations in {@link VariationDTO}
-	 * 
+	 *
 	 * @return {@link ResponseDTO} of {@link List<VariationDTO>}
 	 */
 	ResponseEntity<ResponseDTO<List<VariationDTO>>> variations();
 
 	/**
 	 * returns All the available variations in {@link VariationDTO}
-	 * 
+	 *
 	 * @param page
 	 * @return {@link ResponseDTO} of {@link List<VariationDTO>}
 	 */
@@ -50,7 +50,7 @@ public interface ApiVariationService {
 
 	/**
 	 * returns All the available variations in {@link VariationDTO}
-	 * 
+	 *
 	 * @param category
 	 * @return {@link ResponseDTO} of {@link List<VariationDTO>}
 	 */
@@ -58,7 +58,7 @@ public interface ApiVariationService {
 
 	/**
 	 * returns All the available variations in {@link VariationDTO}
-	 * 
+	 *
 	 * @param category
 	 * @param page
 	 * @return {@link ResponseDTO} of {@link List<VariationDTO>}

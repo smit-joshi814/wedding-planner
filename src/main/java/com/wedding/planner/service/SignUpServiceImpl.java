@@ -26,7 +26,7 @@ public class SignUpServiceImpl implements SignUpService {
 					.build();
 			Users user = Users.builder().firstName(firstName).lastName(lastName).email(email).phone(phone)
 					.password(password).address(List.of(address)).build();
-			Vendor vendor = Vendor.builder().businessName(business_nme).busnessContact(business_contact)
+			Vendor vendor = Vendor.builder().businessName(business_nme).businessContact(business_contact)
 					.gstNumber(gstNumber).build();
 			vendor = vendorService.addVendor(user, vendor).getBody();
 			return ResponseEntity.ok(vendor);

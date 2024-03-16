@@ -15,7 +15,7 @@ public interface ApiVariationOptionService {
 
     /**
      * converts {@link VariationOption} to {@link VariationOptionDTO}
-     * 
+     *
      * @param option
      * @return
      */
@@ -25,7 +25,7 @@ public interface ApiVariationOptionService {
 
     /**
      * converts {@link VariationOption} list to {@link VariationOptionDTO} list
-     * 
+     *
      * @param options
      * @return
      */
@@ -35,7 +35,7 @@ public interface ApiVariationOptionService {
 
     /**
      * returns All the available variation options in {@link VariationOptionDTO}
-     * 
+     *
      * @return
      */
     ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions();
@@ -43,7 +43,7 @@ public interface ApiVariationOptionService {
     /**
      * returns All the available variation options in {@link VariationOptionDTO}
      * with paging
-     * 
+     *
      * @param page
      * @return
      */
@@ -52,7 +52,7 @@ public interface ApiVariationOptionService {
     /**
      * returns All the available variation options in {@link VariationOptionDTO} for
      * {@link Variation}
-     * 
+     *
      * @param variation
      * @return
      */
@@ -61,7 +61,7 @@ public interface ApiVariationOptionService {
     /**
      * returns All the available variation options in {@link VariationOptionDTO} for
      * {@link variation} with paging
-     * 
+     *
      * @param variation
      * @param page
      * @return

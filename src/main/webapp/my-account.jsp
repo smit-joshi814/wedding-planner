@@ -1,3 +1,5 @@
+<%@page import="com.wedding.planner.repository.VendorRepository"%>
+<%@page import="com.wedding.planner.entity.Vendor"%>
 <%@page import="com.wedding.planner.enums.UserRole"%>
 <%@page import="com.wedding.planner.entity.Users"%>
 <%@page import="com.wedding.planner.config.general.Configurations"%>
@@ -7,6 +9,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%
 Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
+Vendor isVendor = (Vendor) pageContext.getRequest().getAttribute("isVendor");
 %>
 
 <!DOCTYPE html>
@@ -67,22 +70,29 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 											<a href="#" class="btn btn-ghost-danger"> Delete avatar </a>
 										</div>
 									</div>
-									<h3 class="card-title mt-4"><%=user.getRole().equals(UserRole.ADMIN)?"Admin":"Business" %> Profile</h3>
+									<h3 class="card-title mt-4"><%=user.getRole().equals(UserRole.ADMIN) ? "Admin" : "Business"%>
+										Profile
+									</h3>
 									<div class="row g-3">
 										<div class="col-md">
-											<div class="form-label"><%=user.getRole().equals(UserRole.ADMIN)?"Admin":"Business" %> Name</div>
-											<input type="text" class="form-control" value="Tabler">
+											<div class="form-label"><%=user.getRole().equals(UserRole.ADMIN) ? "Admin" : "Business"%>
+												Name
+											</div>
+											<input type="text" class="form-control"
+												value="<%=user.getFirstName() + " " + user.getLastName()%>">
 										</div>
 										<sec:authorize access="hasRole('VENDOR')">
-										<div class="col-md">
-											<div class="form-label">GST ID</div>
-											<input type="text" class="form-control" value="560afc32">
-										</div>
-										
-										<div class="col-md">
-											<div class="form-label">Location</div>
-											<input type="text" class="form-control" value="Peimei, China">
-										</div>
+											<div class="col-md">
+												<div class="form-label">GST ID</div>
+												<input type="text" class="form-control"
+													value="<%=isVendor.getGstNumber()%>">
+											</div>
+
+											<div class="col-md">
+												<div class="form-label">Location</div>
+												<input type="text" class="form-control"
+													value="<%=user.getAddress().get(0).getAddressLine1()%>">
+											</div>
 										</sec:authorize>
 									</div>
 									<h3 class="card-title mt-4">Email</h3>
@@ -100,26 +110,27 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 										</div>
 									</div>
 									<sec:authorize access="hasRole('ADMIN')">
-									<h3 class="card-title mt-4">Password</h3>
-									<p class="card-subtitle">You can set a permanent password
-										if you don't want to use temporary login codes.</p>
-									<div>
-										<a href="#" class="btn"> Set new password </a>
-									</div>
+										<h3 class="card-title mt-4">Password</h3>
+										<p class="card-subtitle">You can set a permanent password
+											if you don't want to use temporary login codes.</p>
+										<div>
+											<a href="#" class="btn"> Set new password </a>
+										</div>
 									</sec:authorize>
 									<sec:authorize access="hasRole('VENDOR')">
-									<h3 class="card-title mt-4">Accept Orders</h3>
-									<p class="card-subtitle">accept the Orders for the services
-										provided by you</p>
-									<div>
-										<label class="form-check form-switch form-switch-lg">
-											<input class="form-check-input" type="checkbox"> <span
-											class="form-check-label form-check-label-on">You're
-												currently Accepting Orders</span> <span
-											class="form-check-label form-check-label-off">You're
-												currently Not Accepting Orders</span>
-										</label>
-									</div>
+										<h3 class="card-title mt-4">Accept Orders</h3>
+										<p class="card-subtitle">accept the Orders for the
+											services provided by you</p>
+										<div>
+											<label class="form-check form-switch form-switch-lg">
+												<input class="form-check-input" type="checkbox"
+												<%=isVendor.getAcceptOrders() ? "checked" : ""%>> <span
+												class="form-check-label form-check-label-on">You're
+													currently Accepting Orders</span> <span
+												class="form-check-label form-check-label-off">You're
+													currently Not Accepting Orders</span>
+											</label>
+										</div>
 									</sec:authorize>
 								</div>
 								<div class="card-footer bg-transparent mt-auto">

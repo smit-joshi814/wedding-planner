@@ -229,7 +229,7 @@
 	<jsp:include page="components/footer-imports.jsp" />
 
 	<!-- FILE SPECIFIC IMPORTS -->
-	<script src="api/manage/service-categories.js"></script>
+	<script src="resources/api/manage/service-categories.js"></script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {

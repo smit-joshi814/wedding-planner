@@ -11,14 +11,14 @@ public interface VariationOptionService {
 
 	/**
 	 * gets All the Available Variation Options irrespective of the variation
-	 * 
+	 *
 	 * @return {@link ResponseEntity<List<VariationOptions>>}
 	 */
 	ResponseEntity<List<VariationOption>> getVariationOptions();
 
 	/**
 	 * returns All the Available variation Options related to @param variation
-	 * 
+	 *
 	 * @param variation
 	 * @return {@link ResponseEntity<List<VariationOption>>}
 	 */
@@ -26,7 +26,7 @@ public interface VariationOptionService {
 
 	/**
 	 * returns Variation Entity related to @param optionId
-	 * 
+	 *
 	 * @param optionId
 	 * @return {@link ResponseEntity<VariationOption>}
 	 */
@@ -34,7 +34,7 @@ public interface VariationOptionService {
 
 	/**
 	 * adds the {@link VariationOption} to database
-	 * 
+	 *
 	 * @param variation
 	 * @param variationOption
 	 * @return {@link ResponseEntity<VariationOption>} latest added
@@ -44,7 +44,7 @@ public interface VariationOptionService {
 
 	/**
 	 * deletes {@link VariationOption} related to @param optionId
-	 * 
+	 *
 	 * @param optionId
 	 * @return {@link ResponseEntity<String>}
 	 */
@@ -52,7 +52,7 @@ public interface VariationOptionService {
 
 	/**
 	 * deletes variation option by {@link Variation}
-	 * 
+	 *
 	 * @param variation
 	 * @return {@link ResponseEntity<Boolean>} whether the {@link VariationOption}
 	 *         are deleted or not

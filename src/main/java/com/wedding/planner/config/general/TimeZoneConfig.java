@@ -8,7 +8,7 @@ import jakarta.annotation.PostConstruct;
 
 @Configuration
 public class TimeZoneConfig {
-	
+
 	 @PostConstruct
 	    public void init() {
 	        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"));

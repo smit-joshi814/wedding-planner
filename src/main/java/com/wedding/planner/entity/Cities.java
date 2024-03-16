@@ -21,9 +21,9 @@ public class Cities {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cityId;
-	
+
 	private String cityName;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "state_id")
 	private States state;

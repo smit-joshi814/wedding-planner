@@ -58,7 +58,7 @@ public class ApiUserServiceImpl implements ApiUserService {
 	@Override
 	public ResponseEntity<UserDTO> updateUser(UserDTO user) {
 		Users changes = Users
-				.builder().firstName(user.firstName()).lastName(user.lastName()).email(user.email()).phone(
+				.builder().userId(user.userId()).firstName(user.firstName()).lastName(user.lastName()).email(user.email()).phone(
 						user.phone())
 				.address(List.of(Address.builder().addressId(user.addressInfo().addressId())
 						.addressLine1(user.addressInfo().addressLine1()).addressLine2(user.addressInfo().addressLine2())

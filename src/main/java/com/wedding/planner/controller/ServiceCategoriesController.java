@@ -34,7 +34,7 @@ public class ServiceCategoriesController {
 	/********************************************************************
 	 * Service Categories
 	 *******************************************************************/
-	
+
 //	all available service categories
 	@GetMapping("/categories")
 	public ResponseEntity<List<ServiceCategories>> getAllServiceCategories() {

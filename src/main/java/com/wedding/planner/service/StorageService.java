@@ -15,7 +15,7 @@ public interface StorageService {
 
 	/**
 	 * uploads the Images to the {@link ImageKit}
-	 * 
+	 *
 	 * @param image
 	 * @param name
 	 * @param FOLDER_NAME
@@ -26,7 +26,7 @@ public interface StorageService {
 
 	/**
 	 * uploads the Images to the {@link ImageKit}
-	 * 
+	 *
 	 * @param file
 	 * @param name
 	 * @param FOLDER_NAME
@@ -37,7 +37,7 @@ public interface StorageService {
 
 	/**
 	 * Gets the URL of the image with fileId
-	 * 
+	 *
 	 * @param fileId
 	 * @return {@link String} public link of the file referencing the @param fileId
 	 */
@@ -45,7 +45,7 @@ public interface StorageService {
 
 	/**
 	 * Deletes the file referencing the @param fileId
-	 * 
+	 *
 	 * @param fileId
 	 * @return {@link Boolean} whether image is deleted or not
 	 */
@@ -53,7 +53,7 @@ public interface StorageService {
 
 	/**
 	 * deletes the {@link List<Images>} from database & {@link ImageKit} CDN
-	 * 
+	 *
 	 * @param images
 	 * @return {@link Boolean} whether images are deleted or not
 	 */

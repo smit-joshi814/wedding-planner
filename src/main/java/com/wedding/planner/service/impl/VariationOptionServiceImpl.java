@@ -18,10 +18,12 @@ public class VariationOptionServiceImpl implements VariationOptionService {
 	@Autowired
 	VariationOptionRepository optionRepo;
 
+	@Override
 	public ResponseEntity<List<VariationOption>> getVariationOptions() {
 		return ResponseEntity.ok().body(optionRepo.findAll());
 	}
 
+	@Override
 	public ResponseEntity<List<VariationOption>> getVariationOptions(Variation variation) {
 		try {
 			List<VariationOption> options = optionRepo.findByVariation(variation);
@@ -34,10 +36,12 @@ public class VariationOptionServiceImpl implements VariationOptionService {
 		}
 	}
 
+	@Override
 	public ResponseEntity<VariationOption> getVariationOption(Integer optionId) {
 		return ResponseEntity.ok().body(optionRepo.findById(optionId).get());
 	}
 
+	@Override
 	public ResponseEntity<VariationOption> addVariationOption(Variation variation, String variationOption) {
 		try {
 			return ResponseEntity.ok().body(optionRepo
@@ -47,6 +51,7 @@ public class VariationOptionServiceImpl implements VariationOptionService {
 		}
 	}
 
+	@Override
 	public ResponseEntity<String> deleteVariationOption(Integer optionId) {
 		try {
 			optionRepo.deleteById(optionId);
@@ -56,6 +61,7 @@ public class VariationOptionServiceImpl implements VariationOptionService {
 		}
 	}
 
+	@Override
 	public ResponseEntity<Boolean> deleteVariationOptionsBy(Variation variation) {
 		try {
 			optionRepo.deleteAll(optionRepo.findByVariation(variation));

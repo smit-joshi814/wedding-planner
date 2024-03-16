@@ -13,14 +13,14 @@ public interface ServiceItemService {
 
 	/**
 	 * Gets All the {@link ServiceItem} from the database
-	 * 
+	 *
 	 * @return {@link ResponseEntity<List<ServiceItem>>} list of {@link ServiceItem}
 	 */
 	ResponseEntity<List<ServiceItem>> getAll();
 
 	/**
 	 * gets All the Service Items Associated with Service
-	 * 
+	 *
 	 * @param service
 	 * @return {@link ResponseEntity<List<ServiceItem>>} list of {@link ServiceItem}
 	 */
@@ -28,7 +28,7 @@ public interface ServiceItemService {
 
 	/**
 	 * adds the {@link ServiceItem} to database
-	 * 
+	 *
 	 * @param itemName
 	 * @param service
 	 * @param approxPrice
@@ -40,24 +40,24 @@ public interface ServiceItemService {
 
 	/**
 	 * Deletes the Service Item From The database
-	 * 
+	 *
 	 * @param item
 	 * @return {@link ResponseEntity<String>} response text
 	 */
 	ResponseEntity<String> delete(ServiceItem item);
-	
+
 	/**
 	 * Deletes the Service Variation From The database
-	 * 
+	 *
 	 * @param item
 	 * @return {@link ResponseEntity<String>} response text
 	 */
 	ResponseEntity<String> delete(ServiceVariation variation);
-	
+
 
 	/**
 	 * Gets Service Item For Given ServiceItemId
-	 * 
+	 *
 	 * @param serviceItemId
 	 * @return {@link ResponseEntity<ServiceItem>}
 	 */
@@ -65,7 +65,7 @@ public interface ServiceItemService {
 
 	/**
 	 * Updates existing Service Item And returns the updated entity
-	 * 
+	 *
 	 * @param itemName
 	 * @param approxPrice
 	 * @param service
@@ -75,7 +75,7 @@ public interface ServiceItemService {
 
 	/**
 	 * Updates existing Service Item and Adds Variation
-	 * 
+	 *
 	 * @param variation
 	 * @return
 	 */

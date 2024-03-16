@@ -10,7 +10,7 @@ public interface ImageService {
 
 	/**
 	 * add Images to the database
-	 * 
+	 *
 	 * @param image
 	 * @return {@link ResponseEntity<Images>} added {@link Images}
 	 */
@@ -18,7 +18,7 @@ public interface ImageService {
 
 	/**
 	 * updates existing Images to provided @param image
-	 * 
+	 *
 	 * @param image
 	 * @return {@link ResponseEntity<Images>} updated {@link Images}
 	 */
@@ -26,7 +26,7 @@ public interface ImageService {
 
 	/**
 	 * deletes if the @param image exists in the database
-	 * 
+	 *
 	 * @param image
 	 * @return {@link ResponseEntity<Boolean>} whether the image entity is deleted
 	 */
@@ -34,7 +34,7 @@ public interface ImageService {
 
 	/**
 	 * deletes if the @param images exists in the database
-	 * 
+	 *
 	 * @param images
 	 * @return {@link ResponseEntity<Boolean>} whether the images are deleted
 	 */

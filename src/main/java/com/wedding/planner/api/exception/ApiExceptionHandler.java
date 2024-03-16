@@ -13,7 +13,7 @@ public class ApiExceptionHandler{
 //        // Handle access denied exception
 //        return new ResponseEntity<ApiErrorResponse>(new ApiErrorResponse(ex.getMessage(),HttpStatus.UNAUTHORIZED),HttpStatus.UNAUTHORIZED);
 //    }
-	
+
 
 	@ExceptionHandler(NoResourceFoundException.class)
 	public ResponseEntity<ApiErrorResponse> handleApiException(NoResourceFoundException ex) {

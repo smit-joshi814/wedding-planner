@@ -18,10 +18,10 @@ public class CitiesController {
 
 	@Autowired
 	private CitiesSercvice citiesService;
-	
+
 	@RequestMapping
 	public ResponseEntity<List<Cities>> getCities(@RequestParam("state") States state){
 		return citiesService.getCities(state);
 	}
-	
+
 }

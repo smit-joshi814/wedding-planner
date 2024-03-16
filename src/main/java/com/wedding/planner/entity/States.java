@@ -16,7 +16,7 @@ public class States {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer stateId;
-	
+
 	private String stateName;
 
 }

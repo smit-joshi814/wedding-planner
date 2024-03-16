@@ -11,14 +11,14 @@ public interface ServicecategoryService {
 
 	/**
 	 * returns all the {@link ServiceCategories} list
-	 * 
+	 *
 	 * @return {@link ResponseEntity<List<ServiceCategories>>}
 	 */
 	ResponseEntity<List<ServiceCategories>> getAllServiceCategories();
 
 	/**
 	 * addsServiceCategory to the database
-	 * 
+	 *
 	 * @param serviceCategoryName
 	 * @param icon
 	 * @param isActive
@@ -30,14 +30,14 @@ public interface ServicecategoryService {
 
 	/**
 	 * deletes the Service Category referencing provided @param serviceCategoryId
-	 * 
+	 *
 	 * @return {@link ResponseEntity<String>}
 	 */
 	ResponseEntity<String> deleteServiceCategories(int serviceCategoryId);
 
 	/**
 	 * updates service category
-	 * 
+	 *
 	 * @param serviceCategoryId
 	 * @param serviceCategoryName
 	 * @param serviceCategoryIcon

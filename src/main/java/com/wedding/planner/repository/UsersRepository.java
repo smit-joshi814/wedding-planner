@@ -6,7 +6,7 @@ import com.wedding.planner.entity.Users;
 
 
 public interface UsersRepository extends JpaRepository<Users, Long>{
-	
+
 	Users findByEmail(String email);
-	
+
 }

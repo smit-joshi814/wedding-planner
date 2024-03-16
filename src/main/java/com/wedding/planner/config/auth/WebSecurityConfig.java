@@ -52,7 +52,7 @@ public class WebSecurityConfig {
 
 		return authProvider;
 	}
-	
+
 	@Bean
 	AuthenticationFailureHandler authenticationFailureHandler() {
 		return new CustomAuthenticationFailureHandler();
@@ -62,7 +62,7 @@ public class WebSecurityConfig {
 	AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
 		return http.getSharedObject(AuthenticationManagerBuilder.class).build();
 	}
-	
+
 	 @Bean
 	SessionRegistry sessionRegistry() {
 		 return new SessionRegistryImpl();
@@ -107,10 +107,11 @@ public class WebSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((requests) -> requests
 				.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
+				.requestMatchers("/api/**").denyAll()
+				.requestMatchers("/resources/api/**").authenticated()
 				.requestMatchers("/resources/**", "/static/**","/cities",
 						"/sign-in.jsp","/sign-up/**","/sign-up.jsp","/forgetPassword","/forgot-password.jsp","/service-worker.js","webmanifest.json","/terms-of-service","/terms-of-service.jsp","favicon.ico")
 				.permitAll()
-				.requestMatchers("/api/**").denyAll()
 				.anyRequest()
 				.authenticated())
 			.sessionManagement((session) -> session

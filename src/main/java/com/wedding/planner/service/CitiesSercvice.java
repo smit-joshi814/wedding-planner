@@ -21,7 +21,7 @@ public interface CitiesSercvice {
 	 * @return
 	 */
 	ResponseEntity<List<Cities>> getCities(States state);
-	
+
 	/**
 	 * Updates City
 	 * @param city

@@ -12,14 +12,14 @@ public class AuthenticationSuccessEventListener implements ApplicationListener<A
 
 	@Autowired
 	private UserService userService;
-	
+
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent event) {
         // Handle successful login event
         String username = event.getAuthentication().getName();
-        
+
         userService.updateLoginStatus(username, true);
-        
+
 //        System.out.println("User logged in: " + username);
         // Add your custom logic here
     }

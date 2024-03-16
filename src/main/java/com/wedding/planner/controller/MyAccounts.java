@@ -7,11 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/my-account")
 public class MyAccounts {
-    
+
     @RequestMapping
     public ModelAndView myAccount() {
         return new ModelAndView("my-account");
-    }    
-    
-    
+    }
+
+
 }

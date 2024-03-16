@@ -26,10 +26,10 @@ public class ServiceCategories {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer serviceCategoryId;
 	private String serviceCategoryName;
-	
+
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Images categoryIcon;
-	
+
 	private boolean isActive;
 
 	@CreationTimestamp

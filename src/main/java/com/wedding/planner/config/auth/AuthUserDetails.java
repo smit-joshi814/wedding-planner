@@ -13,15 +13,15 @@ import com.wedding.planner.entity.Users;
 public class AuthUserDetails implements  UserDetails{
 
 	private final String  ROLE_PREFIX="ROLE_";
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Users user;
-	
+
 	public AuthUserDetails(Users user) {
 		this.user=user;
 	}
-	
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -70,9 +70,7 @@ public class AuthUserDetails implements  UserDetails{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		AuthUserDetails other = (AuthUserDetails) obj;
 		return Objects.equals(ROLE_PREFIX, other.ROLE_PREFIX) && Objects.equals(user, other.user);

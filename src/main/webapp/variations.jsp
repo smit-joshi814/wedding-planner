@@ -316,7 +316,7 @@
 	<jsp:include page="components/footer-imports.jsp" />
 
 	<!-- FILE SPECIFIC IMPORTS -->
-	<script src="api/manage/variations.js"></script>
+	<script src="resources/api/manage/variations.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

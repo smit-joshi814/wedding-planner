@@ -13,16 +13,16 @@ import jakarta.servlet.http.HttpServletResponse;
 @Controller
 public class CustomErrorController implements ErrorController {
 
-	
+
 	@RequestMapping("/error")
 	public ModelAndView handleError(HttpServletRequest request, HttpServletResponse response,Exception ex) {
-		
+
 	    Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 	    Object errorMessage = request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
-	    
+
 	    if (status != null) {
 	        Integer statusCode = Integer.valueOf(status.toString());
-	    
+
 	        if(statusCode == HttpStatus.NOT_FOUND.value()) {
 	            return new ModelAndView("error-404").addObject("error", errorMessage);
 	        }

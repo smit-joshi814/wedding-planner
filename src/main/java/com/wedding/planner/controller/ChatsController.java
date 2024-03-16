@@ -12,5 +12,5 @@ public class ChatsController {
 	public ModelAndView chats() {
 		return new ModelAndView("chats");
 	}
-	
+
 }

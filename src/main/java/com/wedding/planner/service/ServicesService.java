@@ -10,14 +10,14 @@ public interface ServicesService {
 
 	/**
 	 * gets All the {@link Services} Entities in list from database
-	 * 
+	 *
 	 * @return {@link ResponseEntity<List<Services>>}
 	 */
 	ResponseEntity<List<Services>> getAll();
 
 	/**
 	 * adds the provided {@link Services} entity to the database
-	 * 
+	 *
 	 * @param service
 	 * @return {@link ResponseEntity<Services>} latest added Entity
 	 */
@@ -25,7 +25,7 @@ public interface ServicesService {
 
 	/**
 	 * Updates the {@link Services}
-	 * 
+	 *
 	 * @param service
 	 * @return {@link ResponseEntity<Services>} updated {@link Services} entity
 	 */
@@ -33,7 +33,7 @@ public interface ServicesService {
 
 	/**
 	 * Deletes the Provided {@link Services}
-	 * 
+	 *
 	 * @param service
 	 * @return {@link ResponseEntity<String>} response text
 	 */

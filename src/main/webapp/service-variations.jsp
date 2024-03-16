@@ -106,7 +106,7 @@
 	<jsp:include page="components/footer-imports.jsp"></jsp:include>
 
 
-	<script type="text/javascript" src="api/manage/service-varitions.js"></script>
+	<script type="text/javascript" src="resources/api/manage/service-varitions.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

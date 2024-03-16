@@ -11,7 +11,7 @@ import com.wedding.planner.entity.Services;
 public interface ServicesRepository extends JpaRepository<Services, Long> {
 
 	Long countByServicecategory(ServiceCategories servicecategory);
-	
+
     List<Services> findByStatus(Boolean status);
 
     List<Services> findByStatus(Boolean status, Pageable page);

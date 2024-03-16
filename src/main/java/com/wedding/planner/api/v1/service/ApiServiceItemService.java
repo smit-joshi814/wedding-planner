@@ -16,7 +16,7 @@ public interface ApiServiceItemService {
 
     /**
      * to get image urls from {@link Images} list
-     * 
+     *
      * @param images
      * @return
      */
@@ -26,7 +26,7 @@ public interface ApiServiceItemService {
 
     /**
      * converts {@link ServiceItem} to {@link ServiceItemDTO}
-     * 
+     *
      * @param serviceItem
      * @return
      */
@@ -37,7 +37,7 @@ public interface ApiServiceItemService {
 
     /**
      * converts {@link ServiceItem} list to {@link ServiceItemDTO} list
-     * 
+     *
      * @param serviceItems
      * @return
      */
@@ -47,14 +47,14 @@ public interface ApiServiceItemService {
 
     /**
      * returns All the available service items in {@link ServiceItemDTO}
-     * 
+     *
      * @return
      */
     ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems();
 
     /**
      * returns All the available service items in {@link ServiceItemDTO} with paging
-     * 
+     *
      * @param page
      * @return
      */
@@ -63,7 +63,7 @@ public interface ApiServiceItemService {
     /**
      * returns All the available service items in {@link ServiceItemDTO} for
      * spacific {@link Services}
-     * 
+     *
      * @param service
      * @return
      */
@@ -72,7 +72,7 @@ public interface ApiServiceItemService {
     /**
      * returns All the available service items in {@link ServiceItemDTO} for
      * {@link Services} with paging
-     * 
+     *
      * @param service
      * @param page
      * @return

@@ -34,7 +34,7 @@ public class Services {
 	@Lob
 	@Column(columnDefinition = "TEXT")
 	private String serviceDescription;
-	
+
 	private String serviceLocation;
 
 	@ManyToOne(fetch = FetchType.EAGER)

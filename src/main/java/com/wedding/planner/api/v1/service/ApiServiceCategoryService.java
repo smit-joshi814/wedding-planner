@@ -14,7 +14,7 @@ public interface ApiServiceCategoryService {
 
 	/**
 	 * Converts {@link ServiceCategories} to {@link ServiceCategoryDTO}
-	 * 
+	 *
 	 * @param category
 	 * @return {@link ServiceCategoryDTO}
 	 */
@@ -25,7 +25,7 @@ public interface ApiServiceCategoryService {
 
 	/**
 	 * Converts {@link List<ServiceCategories>} to {@link List<ServiceCategoryDTO>}
-	 * 
+	 *
 	 * @param category
 	 * @return {@link List<ServiceCategoryDTO>}
 	 */
@@ -35,7 +35,7 @@ public interface ApiServiceCategoryService {
 
 	/**
 	 * Gets Service category
-	 * 
+	 *
 	 * @param categoryId
 	 * @return {@link ServiceCategories}
 	 */
@@ -43,14 +43,14 @@ public interface ApiServiceCategoryService {
 
 	/**
 	 * List of Service Categories
-	 * 
+	 *
 	 * @return {@link ResponseDTO} of {@link List<ServiceCategoryDTO>}
 	 */
 	ResponseEntity<ResponseDTO<List<ServiceCategoryDTO>>> serviceCategories();
 
 	/**
 	 * List of Service Categories
-	 * 
+	 *
 	 * @param page
 	 * @return {@link ResponseDTO} of {@link List<ServiceCategoryDTO>}
 	 */

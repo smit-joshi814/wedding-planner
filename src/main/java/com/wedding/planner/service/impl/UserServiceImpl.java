@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 
 //		status
 			if (Objects.nonNull(user.getStatus())) {
-				if (user.getStatus() == false) {
+				if (!user.getStatus()) {
 					utility.invalidateUserSession(user.getEmail());
 				}
 				dbUserOpt.ifPresent(data -> data.setStatus(user.getStatus()));

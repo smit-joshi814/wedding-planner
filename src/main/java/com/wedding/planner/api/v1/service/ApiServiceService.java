@@ -15,7 +15,7 @@ public interface ApiServiceService {
 
 	/**
 	 * converts Service to ServiceDTO
-	 * 
+	 *
 	 * @param service
 	 * @param serviceImage
 	 * @return
@@ -27,7 +27,7 @@ public interface ApiServiceService {
 
 	/**
 	 * Converts List of Service to List of ServiceDTO
-	 * 
+	 *
 	 * @param services
 	 * @param images
 	 * @return
@@ -39,14 +39,14 @@ public interface ApiServiceService {
 
 	/**
 	 * returns All the available services in {@link ServiceDTO}
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<ResponseDTO<List<ServiceDTO>>> services();
 
 	/**
 	 * returns All the available services in {@link ServiceDTO} with pagination
-	 * 
+	 *
 	 * @param page
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public interface ApiServiceService {
 	/**
 	 * returns All the available services in {@link ServiceDTO} of
 	 * {@link ServiceCategories}
-	 * 
+	 *
 	 * @param category
 	 * @return
 	 */
@@ -64,7 +64,7 @@ public interface ApiServiceService {
 	/**
 	 * returns All the available services in {@link ServiceDTO} of
 	 * {@link ServiceCategories} with pagination
-	 * 
+	 *
 	 * @param category
 	 * @param page
 	 * @return

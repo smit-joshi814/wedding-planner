@@ -17,11 +17,11 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException authException)
 			throws java.io.IOException, ServletException {
-		
+
 		 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 	        PrintWriter writer = response.getWriter();
 	        writer.println("Access Denied !! " + authException.getMessage());
-		
+
 	}
-   
+
 }

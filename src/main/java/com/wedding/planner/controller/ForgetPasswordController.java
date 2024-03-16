@@ -7,10 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/forgetPassword")
 public class ForgetPasswordController {
-    
+
     @RequestMapping
     public ModelAndView forgetPassword() {
         return new ModelAndView("forgot-password");
-    
+
     }
 }

@@ -567,7 +567,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 
 	<jsp:include page="components/footer-imports.jsp" />
 
-	<script src="api/manage/services.js"></script>
+	<script src="resources/api/manage/services.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

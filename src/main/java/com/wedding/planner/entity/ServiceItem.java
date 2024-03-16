@@ -38,6 +38,6 @@ public class ServiceItem {
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinTable(name = "service_item_variations", joinColumns = @JoinColumn(name = "service_item_id"), inverseJoinColumns = @JoinColumn(name = "variation_option_id"))
 	private List<VariationOption> variations;
-	
+
 	private Boolean status;
 }

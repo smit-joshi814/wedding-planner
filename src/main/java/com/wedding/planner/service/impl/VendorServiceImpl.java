@@ -64,8 +64,8 @@ public class VendorServiceImpl implements VendorService {
 			}
 
 //			business contact
-			if (Objects.nonNull(vendor.getBusnessContact()) && !"".equalsIgnoreCase(vendor.getBusnessContact())) {
-				dbVendorOpt.ifPresent(data -> data.setBusnessContact(vendor.getBusnessContact()));
+			if (Objects.nonNull(vendor.getBusinessContact()) && !"".equalsIgnoreCase(vendor.getBusinessContact())) {
+				dbVendorOpt.ifPresent(data -> data.setBusinessContact(vendor.getBusinessContact()));
 			}
 
 			return ResponseEntity.ok(vendorRepo.save(dbVendorOpt.get()));
@@ -86,6 +86,11 @@ public class VendorServiceImpl implements VendorService {
 			return ResponseEntity.ok(true);
 		}
 		return ResponseEntity.notFound().build();
+	}
+
+	@Override
+	public ResponseEntity<Vendor> getvendor(Users user) {
+		return ResponseEntity.ok(vendorRepo.findByUser(user));
 	}
 
 }

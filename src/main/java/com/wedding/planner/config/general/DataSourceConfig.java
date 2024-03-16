@@ -16,7 +16,7 @@ public class DataSourceConfig {
 	@Value("${spring.datasource.password:}")
 	private final String password = env("SPRING_DATASOURCE_PASSWORD");
 
-	
+
 	private static String env(String name) {
 		return System.getenv(name);
 	}
