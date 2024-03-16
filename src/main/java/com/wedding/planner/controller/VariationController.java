@@ -54,7 +54,7 @@ public class VariationController {
 
 	// add variations
 	@PostMapping("/add-variations")
-	public ResponseEntity<Variation> addVariation(@RequestParam("variation-name") String variationName,
+	public ResponseEntity<Variation> addVariation(@RequestParam("variation-NAME") String variationName,
 			@RequestParam("service-category") ServiceCategories category) {
 		return service.addVariation(variationName, category);
 	}
@@ -89,7 +89,7 @@ public class VariationController {
 	// add variation option
 	@PostMapping("/add-variation-options")
 	public ResponseEntity<VariationOption> addVariationOption(@RequestParam("variations-select") Variation variation,
-			@RequestParam("variation-option-name") String variationOption) {
+			@RequestParam("variation-option-NAME") String variationOption) {
 		return optionService.addVariationOption(variation, variationOption);
 	}
 

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title><%=Configurations.name%></title>
+<title><%=Configurations.NAME%></title>
 <link href="resources/css/tabler.min.css" rel="stylesheet" />
 <style>
 @import url('https://rsms.me/inter/inter.css');

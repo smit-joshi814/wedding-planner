@@ -7,6 +7,6 @@ public record VariationOptionDTO(
         String variationOptionName) {
     public VariationOptionDTO {
         Objects.requireNonNull(variationOptionId, "option id required");
-        Objects.requireNonNull(variationOptionName, "option name required");
+        Objects.requireNonNull(variationOptionName, "option NAME required");
     }
 }

@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 
-<title>2 Step Verification Code | <%=Configurations.name%></title>
+<title>2 Step Verification Code | <%=Configurations.NAME%></title>
 <jsp:include page="components/head-imports.jsp" />
 </head>
   <body  class=" d-flex flex-column">

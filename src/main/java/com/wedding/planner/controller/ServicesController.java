@@ -58,9 +58,9 @@ public class ServicesController {
 
 //	adds Service
 	@PostMapping("add")
-	public ResponseEntity<Services> add(@RequestParam("service-name") String serviceName,
+	public ResponseEntity<Services> add(@RequestParam("service-NAME") String serviceName,
 			@RequestParam("service-category") ServiceCategories category,
-			@RequestParam("service-description") String serviceDescription,
+			@RequestParam("service-DESCRIPTION") String serviceDescription,
 			@RequestParam("service-location") String serviceLocation, @RequestParam("service-status") boolean status) {
 		Services service = Services.builder().serviceName(serviceName).servicecategory(category)
 				.serviceLocation(serviceLocation).serviceDescription(serviceDescription).status(status)
@@ -72,8 +72,8 @@ public class ServicesController {
 //	Update Service
 	@PutMapping("update")
 	public ResponseEntity<Services> update(@RequestParam("edit-service-id") Long serviceId,
-			@RequestParam("edit-service-name") String serviceName,
-			@RequestParam("edit-service-description") String serviceDescription,
+			@RequestParam("edit-service-NAME") String serviceName,
+			@RequestParam("edit-service-DESCRIPTION") String serviceDescription,
 			@RequestParam("edit-service-category") ServiceCategories servicecategory,
 			@RequestParam(name = "edit-service-status", required = false) Boolean status) {
 		Services service = Services.builder().serviceId(serviceId).serviceName(serviceName)
@@ -106,7 +106,7 @@ public class ServicesController {
 //	adds Service Item
 	@PostMapping("add-item")
 	public ResponseEntity<ServiceItem> addItem(@RequestParam("select-service") Services service,
-			@RequestParam("service-item-name") String serviceItemName,
+			@RequestParam("service-item-NAME") String serviceItemName,
 			@RequestParam("service-item-price") Double serviceItemPrice,
 			@RequestParam("service-item-status") Boolean status,
 			@RequestParam("item-images") MultipartFile[] itemImages) {
@@ -116,7 +116,7 @@ public class ServicesController {
 	@PutMapping("update-item")
 	public ResponseEntity<ServiceItem> updateItem(@RequestParam("edit-service-item-id") Long serviceItemId,
 			@RequestParam("edit-select-service") Services service,
-			@RequestParam("edit-service-item-name") String itemName,
+			@RequestParam("edit-service-item-NAME") String itemName,
 			@RequestParam("edit-service-item-price") Double approxPrice,
 			@RequestParam("edit-service-item-status") Boolean status) {
 		ServiceItem item = ServiceItem.builder().serviceItemId(serviceItemId).itemName(itemName).status(status)

@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Dashboard | <%=Configurations.name%> </title>
+    <title>Dashboard | <%=Configurations.NAME%> </title>
     <jsp:include page="components/head-imports.jsp" />
   </head>
 

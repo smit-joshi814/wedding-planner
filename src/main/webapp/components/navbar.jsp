@@ -15,7 +15,7 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 		</button>
 		<h1
 			class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-			<a href="/home"> <img src="<%=Configurations.logo%>" width="110"
+			<a href="/home"> <img src="<%=Configurations.LOGO%>" width="110"
 				height="32" alt="Tabler" class="navbar-brand-image" />
 			</a>
 		</h1>

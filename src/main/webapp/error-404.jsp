@@ -8,7 +8,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Page 404 | <%=Configurations.name%></title>
+<title>Page 404 | <%=Configurations.NAME%></title>
 <!-- CSS files -->
 <link href="resources/css/tabler.min.css" rel="stylesheet" />
 <style>

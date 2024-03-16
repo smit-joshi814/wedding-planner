@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 
-<title>Terms Of Service | <%=Configurations.name%></title>
+<title>Terms Of Service | <%=Configurations.NAME%></title>
 
 <jsp:include page="components/head-imports.jsp" />
 </head>

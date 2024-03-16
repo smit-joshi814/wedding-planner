@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-<title>Service categories | <%=Configurations.name%>
+<title>Service categories | <%=Configurations.NAME%>
 </title>
 <jsp:include page="components/head-imports.jsp" />
 </head>

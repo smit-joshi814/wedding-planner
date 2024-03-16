@@ -14,7 +14,7 @@ List<Vendor> vendorList = (List<Vendor>) request.getAttribute("vendorList");
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Vendors | <%=Configurations.name%></title>
+<title>Vendors | <%=Configurations.NAME%></title>
 <jsp:include page="components/head-imports.jsp" />
 </head>
 <body>
@@ -56,7 +56,7 @@ List<Vendor> vendorList = (List<Vendor>) request.getAttribute("vendorList");
 							<div class="card">
 								<div class="card-body p-4 text-center">
 									<span class="avatar avatar-xl mb-3 rounded"
-										style="background-image: url(<%=vendor.getUser().getAvatar()!=null?vendor.getUser().getAvatar():"https://ik.imagekit.io/weddingplanning/defaults/Wedding%20Planner"%>)"></span>
+										style="background-image: url(<%=vendor.getUser().getAvatar()!=null?vendor.getUser().getAvatar():Configurations.LOGO_COMPACT%>)"></span>
 									<h3 class="m-0 mb-1">
 										<a href="vendor?vendor=<%=vendor.getVendorId()%>"><%=vendor.getUser().getFirstName()+" "+vendor.getUser().getLastName()%></a>
 									</h3>

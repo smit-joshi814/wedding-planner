@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 
-<title>Sign In Link | <%=Configurations.name%></title>
+<title>Sign In Link | <%=Configurations.NAME%></title>
 <jsp:include page="components/head-imports.jsp" />
 </head>
 
@@ -15,7 +15,7 @@
       <div class="container container-tight py-4">
         <div class="text-center mb-4">
           <a href="." class="navbar-brand navbar-brand-autodark">
-            <img src="<%=Configurations.logo%>" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            <img src="<%=Configurations.LOGO%>" width="110" height="32" alt="Tabler" class="navbar-brand-image">
           </a>
         </div>
         <div class="text-center">

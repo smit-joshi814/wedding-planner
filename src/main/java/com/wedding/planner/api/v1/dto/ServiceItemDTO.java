@@ -10,7 +10,7 @@ public record ServiceItemDTO(
         List<String> images) {
     public ServiceItemDTO {
         Objects.requireNonNull(serviceItemId, "service item id is required");
-        Objects.requireNonNull(itemName, "item name is required");
+        Objects.requireNonNull(itemName, "item NAME is required");
         Objects.requireNonNull(approxPrice, "approx price is required");
         Objects.requireNonNull(images, "images is required");
         if (images.isEmpty()) {

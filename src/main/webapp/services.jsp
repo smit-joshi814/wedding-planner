@@ -11,7 +11,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Services | <%=Configurations.name%></title>
+<title>Services | <%=Configurations.NAME%></title>
 <jsp:include page="components/head-imports.jsp" />
 
 <style type="text/css">

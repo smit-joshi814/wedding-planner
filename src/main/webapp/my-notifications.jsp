@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 
-<title>My Notifications | <%=Configurations.name%>
+<title>My Notifications | <%=Configurations.NAME%>
 </title>
 <jsp:include page="components/head-imports.jsp" />
 </head>

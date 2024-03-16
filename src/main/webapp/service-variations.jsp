@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-<title>Variation - Vendors | <%=Configurations.name%></title>
+<title>Variation - Vendors | <%=Configurations.NAME%></title>
 
 <jsp:include page="components/head-imports.jsp" />
 

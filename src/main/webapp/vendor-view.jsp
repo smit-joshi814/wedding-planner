@@ -12,7 +12,7 @@ List<States> states = (List<States>) request.getAttribute("states");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>View Vendor | <%=Configurations.name%>
+<title>View Vendor | <%=Configurations.NAME%>
 </title>
 <jsp:include page="components/head-imports.jsp" />
 </head>

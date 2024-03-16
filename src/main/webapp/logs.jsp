@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 
-<title>Logs | <%=Configurations.name%>
+<title>Logs | <%=Configurations.NAME%>
 </title>
 <jsp:include page="components/head-imports.jsp" />
 </head>

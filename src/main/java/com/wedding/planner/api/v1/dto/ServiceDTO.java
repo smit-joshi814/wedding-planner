@@ -7,8 +7,8 @@ public record ServiceDTO(Long serviceId, Long createdBy, String serviceName, Str
 	public ServiceDTO {
 		Objects.requireNonNull(serviceId, "service id require");
 		Objects.requireNonNull(createdBy, "required created By");
-		Objects.requireNonNull(serviceName, "service name require");
-		Objects.requireNonNull(serviceDescription, "service description require");
+		Objects.requireNonNull(serviceName, "service NAME require");
+		Objects.requireNonNull(serviceDescription, "service DESCRIPTION require");
 		Objects.requireNonNull(serviceLocation, "service location require");
 	}
 }

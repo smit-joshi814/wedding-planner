@@ -17,7 +17,7 @@ public interface StorageService {
 	 * uploads the Images to the {@link ImageKit}
 	 *
 	 * @param image
-	 * @param name
+	 * @param NAME
 	 * @param FOLDER_NAME
 	 * @return {@link Images} uploaded image Entity
 	 * @throws IOException
@@ -28,7 +28,7 @@ public interface StorageService {
 	 * uploads the Images to the {@link ImageKit}
 	 *
 	 * @param file
-	 * @param name
+	 * @param NAME
 	 * @param FOLDER_NAME
 	 * @return {@link List<Images>} uploaded list images
 	 * @throws IOException

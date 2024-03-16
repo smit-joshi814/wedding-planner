@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/my-notifications")
-public class MyNotifications {
+public class MyNotificationsController {
 
 	@RequestMapping
 	public ModelAndView myNotifications() {

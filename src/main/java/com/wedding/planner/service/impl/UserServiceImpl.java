@@ -1,5 +1,6 @@
 package com.wedding.planner.service.impl;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -8,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.wedding.planner.entity.Images;
 import com.wedding.planner.entity.Users;
 import com.wedding.planner.repository.UsersRepository;
+import com.wedding.planner.service.StorageService;
 import com.wedding.planner.service.UserService;
 import com.wedding.planner.utils.UtilityService;
+import com.wedding.planner.utils.impl.Storage;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UtilityService utility;
+
+	@Autowired
+	private StorageService storage;
 
 	@Override
 	public ResponseEntity<List<Users>> getUsers() {
@@ -70,12 +78,12 @@ public class UserServiceImpl implements UserService {
 		Optional<Users> dbUserOpt = usersRepo.findById(user.getUserId());
 
 		if (dbUserOpt.isPresent()) {
-//		first name
+//		first NAME
 			if (Objects.nonNull(user.getFirstName()) && !"".equalsIgnoreCase(user.getFirstName())) {
 				dbUserOpt.ifPresent(data -> data.setFirstName(user.getFirstName()));
 			}
 
-//		last name
+//		last NAME
 			if (Objects.nonNull(user.getLastName()) && !"".equalsIgnoreCase(user.getLastName())) {
 				dbUserOpt.ifPresent(data -> data.setLastName(user.getLastName()));
 			}
@@ -130,5 +138,18 @@ public class UserServiceImpl implements UserService {
 			return ResponseEntity.ok(true);
 		}
 		return ResponseEntity.notFound().build();
+	}
+
+	@Override
+	public ResponseEntity<String> updateAvatar(String email, MultipartFile file) {
+		try {
+			Users dbUser = usersRepo.findByEmail(email);
+			Images image = storage.upload(file, dbUser.getFirstName(), Storage.STORAGE_AVATAR);
+			dbUser.setAvatar(image);
+			usersRepo.save(dbUser);
+			return ResponseEntity.ok(image.getUrl());
+		} catch (IOException e) {
+			return ResponseEntity.internalServerError().body(e.getMessage());
+		}
 	}
 }

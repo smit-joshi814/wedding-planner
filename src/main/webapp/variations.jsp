@@ -13,7 +13,7 @@
 <html lang="en">
 
 <head>
-<title>Variations | <%=Configurations.name%>
+<title>Variations | <%=Configurations.NAME%>
 </title>
 
 <jsp:include page="components/head-imports.jsp" />

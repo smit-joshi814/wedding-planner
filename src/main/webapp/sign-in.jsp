@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 
-<title>Sign In | <%=Configurations.name%></title>
+<title>Sign In | <%=Configurations.NAME%></title>
 
 <jsp:include page="components/head-imports.jsp" />
 </head>
@@ -17,7 +17,7 @@
 					<div class="container-tight">
 						<div class="text-center mb-4">
 							<a href="#" class="navbar-brand navbar-brand-autodark"><img
-								src="<%=Configurations.logo%>" height="36" alt="Tabler" class="navbar-brand-image"></a>
+								src="<%=Configurations.LOGO%>" height="36" alt="Tabler" class="navbar-brand-image"></a>
 						</div>
 						<div class="card card-md">
 							<div class="card-body">

@@ -8,15 +8,15 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%
-Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
-Vendor isVendor = (Vendor) pageContext.getRequest().getAttribute("isVendor");
+Users user = (Users) request.getAttribute("user");
+Vendor isVendor = (Vendor) request.getAttribute("vendor");
 %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-<title>Settings | <%=Configurations.name%>
+<title>Settings | <%=Configurations.NAME%>
 </title>
 <jsp:include page="components/head-imports.jsp" />
 </head>
@@ -50,24 +50,16 @@ Vendor isVendor = (Vendor) pageContext.getRequest().getAttribute("isVendor");
 									<h3 class="card-title">Profile Details</h3>
 									<div class="row align-items-center">
 										<div class="col-auto">
-											<%
-											if (user.getAvatar() != null) {
-											%>
-											<span class="avatar avatar-xl"
-												style="background-image: url(./static/avatars/000m.jpg)"></span>
-											<%
-											} else {
-											%>
-											<span class="avatar avatar-xl"><i class="ti ti-user"></i></span>
-											<%
-											}
-											%>
+											<span class="avatar avatar-xl" id="current-avatar"
+												style="background-image: url(<%=user.getAvatar() != null ? user.getAvatar().getUrl() : Configurations.LOGO_COMPACT%>)"></span>
 										</div>
 										<div class="col-auto">
-											<a href="#" class="btn"> Change avatar </a>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="btn btn-ghost-danger"> Delete avatar </a>
+											<form method="POST" id="change-avatar">
+												<input type="file" id="user-avatar" name="user-avatar"
+													required /> <input type="hidden"
+													name="${_csrf.parameterName}" value="${_csrf.token}" />
+												<button type="submit" class="btn">Change avatar</button>
+											</form>
 										</div>
 									</div>
 									<h3 class="card-title mt-4"><%=user.getRole().equals(UserRole.ADMIN) ? "Admin" : "Business"%>
@@ -151,6 +143,9 @@ Vendor isVendor = (Vendor) pageContext.getRequest().getAttribute("isVendor");
 	<!-- Libs JS -->
 	<!-- Tabler Core -->
 	<jsp:include page="components/footer-imports.jsp" />
+
+	<script type="text/javascript"
+		src="resources/api/account/my-account.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

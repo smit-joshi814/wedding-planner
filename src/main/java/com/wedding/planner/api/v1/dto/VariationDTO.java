@@ -5,6 +5,6 @@ import java.util.Objects;
 public record VariationDTO(Integer variationId, String variationName) {
 	public VariationDTO {
         Objects.requireNonNull(variationId,"variation id is required");
-        Objects.requireNonNull(variationName,"variation name is required");
+        Objects.requireNonNull(variationName,"variation NAME is required");
     }
 }

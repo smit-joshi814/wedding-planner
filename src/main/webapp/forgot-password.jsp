@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 
-<title>Forgot password | <%=Configurations.name%></title>
+<title>Forgot password | <%=Configurations.NAME%></title>
 <jsp:include page="components/head-imports.jsp" />
 </head>
 <body class=" d-flex flex-column">
@@ -13,7 +13,7 @@
 		<div class="container container-tight py-4">
 			<div class="text-center mb-4">
 				<a href="#" class="navbar-brand navbar-brand-autodark"> <img
-					src="<%=Configurations.logo%>" width="110" height="32" alt="Tabler"
+					src="<%=Configurations.LOGO%>" width="110" height="32" alt="Tabler"
 					class="navbar-brand-image">
 				</a>
 			</div>
