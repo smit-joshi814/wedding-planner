@@ -43,7 +43,7 @@ $("#states").on('change', function() {
 	$("#cities").html(`
 				<option value>Select City</option>
 	`);
-	citiesDropdown.destroy();
+	//citiesDropdown.destroy(); //error
 	loadCities(state);
 });
 
@@ -67,7 +67,7 @@ function loadCities(state, city) {
 			});
 		},
 		complete: function() {
-			citiesDropdown = tomSelectInit("#cities");
+			//citiesDropdown = tomSelectInit("#cities"); //error
 		}
 	});
 }
