@@ -35,7 +35,7 @@ public class SignUpController {
 			@RequestParam("business_name") String business_nme,
 			@RequestParam("business_contact") String business_contact, @RequestParam("gst_number") String gstNumber,
 			@RequestParam("city") Cities city, @RequestParam("address_line_1") String addressLine1,
-			@RequestParam("address_line_2") String addressLine2) {
+			@RequestParam(name="address_line_2",required = false,defaultValue = " ") String addressLine2) {
 
 		signUpService.registerVendor(firstName, lastName, email, phone, password, business_nme, business_contact,
 				gstNumber, city, addressLine1, addressLine2);

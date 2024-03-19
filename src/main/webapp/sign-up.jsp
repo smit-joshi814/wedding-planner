@@ -137,9 +137,9 @@ List<States> states = (List<States>) request.getAttribute("states");
 						</div>
 						<div class="col-sm-6 col-md-6">
 							<div class="mb-3">
-								<label class="form-label required">Address Line 2</label> <input
+								<label class="form-label">Address Line 2</label> <input
 									type="text" class="form-control" name="address_line_2"
-									placeholder="Address Line 2" required>
+									placeholder="Address Line 2">
 							</div>
 						</div>
 					</div>

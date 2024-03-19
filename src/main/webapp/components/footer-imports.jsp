@@ -1,10 +1,10 @@
-<script src="resources/js/demo-theme.min.js?1692870487"></script>
+<script src="resources/js/demo-theme.min.js"></script>
 
 <!-- Libs JS -->
 <script
-	src="resources/libs/apexcharts/dist/apexcharts.min.js?1692870487" defer></script>
+	src="resources/libs/apexcharts/dist/apexcharts.min.js" defer></script>
 <script
-	src="resources/libs/jsvectormap/dist/js/jsvectormap.min.js?1692870487"
+	src="resources/libs/jsvectormap/dist/js/jsvectormap.min.js"
 	defer></script>
 
 <!-- tinymce -->
