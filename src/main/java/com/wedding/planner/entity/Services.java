@@ -43,7 +43,7 @@ public class Services {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "created_by")
-	private Users createdBy;
+	private Vendor createdBy;
 
 	@CreationTimestamp
 	private LocalDateTime createdAt;

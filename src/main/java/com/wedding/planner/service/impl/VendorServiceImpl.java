@@ -58,7 +58,7 @@ public class VendorServiceImpl implements VendorService {
 				dbVendorOpt.ifPresent(data -> data.setApproved(vendor.getApproved()));
 			}
 
-//			business NAME
+//			business name
 			if (Objects.nonNull(vendor.getBusinessName()) && !"".equalsIgnoreCase(vendor.getBusinessName())) {
 				dbVendorOpt.ifPresent(data -> data.setBusinessName(vendor.getBusinessName()));
 			}

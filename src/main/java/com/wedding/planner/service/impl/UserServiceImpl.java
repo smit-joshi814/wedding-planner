@@ -100,7 +100,10 @@ public class UserServiceImpl implements UserService {
 
 //		address
 			if (Objects.nonNull(user.getAddress())) {
-				dbUserOpt.ifPresent(data -> data.setAddress(user.getAddress()));
+				dbUserOpt.ifPresent(data -> {
+					user.getAddress().get(0).setAddressId(data.getAddress().get(0).getAddressId());
+					data.setAddress(user.getAddress());
+				});
 			}
 
 //		password
@@ -144,6 +147,9 @@ public class UserServiceImpl implements UserService {
 	public ResponseEntity<String> updateAvatar(String email, MultipartFile file) {
 		try {
 			Users dbUser = usersRepo.findByEmail(email);
+			if (dbUser.getAvatar() != null) {
+				storage.delete(dbUser.getAvatar());
+			}
 			Images image = storage.upload(file, dbUser.getFirstName(), Storage.STORAGE_AVATAR);
 			dbUser.setAvatar(image);
 			usersRepo.save(dbUser);

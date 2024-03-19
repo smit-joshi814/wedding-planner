@@ -7,7 +7,7 @@ $("#change-avatar").on("submit", function(e) {
 		processData: false,
 		contentType: false,
 		success: function(data) {
-			$("#change-avatar").reset();
+			$("#change-avatar").trigger("reset");
 			$("#current-avatar").css('background-image', 'url(' + data + ')');
 		},
 		error: function(err) {

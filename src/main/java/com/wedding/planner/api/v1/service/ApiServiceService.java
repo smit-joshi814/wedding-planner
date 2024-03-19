@@ -21,7 +21,7 @@ public interface ApiServiceService {
 	 * @return
 	 */
 	default ServiceDTO convertToDTO(Services service, String serviceImage) {
-		return new ServiceDTO(service.getServiceId(), service.getCreatedBy().getUserId(), service.getServiceName(),
+		return new ServiceDTO(service.getServiceId(), service.getCreatedBy().getVendorId(), service.getServiceName(),
 				service.getServiceDescription(), service.getServiceLocation(), serviceImage);
 	}
 

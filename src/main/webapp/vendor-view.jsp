@@ -25,7 +25,7 @@ List<States> states = (List<States>) request.getAttribute("states");
 
 		<div class="page-wrapper">
 			<!-- Page header -->
-			<form action="/update-bank-form" method="POST">
+			<form action="/update-vendor" method="POST">
 				<div class="page-header d-print-none">
 					<div class="container-xl">
 						<div class="row g-2 align-items-center">
@@ -69,15 +69,17 @@ List<States> states = (List<States>) request.getAttribute("states");
 									</span>
 									</label>
 								</div>
+								<!--  
 								<div class="me-3 mb-3">
 									<label class="row"> <span class="col">Delete: </span> <span
 										class="col-auto"> <a
-											href="/delete-bank/<%=vendor.getVendorId()%>"
+											href="/delete-vendor/<%=vendor.getVendorId()%>"
 											class="btn nav-link me-2"> <i class="ti-trash ti icon"></i>
 										</a>
 									</span>
 									</label>
 								</div>
+								 -->
 							</div>
 						</div>
 					</div>
@@ -96,16 +98,16 @@ List<States> states = (List<States>) request.getAttribute("states");
 										<div class="col-sm-6 col-md-6">
 											<div class="mb-3">
 												<label class="form-label">First Name</label> <input
-													type="text" class="form-control" placeholder="Name"
-													name="name" maxlength="30"
+													type="text" class="form-control" placeholder="First Name"
+													name="first_name" maxlength="30"
 													value="<%=vendor.getUser().getFirstName()%>" required>
 											</div>
 										</div>
 										<div class="col-sm-6 col-md-6">
 											<div class="mb-3">
 												<label class="form-label">Last Name</label> <input
-													type="text" class="form-control" placeholder="Username"
-													maxlength="30" name="username"
+													type="text" class="form-control" placeholder="Last Name"
+													maxlength="30" name="last_name"
 													value="<%=vendor.getUser().getLastName()%>">
 											</div>
 										</div>
@@ -143,16 +145,24 @@ List<States> states = (List<States>) request.getAttribute("states");
 										<div class="col-sm-6 col-md-6">
 											<div class="mb-3">
 												<label class="form-label">Business Name</label> <input
-													type="text" class="form-control" placeholder="UPI ID"
-													name="upiId" value="<%=vendor.getBusinessName()%>" required>
+													type="text" class="form-control" placeholder="Business Name"
+													name="business_name" value="<%=vendor.getBusinessName()%>" required>
 											</div>
 										</div>
 										<div class="col-sm-6 col-md-6">
 											<div class="mb-3">
 												<label class="form-label">Business Contact</label> <input
 													type="number" class="form-control"
-													placeholder="Opening Balance" name="openingBalance"
+													placeholder="Business Contact" name="business_contact"
 													value="<%=vendor.getBusinessContact()%>" required>
+											</div>
+										</div>
+										<div class="col-sm-6 col-md-6">
+											<div class="mb-3">
+												<label class="form-label">GST Number</label> <input
+													type="number" class="form-control"
+													placeholder="GST Number" name="gst_number"
+													value="<%=vendor.getGstNumber()%>" required>
 											</div>
 										</div>
 										<div class="col-sm-6 col-md-6">
@@ -201,9 +211,9 @@ List<States> states = (List<States>) request.getAttribute("states");
 									</div>
 								</div>
 								<div class="card-footer d-flex justify-content-end">
-									<input type="hidden" name="bankId"
+									<input type="hidden" name="vendor_id"
 										value="<%=vendor.getVendorId()%>" /> <input type="hidden"
-										name="userId" value="<%=vendor.getUser().getUserId()%>" /> <input
+										name="user_id" value="<%=vendor.getUser().getUserId()%>" /> <input
 										type="hidden" name="${_csrf.parameterName}"
 										value="${_csrf.token}" />
 									<button type="submit" class="btn btn-primary">

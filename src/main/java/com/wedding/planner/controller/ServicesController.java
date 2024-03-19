@@ -21,6 +21,7 @@ import com.wedding.planner.entity.Services;
 import com.wedding.planner.service.ServiceItemService;
 import com.wedding.planner.service.ServicesService;
 import com.wedding.planner.service.UserService;
+import com.wedding.planner.service.VendorService;
 import com.wedding.planner.utils.UtilityService;
 
 @Controller
@@ -35,6 +36,9 @@ public class ServicesController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private VendorService vendorService;
 
 	@Autowired
 	private UtilityService utility;
@@ -64,7 +68,7 @@ public class ServicesController {
 			@RequestParam("service-location") String serviceLocation, @RequestParam("service-status") boolean status) {
 		Services service = Services.builder().serviceName(serviceName).servicecategory(category)
 				.serviceLocation(serviceLocation).serviceDescription(serviceDescription).status(status)
-				.createdBy(userService.getUser(utility.getCurrentUsername()).getBody()).build();
+				.createdBy(vendorService.getvendor(userService.getUser(utility.getCurrentUsername()).getBody()).getBody()).build();
 
 		return servicesService.add(service);
 	}

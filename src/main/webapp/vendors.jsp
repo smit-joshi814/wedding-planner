@@ -56,7 +56,7 @@ List<Vendor> vendorList = (List<Vendor>) request.getAttribute("vendorList");
 							<div class="card">
 								<div class="card-body p-4 text-center">
 									<span class="avatar avatar-xl mb-3 rounded"
-										style="background-image: url(<%=vendor.getUser().getAvatar()!=null?vendor.getUser().getAvatar():Configurations.LOGO_COMPACT%>)"></span>
+										style="background-image: url(<%=vendor.getUser().getAvatar()!=null?vendor.getUser().getAvatar().getUrl():Configurations.LOGO_COMPACT%>)"></span>
 									<h3 class="m-0 mb-1">
 										<a href="vendor?vendor=<%=vendor.getVendorId()%>"><%=vendor.getUser().getFirstName()+" "+vendor.getUser().getLastName()%></a>
 									</h3>

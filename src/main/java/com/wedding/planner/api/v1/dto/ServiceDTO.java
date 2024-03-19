@@ -2,7 +2,7 @@ package com.wedding.planner.api.v1.dto;
 
 import java.util.Objects;
 
-public record ServiceDTO(Long serviceId, Long createdBy, String serviceName, String serviceDescription,
+public record ServiceDTO(Long serviceId, Integer createdBy, String serviceName, String serviceDescription,
 		String serviceLocation, String serviceImage) {
 	public ServiceDTO {
 		Objects.requireNonNull(serviceId, "service id require");
