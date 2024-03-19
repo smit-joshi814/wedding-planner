@@ -49,7 +49,8 @@ public class VendorsController {
 			@RequestParam(name = "status", required = false, defaultValue = "false") Boolean status,
 			@RequestParam("first_name") String firstName, @RequestParam("last_name") String lastName,
 			@RequestParam("email") String email, @RequestParam("phone") String phone,
-			@RequestParam("password") String password, @RequestParam("business_name") String businessName,
+			@RequestParam(name = "password", required = false) String password,
+			@RequestParam("business_name") String businessName,
 			@RequestParam("business_contact") String businessContact, @RequestParam("city") Cities city,
 			@RequestParam("address_line_1") String addressLine1, @RequestParam("address_line_2") String addressLine2,
 			@RequestParam("vendor_id") Integer vendorId, @RequestParam("user_id") Long userId,
@@ -58,7 +59,8 @@ public class VendorsController {
 		Address address = Address.builder().addressLine1(addressLine1).addressLine2(addressLine2).city(city).build();
 
 		Users user = Users.builder().userId(userId).firstName(firstName).lastName(lastName).email(email)
-				.password(password).phone(phone).address(List.of(address)).loggedIn(isLoggedIn).status(status).build();
+				.password(password != null ? password : null).phone(phone).address(List.of(address))
+				.loggedIn(isLoggedIn).status(status).build();
 		Vendor vendor = Vendor.builder().businessName(businessName).businessContact(businessContact).user(user)
 				.gstNumber(gstNumber).vendorId(vendorId).build();
 		vendorService.updatevendor(vendor);
@@ -67,8 +69,8 @@ public class VendorsController {
 	}
 
 	@GetMapping("/vendor/approve/{vendor}")
-	public ModelAndView approveVendor(@PathVariable("vendor") Vendor vendor) {
-		vendor.setApproved(true);
+	public ModelAndView approveVendor(@PathVariable("vendor") Integer vendorId) {
+		Vendor vendor = Vendor.builder().vendorId(vendorId).approved(true).build();
 		vendorService.updatevendor(vendor);
 		return new ModelAndView("redirect:/vendors");
 	}
