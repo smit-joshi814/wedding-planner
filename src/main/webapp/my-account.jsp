@@ -54,82 +54,83 @@ Vendor isVendor = (Vendor) request.getAttribute("vendor");
 												style="background-image: url(<%=user.getAvatar() != null ? user.getAvatar().getUrl() : Configurations.LOGO_COMPACT%>)"></span>
 										</div>
 										<div class="col-auto">
-											<form method="POST" id="change-avatar">
-												<input type="file" id="user-avatar" name="user-avatar"
+											<form method="POST" id="change-avatar" class="d-flex">
+												<input type="file" class="form-control" id="user-avatar" name="user-avatar"
 													required /> <input type="hidden"
 													name="${_csrf.parameterName}" value="${_csrf.token}" />
-												<button type="submit" class="btn">Change avatar</button>
+												<button type="submit" class="btn ms-3 btn-outline-primary">Change avatar</button>
 											</form>
 										</div>
 									</div>
-									<h3 class="card-title mt-4"><%=user.getRole().equals(UserRole.ADMIN) ? "Admin" : "Business"%>
+									<h3 class="card-title mt-4"><%=user.getRole().equals(UserRole.ADMIN) ? "Admin" : "Vendor"%>
 										Profile
 									</h3>
-									<div class="row g-3">
-										<div class="col-md">
-											<div class="form-label"><%=user.getRole().equals(UserRole.ADMIN) ? "Admin" : "Business"%>
-												Name
+									<form action="" id="account-update">
+										<div class="row g-3">
+											<div class="col-md">
+												<div class="form-label"><%=user.getRole().equals(UserRole.ADMIN) ? "Admin" : "Vendor"%>
+													Name
+												</div>
+												<input type="text" class="form-control" name="user_name"
+													value="<%=user.getFirstName() + " " + user.getLastName()%>">
 											</div>
-											<input type="text" class="form-control"
-												value="<%=user.getFirstName() + " " + user.getLastName()%>">
+											<sec:authorize access="hasRole('VENDOR')">
+												<div class="col-md">
+													<div class="form-label">GST ID</div>
+													<input type="text" class="form-control" name="gst_number"
+														value="<%=isVendor.getGstNumber()%>">
+												</div>
+												<div class="col-md">
+													<div class="form-label">Location</div>
+													<input type="text" class="form-control" name="address_line_1"
+														value="<%=user.getAddress().get(0).getAddressLine1()%>">
+												</div>
+											</sec:authorize>
 										</div>
-										<sec:authorize access="hasRole('VENDOR')">
-											<div class="col-md">
-												<div class="form-label">GST ID</div>
-												<input type="text" class="form-control"
-													value="<%=isVendor.getGstNumber()%>">
+										<h3 class="card-title mt-4">Email</h3>
+										<p class="card-subtitle">This contact will be shown to
+											others publicly, so choose it carefully.</p>
+										<div>
+											<div class="row g-2">
+												<div class="col-auto">
+													<input type="text" class="form-control w-auto" name="email"
+														value="<%=user.getEmail()%>">
+												</div>
+												<div class="col-auto">
+													<a href="#" class="btn"> Change </a>
+												</div>
 											</div>
-
-											<div class="col-md">
-												<div class="form-label">Location</div>
-												<input type="text" class="form-control"
-													value="<%=user.getAddress().get(0).getAddressLine1()%>">
+										</div>
+										<sec:authorize access="hasRole('ADMIN')">
+											<h3 class="card-title mt-4">Password</h3>
+											<p class="card-subtitle">You can set a permanent password
+												if you don't want to use temporary login codes.</p>
+											<div>
+												<a href="#" class="btn"> Set new password </a>
 											</div>
 										</sec:authorize>
-									</div>
-									<h3 class="card-title mt-4">Email</h3>
-									<p class="card-subtitle">This contact will be shown to
-										others publicly, so choose it carefully.</p>
-									<div>
-										<div class="row g-2">
-											<div class="col-auto">
-												<input type="text" class="form-control w-auto"
-													value="<%=user.getEmail()%>">
+										<sec:authorize access="hasRole('VENDOR')">
+											<h3 class="card-title mt-4">Accept Orders</h3>
+											<p class="card-subtitle">accept the Orders for the
+												services provided by you</p>
+											<div>
+												<label class="form-check form-switch form-switch-lg">
+													<input class="form-check-input" type="checkbox" value="true" name="accepting_orders"
+													<%=isVendor.getAcceptOrders() ? "checked" : ""%>> <span
+													class="form-check-label form-check-label-on">You're
+														currently Accepting Orders</span> <span
+													class="form-check-label form-check-label-off">You're
+														currently Not Accepting Orders</span>
+												</label>
 											</div>
-											<div class="col-auto">
-												<a href="#" class="btn"> Change </a>
+										</sec:authorize>
+										<div class="card-footer bg-transparent mt-3">
+											<div class="btn-list justify-content-end">
+												<button type="submit" class="btn btn-primary">
+													Submit</button>
 											</div>
 										</div>
-									</div>
-									<sec:authorize access="hasRole('ADMIN')">
-										<h3 class="card-title mt-4">Password</h3>
-										<p class="card-subtitle">You can set a permanent password
-											if you don't want to use temporary login codes.</p>
-										<div>
-											<a href="#" class="btn"> Set new password </a>
-										</div>
-									</sec:authorize>
-									<sec:authorize access="hasRole('VENDOR')">
-										<h3 class="card-title mt-4">Accept Orders</h3>
-										<p class="card-subtitle">accept the Orders for the
-											services provided by you</p>
-										<div>
-											<label class="form-check form-switch form-switch-lg">
-												<input class="form-check-input" type="checkbox"
-												<%=isVendor.getAcceptOrders() ? "checked" : ""%>> <span
-												class="form-check-label form-check-label-on">You're
-													currently Accepting Orders</span> <span
-												class="form-check-label form-check-label-off">You're
-													currently Not Accepting Orders</span>
-											</label>
-										</div>
-									</sec:authorize>
-								</div>
-								<div class="card-footer bg-transparent mt-auto">
-									<div class="btn-list justify-content-end">
-										<a href="#" class="btn"> Cancel </a> <a href="#"
-											class="btn btn-primary"> Submit </a>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
