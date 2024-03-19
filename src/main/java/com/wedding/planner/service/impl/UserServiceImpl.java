@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wedding.planner.entity.Address;
 import com.wedding.planner.entity.Images;
 import com.wedding.planner.entity.Users;
 import com.wedding.planner.repository.UsersRepository;
@@ -101,7 +102,11 @@ public class UserServiceImpl implements UserService {
 //		address
 			if (Objects.nonNull(user.getAddress())) {
 				dbUserOpt.ifPresent(data -> {
-					user.getAddress().get(0).setAddressId(data.getAddress().get(0).getAddressId());
+					Address address = user.getAddress().get(0);
+					address.setAddressId(data.getAddress().get(0).getAddressId());
+					if (address.getCity() == null) {
+						address.setCity(data.getAddress().get(0).getCity());
+					}
 					data.setAddress(user.getAddress());
 				});
 			}

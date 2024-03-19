@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,5 +64,12 @@ public class VendorsController {
 		vendorService.updatevendor(vendor);
 		ModelAndView mv = new ModelAndView("redirect:/vendors");
 		return mv;
+	}
+
+	@GetMapping("/vendor/approve/{vendor}")
+	public ModelAndView approveVendor(@PathVariable("vendor") Vendor vendor) {
+		vendor.setApproved(true);
+		vendorService.updatevendor(vendor);
+		return new ModelAndView("redirect:/vendors");
 	}
 }

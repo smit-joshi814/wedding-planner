@@ -1,14 +1,18 @@
 package com.wedding.planner.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.wedding.planner.entity.Address;
 import com.wedding.planner.entity.Users;
 import com.wedding.planner.entity.Vendor;
 import com.wedding.planner.enums.UserRole;
@@ -48,4 +52,30 @@ public class MyAccountsController {
 		return userService.updateAvatar(utility.getCurrentUsername(), image);
 	}
 
+	@PutMapping("/user/update")
+	public ResponseEntity<Users> updateUser(@RequestParam("first_name") String firstName,
+			@RequestParam("last_name") String lastName, @RequestParam("email") String email,
+			@RequestParam(name = "password", required = false) String password, @RequestParam("user_id") Long userId) {
+		Users user = Users.builder().userId(userId).firstName(firstName).lastName(lastName).email(email)
+				.password(password != null ? password : null).build();
+		return userService.updateUser(user);
+	}
+
+	@PutMapping("/vendor/update")
+	public ResponseEntity<Vendor> updatevendor(@RequestParam("first_name") String firstName,
+			@RequestParam("last_name") String lastName, @RequestParam("email") String email,
+			@RequestParam(name = "password", required = false) String password, @RequestParam("user_id") Long userId,
+			@RequestParam("gst_number") String gstNumber, @RequestParam("address_line_1") String addressLine1,
+			@RequestParam("address_line_2") String addressLine2, @RequestParam("address_id") Long addressId,
+			@RequestParam(name = "accepting_orders", required = false, defaultValue = "false") Boolean acceptingOrders,
+			@RequestParam("vendor_id") Integer vendorId) {
+
+		Address address = Address.builder().addressLine1(addressLine1).addressLine2(addressLine2).addressId(addressId)
+				.build();
+		Users user = Users.builder().userId(userId).firstName(firstName).lastName(lastName).email(email)
+				.address(List.of(address)).password(password != null ? password : null).build();
+		Vendor vendor = Vendor.builder().user(user).gstNumber(gstNumber).acceptOrders(acceptingOrders)
+				.vendorId(vendorId).build();
+		return vendorService.updatevendor(vendor);
+	}
 }
