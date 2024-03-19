@@ -16,7 +16,7 @@ public interface ApiStatesService {
 	 * @param state
 	 * @return
 	 */
-	default StatesDTO convertToDTO(States state) {
+	private StatesDTO convertToDTO(States state) {
 		return new StatesDTO(state.getStateId(), state.getStateName());
 	}
 
