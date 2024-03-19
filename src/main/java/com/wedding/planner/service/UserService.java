@@ -1,10 +1,12 @@
 package com.wedding.planner.service;
 
+
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wedding.planner.entity.Images;
 import com.wedding.planner.entity.Users;
 
 public interface UserService {
@@ -64,4 +66,12 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<String> updateAvatar(String email,MultipartFile file);
+	
+	/**
+	 * updates user's avatar
+	 * @param email
+	 * @param file
+	 * @return
+	 */
+	ResponseEntity<Images> updateAvatarImage(String email,MultipartFile file);
 }

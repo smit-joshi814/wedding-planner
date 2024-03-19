@@ -163,4 +163,20 @@ public class UserServiceImpl implements UserService {
 			return ResponseEntity.internalServerError().body(e.getMessage());
 		}
 	}
+	
+	@Override
+	public ResponseEntity<Images> updateAvatarImage(String email, MultipartFile file) {
+		try {
+			Users dbUser = usersRepo.findByEmail(email);
+			if (dbUser.getAvatar() != null) {
+				storage.delete(dbUser.getAvatar());
+			}
+			Images image = storage.upload(file, dbUser.getFirstName(), Storage.STORAGE_AVATAR);
+			dbUser.setAvatar(image);
+			usersRepo.save(dbUser);
+			return ResponseEntity.ok(image);
+		} catch (IOException e) {
+			return ResponseEntity.internalServerError().build();
+		}
+	}
 }

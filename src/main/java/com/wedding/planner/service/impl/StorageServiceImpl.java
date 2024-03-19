@@ -48,6 +48,23 @@ public class StorageServiceImpl implements StorageService {
 	}
 
 	@Override
+	public Images upload(MultipartFile file, String name, String FOLDER_NAME, Long ImageId) throws IOException {
+		try {
+			FileCreateRequest request = new FileCreateRequest(file.getBytes(), name);
+			request.folder = FOLDER_NAME;
+			Result response = imageKit.upload(request);
+			Images image = imageService.getImage(ImageId).getBody();
+			image.setFileId(response.getFileId());
+			image.setUrl(response.getUrl());
+			return imageService.update(image).getBody();
+		} catch (InternalServerException | BadRequestException | UnknownException | ForbiddenException
+				| TooManyRequestsException | UnauthorizedException | IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
 	public List<Images> upload(MultipartFile[] images, String name, String FOLDER_NAME) throws IOException {
 		try {
 			List<Images> imagesList = new ArrayList<>();

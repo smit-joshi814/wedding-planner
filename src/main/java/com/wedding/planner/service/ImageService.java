@@ -8,6 +8,14 @@ import com.wedding.planner.entity.Images;
 
 public interface ImageService {
 
+	
+	/**
+	 * gets {@link Images} based on the imageId
+	 * @param imageId
+	 * @return {@link ResponseEntity<Images>} 
+	 */
+	ResponseEntity<Images> getImage(Long imageId);
+	
 	/**
 	 * add Images to the database
 	 *

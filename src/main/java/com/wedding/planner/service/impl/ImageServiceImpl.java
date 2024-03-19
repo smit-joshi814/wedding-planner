@@ -19,10 +19,17 @@ public class ImageServiceImpl implements ImageService {
 	@Autowired
 	private ImagesRepository imageRepo;
 
+	public ResponseEntity<Images> getImage(Long imageId) {
+		try {
+			return ResponseEntity.ok(imageRepo.findById(imageId).get());
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 	@Override
 	@Transactional
 	public ResponseEntity<Images> addImage(Images image) {
-
 		return ResponseEntity.ok(imageRepo.save(image));
 	}
 

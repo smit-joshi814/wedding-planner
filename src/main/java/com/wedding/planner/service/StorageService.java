@@ -27,6 +27,17 @@ public interface StorageService {
 	/**
 	 * uploads the Images to the {@link ImageKit}
 	 *
+	 * @param image
+	 * @param NAME
+	 * @param FOLDER_NAME
+	 * @return {@link Images} uploaded image Entity
+	 * @throws IOException
+	 */
+	Images upload(MultipartFile image, String name, String FOLDER_NAME, Long ImageId) throws IOException;
+
+	/**
+	 * uploads the Images to the {@link ImageKit}
+	 *
 	 * @param file
 	 * @param NAME
 	 * @param FOLDER_NAME

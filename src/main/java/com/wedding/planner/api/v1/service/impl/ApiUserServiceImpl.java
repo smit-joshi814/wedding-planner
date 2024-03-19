@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wedding.planner.api.v1.auth.SignUpRequest;
+import com.wedding.planner.api.v1.dto.ImageDTO;
 import com.wedding.planner.api.v1.dto.UserDTO;
 import com.wedding.planner.api.v1.service.ApiUserService;
 import com.wedding.planner.entity.Address;
@@ -57,8 +59,8 @@ public class ApiUserServiceImpl implements ApiUserService {
 
 	@Override
 	public ResponseEntity<UserDTO> updateUser(UserDTO user) {
-		Users changes = Users
-				.builder().userId(user.userId()).firstName(user.firstName()).lastName(user.lastName()).email(user.email()).phone(
+		Users changes = Users.builder().userId(user.userId()).firstName(user.firstName()).lastName(user.lastName())
+				.email(user.email()).phone(
 						user.phone())
 				.address(List.of(Address.builder().addressId(user.addressInfo().addressId())
 						.addressLine1(user.addressInfo().addressLine1()).addressLine2(user.addressInfo().addressLine2())
@@ -73,5 +75,12 @@ public class ApiUserServiceImpl implements ApiUserService {
 	public ResponseEntity<Boolean> deleteUser() {
 		Users user = userService.getUser(utility.getCurrentUsername()).getBody();
 		return userService.deleteUser(user);
+	}
+
+	@Override
+	public ResponseEntity<ImageDTO> updateAvatar(MultipartFile file) {
+		return ResponseEntity
+				.ok(convertToDTO(userService.updateAvatarImage(utility.getCurrentUsername(), file).getBody()));
+
 	}
 }
