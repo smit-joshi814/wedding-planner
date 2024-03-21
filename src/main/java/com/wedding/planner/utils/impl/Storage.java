@@ -10,4 +10,6 @@ public class Storage implements StorageUtil {
 	public static final String STORAGE_SERVICE_ITEMS = STORAGE_STATIC + "/service_items";
 	public static final String STORAGE_AVATAR = "avatar";
 	public static final String STORAGE_DEFAULT = "default";
+	public static final String STORAGE_USERS = "users";
+	public static final String STORAGE_INSPIRATIONS = STORAGE_USERS + "/inspirations";
 }

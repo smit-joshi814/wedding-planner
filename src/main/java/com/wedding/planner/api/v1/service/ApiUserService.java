@@ -13,11 +13,11 @@ import com.wedding.planner.entity.Cities;
 import com.wedding.planner.entity.Images;
 import com.wedding.planner.entity.Users;
 
-
 public interface ApiUserService {
-	
+
 	/**
 	 * converts {@link Images} to {@link ImageDTO}
+	 * 
 	 * @param image
 	 * @return
 	 */
@@ -54,8 +54,8 @@ public interface ApiUserService {
 	 */
 	default UserDTO convertToDTO(Users user) {
 		return new UserDTO(user.getUserId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone(),
-				user.getAvatar() != null ? user.getAvatar().getUrl()
-						: "https://ik.imagekit.io/weddingplanning/defaults/Wedding%20Planner",
+				user.getAvatar() != null ? convertToDTO(user.getAvatar())
+						: new ImageDTO((long) 0, "https://ik.imagekit.io/weddingplanning/defaults/Wedding%20Planner"),
 				user.getAddress().size() != 0 ? convertAddress(user.getAddress().get(0)) : null);
 	}
 
@@ -89,8 +89,9 @@ public interface ApiUserService {
 	 * @return
 	 */
 	ResponseEntity<Boolean> deleteUser();
-	
-	/** updates Avatar
+
+	/**
+	 * updates Avatar
 	 * 
 	 * @param file
 	 * @return
