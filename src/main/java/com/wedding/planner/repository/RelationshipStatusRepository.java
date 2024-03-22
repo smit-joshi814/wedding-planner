@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.wedding.planner.entity.RelationshipStatus;
 
-public interface RelationshipStatusRepository extends JpaRepository<RelationshipStatus, Integer>{
-
+public interface RelationshipStatusRepository extends JpaRepository<RelationshipStatus, Integer> {
+	
+	RelationshipStatus findByRelationshipName(String relationshipName);
+	
 }

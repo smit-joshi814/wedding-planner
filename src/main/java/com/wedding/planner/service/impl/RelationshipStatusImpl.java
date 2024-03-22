@@ -46,4 +46,14 @@ public class RelationshipStatusImpl implements RelationshipStatusService {
 		}
 	}
 
+	@Override
+	public ResponseEntity<RelationshipStatus> getStatus(String status) {
+		return ResponseEntity.ok(statusRepo.findByRelationshipName(status));
+	}
+
+	@Override
+	public ResponseEntity<RelationshipStatus> getsStatus(Integer statusId) {
+		return ResponseEntity.ok(statusRepo.findById(statusId).get());
+	}
+
 }

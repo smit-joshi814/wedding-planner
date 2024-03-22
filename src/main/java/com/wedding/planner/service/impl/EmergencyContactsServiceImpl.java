@@ -57,4 +57,14 @@ public class EmergencyContactsServiceImpl implements EmergencyContactsService {
 			return ResponseEntity.internalServerError().body(false);
 		}
 	}
+	
+	@Override
+	public ResponseEntity<Boolean> deleteContact(Long contactId) {
+		try {
+			contactsRepo.deleteById(contactId);
+			return ResponseEntity.ok(true);
+		} catch (Exception e) {
+			return ResponseEntity.internalServerError().body(false);
+		}
+	}
 }

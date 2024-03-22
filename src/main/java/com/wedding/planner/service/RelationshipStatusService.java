@@ -34,5 +34,19 @@ public interface RelationshipStatusService {
 	 * @return
 	 */
 	ResponseEntity<Boolean> deleteStatus(RelationshipStatus status);
+	
+	/**
+	 * Gets Status By Name
+	 * @param status
+	 * @return
+	 */
+	ResponseEntity<RelationshipStatus> getStatus(String status);
+	
+	/**
+	 * Gets Status By Id
+	 * @param status
+	 * @return
+	 */
+	ResponseEntity<RelationshipStatus> getsStatus(Integer statusId);
 		
 }

@@ -36,4 +36,11 @@ public interface EmergencyContactsService {
 	 * @return
 	 */
 	ResponseEntity<Boolean> deleteContact(EmergencyContacts contact);
+	
+	/**
+	 * Deletes Contact By Id
+	 * @param contactId
+	 * @return
+	 */
+	ResponseEntity<Boolean> deleteContact(Long contactId);
 }

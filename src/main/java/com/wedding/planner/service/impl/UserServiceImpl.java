@@ -59,6 +59,16 @@ public class UserServiceImpl implements UserService {
 			return ResponseEntity.notFound().build();
 		}
 	}
+	
+	@Override
+	public ResponseEntity<Users> getUser(Long userId) {
+		try {
+			Users user = usersRepo.findById(userId).get();
+			return ResponseEntity.ok(user);
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
+		}
+	}
 
 	@Override
 	public ResponseEntity<Users> addUser(Users user) {

@@ -50,6 +50,13 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Users> getUser(String email);
+	
+	/**
+	 * Gets User By UserId
+	 * @param userId
+	 * @return
+	 */
+	ResponseEntity<Users> getUser(Long userId);
 
 	/**
 	 * Deletes given User
