@@ -5,11 +5,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.wedding.planner.entity.RelationshipStatus;
 import com.wedding.planner.repository.RelationshipStatusRepository;
 import com.wedding.planner.service.RelationshipStatusService;
 
+@Service
 public class RelationshipStatusImpl implements RelationshipStatusService {
 
 	@Autowired

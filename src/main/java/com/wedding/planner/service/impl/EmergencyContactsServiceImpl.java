@@ -6,12 +6,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.wedding.planner.entity.EmergencyContacts;
 import com.wedding.planner.entity.Users;
 import com.wedding.planner.repository.EmergencyContactsRepository;
 import com.wedding.planner.service.EmergencyContactsService;
 
+@Service
 public class EmergencyContactsServiceImpl implements EmergencyContactsService {
 
 	@Autowired

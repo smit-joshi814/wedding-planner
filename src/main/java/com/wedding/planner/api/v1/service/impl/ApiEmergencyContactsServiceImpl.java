@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.wedding.planner.api.v1.dto.EmergencyContactsDTO;
 import com.wedding.planner.api.v1.service.ApiEmergencyContactsService;
@@ -14,6 +15,7 @@ import com.wedding.planner.service.RelationshipStatusService;
 import com.wedding.planner.service.UserService;
 import com.wedding.planner.utils.UtilityService;
 
+@Service
 public class ApiEmergencyContactsServiceImpl implements ApiEmergencyContactsService {
 
 	@Autowired
