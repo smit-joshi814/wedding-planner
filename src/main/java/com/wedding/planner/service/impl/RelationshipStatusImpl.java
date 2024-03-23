@@ -50,7 +50,7 @@ public class RelationshipStatusImpl implements RelationshipStatusService {
 
 	@Override
 	public ResponseEntity<RelationshipStatus> getStatus(String status) {
-		return ResponseEntity.ok(statusRepo.findByRelationshipName(status));
+		return ResponseEntity.ok(statusRepo.findByRelationshipNameIgnoreCase(status));
 	}
 
 	@Override

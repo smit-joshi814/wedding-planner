@@ -47,8 +47,9 @@ public class ApiEmergencyContactsServiceImpl implements ApiEmergencyContactsServ
 
 	@Override
 	public ResponseEntity<EmergencyContactsDTO> updateContact(EmergencyContactsDTO contactDto) {
-		EmergencyContacts contact = EmergencyContacts.builder().contactName(contactDto.contactName())
-				.numbers(contactDto.numbers()).status(statusService.getStatus(contactDto.status()).getBody())
+		EmergencyContacts contact = EmergencyContacts.builder().contactId(contactDto.contactId())
+				.contactName(contactDto.contactName()).numbers(contactDto.numbers())
+				.status(statusService.getStatus(contactDto.status()).getBody())
 				.user(userService.getUser(utility.getCurrentUsername()).getBody()).build();
 		return ResponseEntity.ok(convertToDTO(contactService.updateContact(contact).getBody()));
 

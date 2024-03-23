@@ -6,6 +6,6 @@ import com.wedding.planner.entity.RelationshipStatus;
 
 public interface RelationshipStatusRepository extends JpaRepository<RelationshipStatus, Integer> {
 	
-	RelationshipStatus findByRelationshipName(String relationshipName);
+	RelationshipStatus findByRelationshipNameIgnoreCase(String relationshipName);
 	
 }
