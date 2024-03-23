@@ -282,7 +282,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 													<td class="sort-created">
 														<div class="d-flex py-1 align-items-center">
 															<div class="flex-fill">
-																<div class="font-weight-medium"><%=service.getCreatedBy() != null ? service.getCreatedBy() : "Admin"%></div>
+																<div class="font-weight-medium"><%=service.getCreatedBy() != null ? service.getCreatedBy().getBusinessName() : "Admin"%></div>
 															</div>
 														</div>
 													</td>
