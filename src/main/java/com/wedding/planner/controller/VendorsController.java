@@ -28,9 +28,13 @@ public class VendorsController {
 	private VendorService vendorService;
 
 	@RequestMapping("/vendors")
-	public ModelAndView vendors(ModelAndView mv) {
+	public ModelAndView vendors(ModelAndView mv,@RequestParam(name="search",required = false) String search) {
 		mv.setViewName("vendors");
-		mv.addObject("vendorList", vendorService.getVendors().getBody());
+		if(search!=null) {
+			mv.addObject("vendorList", vendorService.getVendors(search).getBody());
+		}else {			
+			mv.addObject("vendorList", vendorService.getVendors().getBody());
+		}
 		return mv;
 	}
 

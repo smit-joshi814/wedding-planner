@@ -47,4 +47,11 @@ public interface VendorService {
 	 * @return
 	 */
 	ResponseEntity<Vendor> getvendor(Users user);
+	
+	/**
+	 * Searches for Vendor
+	 * @param search
+	 * @return
+	 */
+	ResponseEntity<List<Vendor>> getVendors(String search);
 }

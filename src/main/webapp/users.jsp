@@ -1,11 +1,11 @@
-<%@page import="com.wedding.planner.entity.Vendor"%>
+<%@page import="com.wedding.planner.entity.Users"%>
 <%@page import="java.util.List"%>
 <%@page import="com.wedding.planner.config.general.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
-List<Vendor> vendorList = (List<Vendor>) request.getAttribute("vendorList");
+List<Users> userList = (List<Users>) request.getAttribute("userList");
 %>
 
 <!DOCTYPE html>
@@ -28,18 +28,18 @@ List<Vendor> vendorList = (List<Vendor>) request.getAttribute("vendorList");
 				<div class="container-xl">
 					<div class="row g-2 align-items-center">
 						<div class="col">
-							<h2 class="page-title">Vendors</h2>
+							<h2 class="page-title">Users</h2>
 						</div>
 						<!-- Page title actions -->
 						<div class="col-auto ms-auto d-print-none">
-							<form action="vendors" method="get">
+							<form action="users" method="get">
 								<div class="d-flex">
 									<input type="search"
 										class="form-control d-inline-block w-9 me-3" name="search"
-										value="<%=request.getParameter("search")!=null?request.getParameter("search"):"" %>" 
-										placeholder="Search vendor " /> <button type="submit"
-										class="btn btn-primary"> <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-										<i class="ti ti-search icon"></i> Search Vendor
+										placeholder="Search User" value="<%=request.getParameter("search")!=null?request.getParameter("search"):"" %>" />
+									<button type="submit" class="btn btn-primary">
+										<!-- Download SVG icon from http://tabler-icons.io/i/search -->
+										<i class="ti ti-search icon"></i> Search User   
 									</button>
 								</div>
 							</form>
@@ -52,40 +52,43 @@ List<Vendor> vendorList = (List<Vendor>) request.getAttribute("vendorList");
 				<div class="container-xl">
 					<div class="row row-cards">
 						<%
-						for (Vendor vendor : vendorList) {
+						for (Users user : userList) {
 						%>
 						<div class="col-md-6 col-lg-3">
 							<div class="card">
 								<div class="card-body p-4 text-center">
 									<span class="avatar avatar-xl mb-3 rounded"
-										style="background-image: url(<%=vendor.getUser().getAvatar() != null ? vendor.getUser().getAvatar().getUrl() : Configurations.LOGO_COMPACT%>)"></span>
+										style="background-image: url(<%=user.getAvatar() != null ? user.getAvatar().getUrl() : Configurations.LOGO_COMPACT%>)"></span>
 									<h3 class="m-0 mb-1">
-										<a href="vendor?vendor=<%=vendor.getVendorId()%>"><%=vendor.getBusinessName() %></a>
+										<span><%=user.getFirstName() + " " + user.getLastName()%></span>
 									</h3>
-									<div class="text-secondary"><%=vendor.getUser().getFirstName() + " " + vendor.getUser().getLastName()%></div>
 									<div class="mt-3">
-										<span class="badge bg-purple-lt">Vendor</span>
+										<span class="badge bg-green-lt">User</span>
 									</div>
 								</div>
 								<div class="d-flex">
 									<%
-									if (vendor.getApproved().equals(false)) {
+									if (user.getEmail() != null) {
 									%>
-									<a href="vendor/approve/<%=vendor.getVendorId()%>" class="card-btn">Approve &nbsp;<i
-										class="ti ti-checks icon"></i></a>
+									<a href="mailto:<%=user.getEmail()%>" class="card-btn"> <i
+										class="ti ti-mail icon"></i>&nbsp; Email
+									</a>
 									<%
-									} else {
+									}
+									if (user.getPhone() != null) {
 									%>
-									<a href="mailto:<%=vendor.getUser().getEmail()%>"
-										class="card-btn"> <i class="ti ti-mail icon"></i>&nbsp;
-										Email
-									</a> <a href="tel:<%=vendor.getBusinessContact()%>"
-										class="card-btn"> <i class="ti ti-phone icon"></i>&nbsp;
-										Call
+									<a href="tel:<%=user.getPhone()%>" class="card-btn"> <i
+										class="ti ti-phone icon"></i>&nbsp; Call
 									</a>
 									<%
 									}
 									%>
+									<a
+										href="user/<%=user.getStatus() ? "block" : "unblock"%>/<%=user.getUserId()%>"
+										class="card-btn"> <i
+										class="ti ti-<%=user.getStatus() ? "x" : "checks"%> icon"></i>&nbsp;
+										<%=user.getStatus() ? "Block" : "Unblock"%>
+									</a>
 								</div>
 							</div>
 						</div>
@@ -104,7 +107,7 @@ List<Vendor> vendorList = (List<Vendor>) request.getAttribute("vendorList");
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#vendors").addClass("active");
+			$("#users").addClass("active");
 		});
 	</script>
 

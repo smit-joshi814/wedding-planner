@@ -1,6 +1,5 @@
 package com.wedding.planner.service;
 
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -8,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.wedding.planner.entity.Images;
 import com.wedding.planner.entity.Users;
+import com.wedding.planner.enums.UserRole;
 
 public interface UserService {
 
@@ -26,6 +26,13 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Users> updateUser(Users user);
+	
+	/**
+	 * Updates User Status
+	 * @param status
+	 * @return
+	 */
+	ResponseEntity<Users> updateUserStatus(Long userId,Boolean status);
 
 	/**
 	 * gets the Users list
@@ -33,6 +40,22 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<List<Users>> getUsers();
+
+	/**
+	 * Gets Users By Role
+	 * 
+	 * @param role
+	 * @return
+	 */
+	ResponseEntity<List<Users>> getUsers(UserRole role);
+
+	/**
+	 * Searches for users
+	 * @param role
+	 * @param search
+	 * @return
+	 */
+	ResponseEntity<List<Users>> getUsers(UserRole role, String search);
 
 	/**
 	 * updates the login status for user
@@ -50,9 +73,10 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Users> getUser(String email);
-	
+
 	/**
 	 * Gets User By UserId
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -65,20 +89,22 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Boolean> deleteUser(Users user);
-	
+
 	/**
 	 * updates user's avatar
+	 * 
 	 * @param email
 	 * @param file
 	 * @return
 	 */
-	ResponseEntity<String> updateAvatar(String email,MultipartFile file);
-	
+	ResponseEntity<String> updateAvatar(String email, MultipartFile file);
+
 	/**
 	 * updates user's avatar
+	 * 
 	 * @param email
 	 * @param file
 	 * @return
 	 */
-	ResponseEntity<Images> updateAvatarImage(String email,MultipartFile file);
+	ResponseEntity<Images> updateAvatarImage(String email, MultipartFile file);
 }

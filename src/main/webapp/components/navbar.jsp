@@ -31,93 +31,8 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 					data-bs-placement="bottom"> <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
 					<i class="ti ti-sun icon"></i>
 				</a>
-				<div class="nav-item dropdown d-none d-md-flex me-3">
-					<a href="#" class="nav-link px-0" data-bs-toggle="dropdown"
-						tabindex="-1" aria-label="Show notifications"> <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
-						<i class="ti ti-bell icon"></i> <span class="badge bg-red"></span>
-					</a>
-					<div
-						class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title">Last updates</h3>
-							</div>
-							<div class="list-group list-group-flush list-group-hoverable">
-								<div class="list-group-item">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="status-dot status-dot-animated bg-red d-block"></span>
-										</div>
-										<div class="col text-truncate">
-											<a href="#" class="text-body d-block">Example 1</a>
-											<div class="d-block text-secondary text-truncate mt-n1">
-												Change deprecated html tags to text decoration classes
-												(#29604)</div>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="list-group-item-actions"> <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-												<i class="ti-star ti icon"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="list-group-item">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="status-dot d-block"></span>
-										</div>
-										<div class="col text-truncate">
-											<a href="#" class="text-body d-block">Example 2</a>
-											<div class="d-block text-secondary text-truncate mt-n1">
-												justify-content:between justify-content:space-between
-												(#29734)</div>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="list-group-item-actions show"> <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-												<i class="ti-star ti icon"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="list-group-item">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="status-dot d-block"></span>
-										</div>
-										<div class="col text-truncate">
-											<a href="#" class="text-body d-block">Example 3</a>
-											<div class="d-block text-secondary text-truncate mt-n1">
-												Update change-version.js (#29736)</div>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="list-group-item-actions"> <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-												<i class="ti-star ti icon"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-								<div class="list-group-item">
-									<div class="row align-items-center">
-										<div class="col-auto">
-											<span class="status-dot status-dot-animated bg-green d-block"></span>
-										</div>
-										<div class="col text-truncate">
-											<a href="#" class="text-body d-block">Example 4</a>
-											<div class="d-block text-secondary text-truncate mt-n1">
-												Regenerate package-lock.json (#29730)</div>
-										</div>
-										<div class="col-auto">
-											<a href="#" class="list-group-item-actions"> <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-												<i class="ti-star ti icon"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
+			<div class="nav-item d-none d-md-flex me-3"></div>
 			<div class="nav-item dropdown">
 				<a href="#" class="nav-link d-flex lh-1 text-reset p-0"
 					data-bs-toggle="dropdown" aria-label="Open user menu"> <span
@@ -193,6 +108,12 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 								<i class="ti icon ti-briefcase"></i>
 						</span> <span class="nav-link-title"> Vendors </span>
 					</a></li>
+					<li class="nav-item" id="users"><a class="nav-link"
+						href="/users"> <span
+							class="nav-link-icon d-md-none d-lg-inline-block"> <!-- Download SVG icon from http://tabler-icons.io/i/users -->
+								<i class="ti icon ti-users"></i>
+						</span> <span class="nav-link-title"> Users </span>
+					</a></li>
 					</sec:authorize>
 					<li class="nav-item" id="chats"><a class="nav-link"
 						href="/chats"> <span
@@ -217,17 +138,6 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 								</sec:authorize>
 						</div></li>
 				</ul>
-				<div
-					class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-					<form action="#" method="get" autocomplete="off" novalidate>
-						<div class="input-icon">
-							<span class="input-icon-addon"> <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-								<i class="ti icon ti-search"></i>
-							</span> <input type="text" value="" class="form-control"
-								placeholder="Search.." aria-label="Search in website" />
-						</div>
-					</form>
-				</div>
 			</div>
 		</div>
 	</div>

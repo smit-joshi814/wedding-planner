@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.wedding.planner.entity.Address;
 import com.wedding.planner.entity.Images;
 import com.wedding.planner.entity.Users;
+import com.wedding.planner.enums.UserRole;
 import com.wedding.planner.repository.UsersRepository;
 import com.wedding.planner.service.StorageService;
 import com.wedding.planner.service.UserService;
@@ -38,6 +39,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public ResponseEntity<List<Users>> getUsers(UserRole role) {
+		return ResponseEntity.ok(usersRepo.findByRole(role));
+	}
+
+	@Override
+	public ResponseEntity<List<Users>> getUsers(UserRole role, String search) {
+		List<Users> users = usersRepo.findByRoleAndFirstNameContainingIgnoreCase(role, search);
+		if (users.isEmpty()) {
+			users = usersRepo.findByRoleAndLastNameContainingIgnoreCase(role, search);
+		}
+		return ResponseEntity.ok(users);
+	}
+
+	@Override
 	public ResponseEntity<Boolean> updateLoginStatus(String email, Boolean status) {
 		try {
 			Users dbUser = usersRepo.findByEmail(email);
@@ -59,7 +74,7 @@ public class UserServiceImpl implements UserService {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@Override
 	public ResponseEntity<Users> getUser(Long userId) {
 		try {
@@ -173,7 +188,7 @@ public class UserServiceImpl implements UserService {
 			return ResponseEntity.internalServerError().body(e.getMessage());
 		}
 	}
-	
+
 	@Override
 	public ResponseEntity<Images> updateAvatarImage(String email, MultipartFile file) {
 		try {
@@ -188,5 +203,15 @@ public class UserServiceImpl implements UserService {
 		} catch (IOException e) {
 			return ResponseEntity.internalServerError().build();
 		}
+	}
+
+	@Override
+	public ResponseEntity<Users> updateUserStatus(Long userId, Boolean status) {
+		Optional<Users> user = usersRepo.findById(userId);
+		if (user.isPresent()) {
+			user.get().setStatus(status);
+			return ResponseEntity.ok(usersRepo.save(user.get()));
+		}
+		return ResponseEntity.internalServerError().build();
 	}
 }

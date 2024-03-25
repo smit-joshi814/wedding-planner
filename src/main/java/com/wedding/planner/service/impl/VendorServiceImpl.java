@@ -93,4 +93,9 @@ public class VendorServiceImpl implements VendorService {
 		return ResponseEntity.ok(vendorRepo.findByUser(user));
 	}
 
+	@Override
+	public ResponseEntity<List<Vendor>> getVendors(String search) {
+		return ResponseEntity.ok(vendorRepo.findByBusinessNameContainingIgnoringCase(search));
+	}
+
 }
