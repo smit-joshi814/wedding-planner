@@ -130,7 +130,7 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 						</span> <span class="nav-link-title"> Help </span>
 					</a>
 						<div class="dropdown-menu">
-							<a class="dropdown-item" href="https://documenter.getpostman.com/view/27911410/2sA2xcbb4T" id="documentation">
+							<a class="dropdown-item" target="_blank" href="https://documenter.getpostman.com/view/27911410/2sA2xcbb4T" id="documentation">
 								Documentation </a>
 								<sec:authorize access="hasRole('ADMIN')">
 								<a class="dropdown-item" href="logs" id="logs">
