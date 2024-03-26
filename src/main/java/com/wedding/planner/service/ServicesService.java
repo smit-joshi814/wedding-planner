@@ -14,6 +14,13 @@ public interface ServicesService {
 	 * @return {@link ResponseEntity<List<Services>>}
 	 */
 	ResponseEntity<List<Services>> getAll();
+	
+	/**
+	 * Gets Service By serviceId
+	 * @param serviceId
+	 * @return
+	 */
+	ResponseEntity<Services> get(Long serviceId);
 
 	/**
 	 * adds the provided {@link Services} entity to the database

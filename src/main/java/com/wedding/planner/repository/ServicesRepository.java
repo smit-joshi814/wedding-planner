@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.wedding.planner.entity.ServiceCategories;
 import com.wedding.planner.entity.Services;
+import com.wedding.planner.entity.Vendor;
 
 public interface ServicesRepository extends JpaRepository<Services, Long> {
 
@@ -23,5 +24,21 @@ public interface ServicesRepository extends JpaRepository<Services, Long> {
     List<Services> findByServicecategory(ServiceCategories servicecategory, Pageable page);
 
     List<Services> findByServicecategoryAndStatus(ServiceCategories servicecategory, Boolean status, Pageable page);
+    
+    Long countByServicecategoryAndCreatedBy(ServiceCategories servicecategory,Vendor vendor);
+
+    List<Services> findByStatusAndCreatedBy(Boolean status,Vendor vendor);
+
+    List<Services> findByStatusAndCreatedBy(Boolean status, Vendor vendor,Pageable page);
+
+    List<Services> findByServicecategoryAndCreatedBy(ServiceCategories servicecategory,Vendor vendor);
+
+    List<Services> findByServicecategoryAndStatusAndCreatedBy(ServiceCategories servicecategory, Boolean status,Vendor vendor);
+
+    List<Services> findByServicecategoryAndCreatedBy(ServiceCategories servicecategory, Vendor vendor,Pageable page);
+
+    List<Services> findByServicecategoryAndStatusAndCreatedBy(ServiceCategories servicecategory, Boolean status, Vendor vendor,Pageable page);
+    
+    List<Services> findByCreatedBy(Vendor createdBy);
 
 }
