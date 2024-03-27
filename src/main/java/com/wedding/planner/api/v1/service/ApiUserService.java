@@ -73,6 +73,13 @@ public interface ApiUserService {
 	 * @return
 	 */
 	ResponseEntity<UserDTO> getUser();
+	
+	/**
+	 * Gets user by userId
+	 * @param userId
+	 * @return
+	 */
+	ResponseEntity<UserDTO> getUser(Long userId);
 
 	/**
 	 * updates User

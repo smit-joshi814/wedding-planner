@@ -21,7 +21,7 @@ public interface ApiInspirationService {
 	 */
 	default InspirationDTO convertToDTO(Inspiration inspiration) {
 		return new InspirationDTO(inspiration.getInspirationId(),
-				inspiration.getPostedBy().getFirstName() + " " + inspiration.getPostedBy().getLastName(),
+				inspiration.getPostedBy().getUserId().toString(),
 				inspiration.getImage().getUrl(), inspiration.getDescription(), inspiration.getTags());
 	}
 

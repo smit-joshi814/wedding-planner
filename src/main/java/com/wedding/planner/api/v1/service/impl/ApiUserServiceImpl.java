@@ -56,6 +56,11 @@ public class ApiUserServiceImpl implements ApiUserService {
 	public ResponseEntity<UserDTO> getUser() {
 		return ResponseEntity.ok(convertToDTO(userService.getUser(utility.getCurrentUsername()).getBody()));
 	}
+	
+	@Override
+	public ResponseEntity<UserDTO> getUser(Long userId) {
+		return ResponseEntity.ok(convertToDTO(userService.getUser(userId).getBody()));
+	}
 
 	@Override
 	public ResponseEntity<UserDTO> updateUser(UserDTO user) {
