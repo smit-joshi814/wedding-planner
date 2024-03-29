@@ -59,4 +59,9 @@ public class CoupleServiceImpl implements CoupleService {
 			return ResponseEntity.notFound().build();
 		}
 	}
+
+	@Override
+	public ResponseEntity<Couple> getCouple(Users user) {
+		return ResponseEntity.ok(coupleRepo.findByGroomOrBride(user, user));
+	}
 }

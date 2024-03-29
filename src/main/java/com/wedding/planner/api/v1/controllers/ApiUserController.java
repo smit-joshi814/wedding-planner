@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.wedding.planner.api.v1.auth.SignUpRequest;
 import com.wedding.planner.api.v1.dto.ImageDTO;
 import com.wedding.planner.api.v1.dto.UserDTO;
 import com.wedding.planner.api.v1.service.ApiUserService;
@@ -23,6 +24,11 @@ public class ApiUserController {
 
 	@Autowired
 	private ApiUserService userService;
+	
+	@PostMapping("/couple")
+	public ResponseEntity<Boolean> addCouple(@RequestBody SignUpRequest request){
+		return userService.registerUser(request);
+	}
 
 	@GetMapping("/current")
 	public ResponseEntity<UserDTO> getUser() {

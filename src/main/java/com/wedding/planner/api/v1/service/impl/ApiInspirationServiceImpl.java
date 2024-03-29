@@ -55,8 +55,8 @@ public class ApiInspirationServiceImpl implements ApiInspirationService {
 			String[] tags) {
 		try {
 			Inspiration inspiration = inspirationRepo.findById(inspirationId).get();
-			if (file != null) {
-				storage.upload(file, file.getName(), Storage.STORAGE_INSPIRATIONS, inspiration.getImage().getImageId());
+			if (Objects.nonNull(file)) {
+				inspiration.setImage(storage.upload(file, file.getName(), Storage.STORAGE_INSPIRATIONS, inspiration.getImage().getImageId()));
 			}
 
 			if (Objects.nonNull(description)) {
