@@ -58,8 +58,9 @@ public class ApiChecklistServiceImpl implements ApiChecklistService {
 	}
 
 	@Override
-	public ResponseEntity<List<ChecklistDTO>> getChecklists() {
-		Users user = userService.getUser(utility.getCurrentUsername()).getBody();
+	public ResponseEntity<List<ChecklistDTO>> getChecklists(Optional<Long> userId) {
+		Users user = userId.isEmpty() ? userService.getUser(utility.getCurrentUsername()).getBody()
+				: userService.getUser(userId.get()).getBody();
 		return ResponseEntity.ok(convertToDTO(checklistRepo.findByUser(user)));
 	}
 

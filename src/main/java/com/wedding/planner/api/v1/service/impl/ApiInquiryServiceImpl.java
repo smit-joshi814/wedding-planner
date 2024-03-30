@@ -29,9 +29,10 @@ public class ApiInquiryServiceImpl implements ApiInquiryService {
 	private UtilityService utility;
 
 	@Override
-	public ResponseEntity<List<InquiryDTO>> getInquiries() {
-		return ResponseEntity
-				.ok(convertToDTO(inquiryRepo.findByUser(userService.getUser(utility.getCurrentUsername()).getBody())));
+	public ResponseEntity<List<InquiryDTO>> getInquiries(Optional<Long> user) {
+		return ResponseEntity.ok(convertToDTO(
+				inquiryRepo.findByUser(user.isEmpty() ? userService.getUser(utility.getCurrentUsername()).getBody()
+						: userService.getUser(user.get()).getBody())));
 	}
 
 	@Override

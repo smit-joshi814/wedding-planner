@@ -2,6 +2,7 @@ package com.wedding.planner.api.v1.service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public interface ApiWeddingDetailsService {
 	 * 
 	 * @return
 	 */
-	ResponseEntity<List<WeddingDetailsDTO>> getweddingDetails();
+	ResponseEntity<List<WeddingDetailsDTO>> getweddingDetails(Optional<Long> user);
 
 	/**
 	 * Adds {@link WeddingDetails}

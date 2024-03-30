@@ -29,9 +29,10 @@ public class ApiBudgetServiceImpl implements ApiBudgetService {
 	private UtilityService utility;
 
 	@Override
-	public ResponseEntity<List<BudgetDTO>> getBudget() {
-		return ResponseEntity
-				.ok(convertToDTO(budgetRepo.findByUser(userService.getUser(utility.getCurrentUsername()).getBody())));
+	public ResponseEntity<List<BudgetDTO>> getBudget(Optional<Long> user) {
+		return ResponseEntity.ok(convertToDTO(
+				budgetRepo.findByUser(user.isEmpty() ? userService.getUser(utility.getCurrentUsername()).getBody()
+						: userService.getUser(user.get()).getBody())));
 	}
 
 	@Override

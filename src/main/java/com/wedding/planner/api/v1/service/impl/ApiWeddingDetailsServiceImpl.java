@@ -30,9 +30,10 @@ public class ApiWeddingDetailsServiceImpl implements ApiWeddingDetailsService {
 	private UtilityService utility;
 
 	@Override
-	public ResponseEntity<List<WeddingDetailsDTO>> getweddingDetails() {
-		return ResponseEntity
-				.ok(convertToDTO(weddingRepo.findByUser(userService.getUser(utility.getCurrentUsername()).getBody())));
+	public ResponseEntity<List<WeddingDetailsDTO>> getweddingDetails(Optional<Long> user) {
+		return ResponseEntity.ok(convertToDTO(
+				weddingRepo.findByUser(user.isEmpty() ? userService.getUser(utility.getCurrentUsername()).getBody()
+						: userService.getUser(user.get()).getBody())));
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.wedding.planner.api.v1.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,7 @@ public interface ApiBudgetService {
 	 * 
 	 * @return
 	 */
-	ResponseEntity<List<BudgetDTO>> getBudget();
+	ResponseEntity<List<BudgetDTO>> getBudget(Optional<Long> user);
 
 	/**
 	 * Adds Budget

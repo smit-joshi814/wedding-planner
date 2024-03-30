@@ -1,6 +1,7 @@
 package com.wedding.planner.api.v1.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public interface ApiInquiryService {
 	 * Gets All the Inquiries
 	 * @return
 	 */
-	ResponseEntity<List<InquiryDTO>> getInquiries();
+	ResponseEntity<List<InquiryDTO>> getInquiries(Optional<Long> userId);
 
 	/** 
 	 * Adds Inquiry

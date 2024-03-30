@@ -1,6 +1,7 @@
 package com.wedding.planner.api.v1.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.wedding.planner.api.v1.dto.EmergencyContactsDTO;
 import com.wedding.planner.api.v1.service.ApiEmergencyContactsService;
 import com.wedding.planner.entity.EmergencyContacts;
-import com.wedding.planner.entity.Users;
 import com.wedding.planner.service.EmergencyContactsService;
 import com.wedding.planner.service.RelationshipStatusService;
 import com.wedding.planner.service.UserService;
@@ -31,8 +31,10 @@ public class ApiEmergencyContactsServiceImpl implements ApiEmergencyContactsServ
 	private UtilityService utility;
 
 	@Override
-	public ResponseEntity<List<EmergencyContactsDTO>> getContacts(Users user) {
-		return ResponseEntity.ok(convertToDTO(contactService.getcontacts(user).getBody()));
+	public ResponseEntity<List<EmergencyContactsDTO>> getContacts(Optional<Long> user) {
+		return ResponseEntity.ok(convertToDTO(
+				contactService.getcontacts(user.isEmpty() ? userService.getUser(utility.getCurrentUsername()).getBody()
+						: userService.getUser(user.get()).getBody()).getBody()));
 	}
 
 	@Override

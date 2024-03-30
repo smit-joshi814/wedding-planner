@@ -2,6 +2,7 @@ package com.wedding.planner.api.v1.service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public interface ApiBookingService {
 	 * 
 	 * @return
 	 */
-	ResponseEntity<List<BookingDTO>> getBookings();
+	ResponseEntity<List<BookingDTO>> getBookings(Optional<Long> user);
 
 	/**
 	 * Adds Booking

@@ -31,9 +31,10 @@ public class ApiBookingServiceImpl implements ApiBookingService {
 	private UtilityService utility;
 
 	@Override
-	public ResponseEntity<List<BookingDTO>> getBookings() {
-		return ResponseEntity.ok(
-				convertToDTO(bookingRepo.findByBookedBy(userService.getUser(utility.getCurrentUsername()).getBody())));
+	public ResponseEntity<List<BookingDTO>> getBookings(Optional<Long> user) {
+		return ResponseEntity.ok(convertToDTO(
+				bookingRepo.findByBookedBy(user.isEmpty() ? userService.getUser(utility.getCurrentUsername()).getBody()
+						: userService.getUser(user.get()).getBody())));
 	}
 
 	@Override

@@ -1,13 +1,13 @@
 package com.wedding.planner.api.v1.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 
 import com.wedding.planner.api.v1.dto.EmergencyContactsDTO;
 import com.wedding.planner.entity.EmergencyContacts;
-import com.wedding.planner.entity.Users;
 
 public interface ApiEmergencyContactsService {
 
@@ -35,7 +35,7 @@ public interface ApiEmergencyContactsService {
 	 * @param user
 	 * @return
 	 */
-	ResponseEntity<List<EmergencyContactsDTO>> getContacts(Users user);
+	ResponseEntity<List<EmergencyContactsDTO>> getContacts(Optional<Long> user);
 	
 	/**
 	 * adds {@link EmergencyContactsDTO}

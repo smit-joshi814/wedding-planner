@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wedding.planner.api.v1.auth.SignUpRequest;
+import com.wedding.planner.api.v1.dto.CoupleDTO;
 import com.wedding.planner.api.v1.dto.ImageDTO;
 import com.wedding.planner.api.v1.dto.UserDTO;
 import com.wedding.planner.api.v1.service.ApiUserService;
@@ -24,19 +25,24 @@ public class ApiUserController {
 
 	@Autowired
 	private ApiUserService userService;
-	
+
 	@PostMapping("/couple")
-	public ResponseEntity<Boolean> addCouple(@RequestBody SignUpRequest request){
+	public ResponseEntity<Boolean> addCouple(@RequestBody SignUpRequest request) {
 		return userService.registerUser(request);
+	}
+
+	@GetMapping("/couple")
+	public ResponseEntity<CoupleDTO> getCouple() {
+		return userService.getCouple();
 	}
 
 	@GetMapping("/current")
 	public ResponseEntity<UserDTO> getUser() {
 		return userService.getUser();
 	}
-	
+
 	@GetMapping("{user}")
-	public ResponseEntity<UserDTO> getUser(@PathVariable("user")Long userId){
+	public ResponseEntity<UserDTO> getUser(@PathVariable("user") Long userId) {
 		return userService.getUser(userId);
 	}
 

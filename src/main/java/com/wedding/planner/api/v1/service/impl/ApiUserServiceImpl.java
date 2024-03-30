@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.wedding.planner.api.v1.auth.SignUpRequest;
+import com.wedding.planner.api.v1.dto.CoupleDTO;
 import com.wedding.planner.api.v1.dto.ImageDTO;
 import com.wedding.planner.api.v1.dto.UserDTO;
 import com.wedding.planner.api.v1.service.ApiUserService;
@@ -44,8 +45,7 @@ public class ApiUserServiceImpl implements ApiUserService {
 			user = userService.addUser(user).getBody();
 
 			if (Objects.nonNull(request.user()) && !"".equals(request.user())) {
-				Couple couple = coupleService
-						.getCouple(Users.builder().userId(Long.parseLong(request.user())).build())
+				Couple couple = coupleService.getCouple(Users.builder().userId(Long.parseLong(request.user())).build())
 						.getBody();
 				if (Objects.isNull(couple.getBride())) {
 					couple.setBride(user);
@@ -99,5 +99,11 @@ public class ApiUserServiceImpl implements ApiUserService {
 		return ResponseEntity
 				.ok(convertToDTO(userService.updateAvatarImage(utility.getCurrentUsername(), file).getBody()));
 
+	}
+
+	@Override
+	public ResponseEntity<CoupleDTO> getCouple() {
+		return ResponseEntity.ok(convertToDTO(
+				coupleService.getCouple(userService.getUser(utility.getCurrentUsername()).getBody()).getBody()));
 	}
 }
