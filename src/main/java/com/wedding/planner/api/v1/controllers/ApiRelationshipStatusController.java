@@ -18,7 +18,6 @@ import com.wedding.planner.entity.RelationshipStatus;
 import com.wedding.planner.service.RelationshipStatusService;
 
 @RestController
-@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/api/v1/relation")
 public class ApiRelationshipStatusController {
 
