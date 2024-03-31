@@ -163,7 +163,7 @@
         <div class="container">
 
           <!-- Navbar brand (Logo) -->
-          <a class="navbar-brand pe-sm-3" href="index.html">
+          <a class="navbar-brand pe-sm-3">
             <span class="text-primary flex-shrink-0 me-2">
               <img src="assets/app-icons/logo.png" width="150" alt="Wedding Planner" />
             </span>
@@ -244,21 +244,14 @@
               <!-- Left features list -->
               <div class="text-center text-sm-start mb-5 mx-auto mx-sm-0 pb-lg-2 pb-xl-4" style="max-width: 340px;" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-out-back" data-disable-parallax-down="lg">
                 <div class="d-table bg-dark bg-opacity-10 rounded-1 p-2 mx-auto mx-sm-0 mb-3 mb-lg-4">
-                  <svg class="d-block m-1 text-warning" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.0005 7.99608C11.897 7.99608 11.795 7.97508 11.699 7.93308L5.4485 5.18358C5.177 5.06358 5 4.79508 5 4.49658C5 4.19808 5.1755 3.92958 5.4485 3.80958L11.699 1.06007C11.891 0.97607 12.1115 0.97607 12.3035 1.06007L18.554 3.80958C18.8255 3.92958 19.0025 4.19808 19.0025 4.49658C19.0025 4.79508 18.827 5.06358 18.554 5.18358L12.3035 7.93308C12.206 7.97508 12.104 7.99608 12.0005 7.99608Z"></path>
-                    <path d="M12.907 9.3054C12.616 9.4329 12.313 9.4959 12.001 9.4959C11.689 9.4959 11.386 9.43291 11.098 9.30691L7 7.50391V8.19241C7 8.80291 7.3195 9.3759 7.831 9.6879C9.2725 10.5624 10.636 10.9989 11.9995 10.9989C13.363 10.9989 14.7265 10.5609 16.168 9.6879C16.681 9.3759 16.999 8.80291 16.999 8.19241V7.50391L12.907 9.3054Z"></path>
-                    <path d="M22.2495 4.99909H20.949C20.79 5.87959 20.2095 6.62959 19.38 7.00009H22.0005V19.0001H1.9995V7.00009H4.62C3.7905 6.62959 3.21 5.87959 3.0495 5.00059H1.7505C0.7905 4.99909 0 5.78959 0 6.74959V19.2491C0 20.2091 0.7905 20.9996 1.7505 20.9996H10.0005V22.9991H8.001C7.4505 22.9991 7.0005 23.4491 7.0005 23.9996C7.0005 24.5501 7.4505 25.0001 8.001 25.0001H16.0005C16.551 25.0001 17.001 24.5501 17.001 23.9996C17.001 23.4491 16.551 22.9991 16.0005 22.9991H14.001V20.9996H22.251C23.211 20.9996 24.0015 20.2091 24.0015 19.2491V6.74959C24 5.78959 23.2095 4.99909 22.2495 4.99909Z"></path>
-                  </svg>
+                  <i class="ai-calendar-check d-block m-1 text-warning"></i>
                 </div>
-                <h2 class="h4 text-white mb-2 mb-lg-3">Full-Service</h2>
+                <h2 class="h4 text-white mb-2 mb-lg-3">Excellent Service</h2>
                 <p class="text-white opacity-80 mb-0">encompassing nature of your services, including vendors, decoration, and budget management</p>
               </div>
               <div class="text-center text-sm-start mb-5 mx-auto mx-sm-0 pb-lg-2 pb-xl-4" style="max-width: 340px;" data-aos="fade-right" data-aos-delay="200" data-aos-offset="250" data-aos-easing="ease-out-back" data-disable-parallax-down="lg">
                 <div class="d-table bg-dark bg-opacity-10 rounded-1 p-2 mx-auto mx-sm-0 mb-3 mb-lg-4">
-                  <svg class="d-block m-1 text-warning" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M17.4995 10.9995C13.916 10.9995 11 13.9155 11 17.499C11 21.0825 13.9145 24 17.4995 24C21.0845 24 23.999 21.084 23.999 17.5005C23.999 13.917 21.083 10.9995 17.4995 10.9995ZM21.803 15H19.9985V13.1955C20.7485 13.632 21.3665 14.2515 21.803 15ZM22.499 17.5005C22.499 17.8425 22.4645 18.177 22.3985 18.501H20V16.5H22.3985C22.4645 16.824 22.499 17.157 22.499 17.5005ZM12.4985 17.5005C12.4985 17.1585 12.533 16.824 12.599 16.5H14.999V18.4995H12.6005C12.5345 18.177 12.4985 17.8425 12.4985 17.5005ZM16.499 16.5H18.4985V18.4995H16.499V16.5ZM18.4985 12.6015V15H16.499V12.6015C16.8215 12.5355 17.156 12.501 17.4995 12.501C17.843 12.501 18.176 12.5355 18.4985 12.6015ZM14.999 13.1955V15H13.1945C13.631 14.2515 14.2505 13.632 14.999 13.1955ZM13.1945 19.9995H14.999V21.804C14.2505 21.3675 13.631 20.7495 13.1945 19.9995ZM16.499 22.3995V20.001H18.4985V22.3995C18.176 22.4655 17.8415 22.5 17.4995 22.5C17.1575 22.5 16.823 22.4655 16.499 22.3995ZM19.9985 21.804V19.9995H21.803C21.3665 20.7495 20.7485 21.3675 19.9985 21.804Z"></path>
-                    <path d="M16.0005 4.0005H15V1.0005C15 0.45 14.55 0 13.9995 0H3C2.1795 0 1.4205 0.3405 0.8805 0.8805C0.3405 1.4205 0 2.1705 0 3V19.0005C0 20.6505 1.35 22.0005 3 22.0005H10.29C9.4695 20.7 9 19.1505 9 17.5005C9 12.981 12.54 9.27 16.9995 9.0105V5.001C16.9995 4.4505 16.5495 4.0005 16.0005 4.0005ZM13.0005 4.0005H3C2.4495 4.0005 1.9995 3.5505 1.9995 3C1.9995 2.4495 2.4495 1.9995 3 1.9995H13.0005V4.0005Z"></path>
-                  </svg>
+                  <i class="ai-user-check d-block m-1 text-warning"></i>
                 </div>
                 <h2 class="h4 text-white mb-2 mb-lg-3">Vendor Network</h2>
                 <p class="text-white opacity-80 mb-0">connects couples with trusted vendors, streamlining the planning process</p>
@@ -277,20 +270,14 @@
               <!-- Right features list -->
               <div class="text-center text-sm-start mb-5 mx-auto me-sm-0 pb-lg-2 pb-xl-4" style="max-width: 340px;" data-aos="fade-left" data-aos-offset="250" data-aos-delay="400" data-aos-easing="ease-out-back" data-disable-parallax-down="lg">
                 <div class="d-table bg-dark bg-opacity-10 rounded-1 p-2 mx-auto mx-sm-0 mb-3 mb-lg-4">
-                  <svg class="d-block m-1 text-warning" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.9986 0C5.38318 0 0 5.38318 0 11.9986C0 18.6141 5.38041 24 11.9986 24C18.6168 24 23.9972 18.6168 23.9972 12.0014C23.9972 5.38595 18.6141 0 11.9986 0ZM16.7837 17.0052C16.5095 17.3541 16.1025 17.5396 15.6899 17.5396C15.3936 17.5396 15.0945 17.4427 14.8397 17.2489L10.6861 14.0173C10.3482 13.7542 10.1516 13.3499 10.1516 12.9235V6.92281C10.1516 6.15853 10.7719 5.53825 11.5362 5.53825C12.3005 5.53825 12.9207 6.15853 12.9207 6.92281V12.2451L16.54 15.0613C17.1437 15.5292 17.2517 16.4015 16.7837 17.0052Z"></path>
-                  </svg>
+                  <i class="ai-clock d-block m-1 text-warning"></i>
                 </div>
                 <h2 class="h4 text-white mb-2 mb-lg-3">Creative Planning</h2>
                 <p class="text-white opacity-80 mb-0">emphasizes your role in offering unique and inspiring ideas for the wedding.</p>
               </div>
               <div class="text-center text-sm-start mb-5 mx-auto me-sm-0 pb-lg-2 pb-xl-4" style="max-width: 340px;" data-aos="fade-left" data-aos-offset="200" data-aos-delay="600" data-aos-easing="ease-out-back" data-disable-parallax-down="lg">
                 <div class="d-table bg-dark bg-opacity-10 rounded-1 p-2 mx-auto mx-sm-0 mb-3 mb-lg-4">
-                  <svg class="d-block m-1 text-warning" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19.9524 20.9857C17.8306 22.8676 15.057 24 12.0132 24C5.38642 24 0 18.6128 0 11.985C0 5.60651 4.98548 0.379975 11.2624 0V5.02678C7.74852 5.39775 5.005 8.38048 5.005 11.985C5.005 15.8493 8.14795 18.9942 12.0132 18.9942C13.6755 18.9942 15.2072 18.413 16.4085 17.4428L19.9524 20.9857Z"></path>
-                    <path d="M24.0042 12.7358C23.8436 15.4797 22.7534 17.9818 21.0205 19.9253L17.4766 16.3808C18.298 15.3701 18.8386 14.1085 18.9782 12.7358H24.0042Z"></path>
-                    <path d="M23.998 11.234H18.9719C18.6311 7.97046 16.0287 5.36621 12.7656 5.02678V0C18.7917 0.360451 23.6376 5.20701 23.998 11.234Z"></path>
-                  </svg>
+                  <i class="ai-pie-chart d-block m-1 text-warning"></i>
                 </div>
                 <h2 class="h4 text-white mb-2 mb-lg-3">Budget Expertise</h2>
                 <p class="text-white opacity-80 mb-0">This showcases your skill in managing finances for a stress-free wedding.</p>
@@ -310,12 +297,14 @@
             <!-- Market buttons -->
             <div class="d-flex justify-content-center justify-content-lg-start">
               <a class="btn btn-dark btn-lg px-3 py-2 me-3" href="#">
-                <i class="d-dark-mode-none mx-1 ai-google-play"></i>
-                <i class="d-none d-dark-mode-block mx-1 ai-google-play"></i>
+                <i class="d-dark-mode-none mx-1 ai-google-play me-2"></i>
+                <i class="d-none d-dark-mode-block mx-1 ai-google-play me-2"></i>
+                Coming soon
               </a>
               <a class="btn btn-dark btn-lg px-3 py-2" href="#">
-                <i class="d-dark-mode-none mx-1 ai-apple"></i>
-                <i class="d-none d-dark-mode-block mx-1 ai-apple"></i>
+                <i class="d-dark-mode-none mx-1 ai-apple me-2"></i>
+                <i class="d-none d-dark-mode-block mx-1 ai-apple me-2"></i>
+                Coming soon
               </a>
             </div>
             
@@ -337,13 +326,13 @@
               <div class="col">
                 <div class="d-flex flex-column h-100 bg-warning bg-opacity-10 rounded-3 text-center p-4">
                   <div class="h3 display-5 mt-1 mb-0">300+</div>
-                  <div class="fs-lg mb-1">Courses</div>
+                  <div class="fs-lg mb-1">Vendors</div>
                 </div>
               </div>
               <div class="col">
                 <div class="d-flex flex-column h-100 bg-danger bg-opacity-10 rounded-3 text-center p-4">
-                  <div class="h3 display-5 mt-1 mb-0">134</div>
-                  <div class="fs-lg mb-1">Countries</div>
+                  <div class="h3 display-5 mt-1 mb-0">10</div>
+                  <div class="fs-lg mb-1">States</div>
                 </div>
               </div>
             </div>
@@ -407,13 +396,13 @@
                   <div class="swiper-slide" data-swiper-binded="#image1">
                     <div class="text-primary fs-xl fw-bold mb-3">01</div>
                     <h2 class="h1 mb-lg-4">Whatever you need, whenever you need !</h2>
-                    <p class="mb-0">Browse your favourite vendors</p>
+                    <p class="mb-0">Browse your favorite vendors</p>
                   </div>
 
                   <!-- Item -->
                   <div class="swiper-slide" data-swiper-binded="#image2">
                     <div class="text-primary fs-xl fw-bold mb-3">02</div>
-                    <h2 class="h1 mb-lg-4">Looking for your favourite services ?</h2>
+                    <h2 class="h1 mb-lg-4">Looking for your favorite services ?</h2>
                     <p class="mb-0"> Well they are at your finger tips !</p>
                   </div>
 
@@ -470,10 +459,10 @@
                   <img src="assets/img/landing/mobile-app-showcase/testimonials/01.png" alt="Nick Williams">
                 </div>
                 <div class="card-body pt-0 mt-n4">
-                  <p class="card-text fs-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis libero vitae sem ornare ornare. Aliquam ut sapien vitae quam blandit egestas. Quisque nulla elit, fermentum et tincidunt tempor, rutrum at leo. Curabitur massa quam, aliquam eu sapien sed.</p>
+                  <p class="card-text fs-xl">I can't thank <b>Wedding Planner</b> enough for their incredible work. They went above and beyond to make sure every aspect of our wedding was perfect. Their team's expertise and creativity exceeded our expectations. Thank you for making our dream wedding come true!</p>
                 </div>
                 <div class="card-footer border-0 pt-0">
-                  <div class="h4 mb-1">Nick Williams</div>
+                  <div class="h4 mb-1">Joshi Vijay</div>
                   <span>Groom</span>
                 </div>
               </div>
@@ -486,10 +475,10 @@
                   <img src="assets/img/landing/mobile-app-showcase/testimonials/02.png" alt="Lili Bocouse">
                 </div>
                 <div class="card-body pt-0 mt-n4">
-                  <p class="card-text fs-xl">Proin interdum purus non quam convallis, quis dignissim leo cursus. Praesent finibus elit nisl, sed ultrices elit lobortis in. Donec laoreet sit amet nulla quis hendrerit. Praesent venenatis mattis ante. Praesent justo elit, suscipit a libero sit amet, luctus posuere mi.</p>
+                  <p class="card-text fs-xl">Working with <b>Wedding Planner</b> was an absolute delight! From start to finish, they listened to our vision and turned it into a beautiful reality. Their attention to detail and professionalism made our special day truly unforgettable. Highly recommend!</p>
                 </div>
                 <div class="card-footer border-0 pt-0">
-                  <div class="h4 mb-1">Lili Bocouse</div>
+                  <div class="h4 mb-1">Nisha Raval</div>
                   <span>Bride</span>
                 </div>
               </div>
@@ -502,10 +491,10 @@
                   <img src="assets/img/landing/mobile-app-showcase/testimonials/04.png" alt="Esther Howard">
                 </div>
                 <div class="card-body pt-0 mt-n4">
-                  <p class="card-text fs-xl">Viverra aliquam interdum mauris facilisi commodo euismod sit est. Et auctor diam a ac vitae vestibulum, eu. Tortor id aliquet rhoncus at orci et tempus, dictum turpis. Purus sit porta lacus, velit. Bibendum at nunc et, ac id vitae nibh semper in dignissim ac nascetur lorem et.</p>
+                  <p class="card-text fs-xl">Choosing <b>Wedding Planner</b> was the best decision we made for our wedding. They took care of everything seamlessly, allowing us to enjoy every moment of our big day. Their dedication and passion for what they do truly shine through in their work. Thank you for making our wedding day so magical!</p>
                 </div>
                 <div class="card-footer border-0 pt-0">
-                  <div class="h4 mb-1">Esther Howard</div>
+                  <div class="h4 mb-1">Digvijay Jankhaniya</div>
                   <span>Groom</span>
                 </div>
               </div>
@@ -518,10 +507,10 @@
                   <img src="assets/img/landing/mobile-app-showcase/testimonials/03.png" alt="Jane Cooper">
                 </div>
                 <div class="card-body pt-0 mt-n4">
-                  <p class="card-text fs-xl">Nam arcu ut in bibendum tincidunt quam massa vitae viverra sem eget. Felis morbi augue cras praesent arcu purus non id consequat dignissim sollicitudin tincidunt dui, dui felis ut ultricies vestibulum ipsum ullamcorper nunc at massa a aliquam massa lacus enim.</p>
+                  <p class="card-text fs-xl">We are so grateful to <b>Wedding Planner</b> for their exceptional service. They were with us every step of the way, offering valuable advice and ensuring that every detail was executed flawlessly. Our wedding was everything we hoped for and more, thanks to their expertise and professionalism.</p>
                 </div>
                 <div class="card-footer border-0 pt-0">
-                  <div class="h4 mb-1">Jane Cooper</div>
+                  <div class="h4 mb-1">Shreya Acharya</div>
                   <span>Bride</span>
                 </div>
               </div>
@@ -624,10 +613,12 @@
                 <!-- Market buttons -->
                 <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-md-start">
                   <a class="btn btn-light btn-lg px-3 py-2 me-sm-3 mb-3 mb-sm-0" href="#">
-                    <i class="ai-google-play"></i>
+                    <i class="ai-google-play me-2"></i>
+                    Coming soon
                   </a>
                   <a class="btn btn-light btn-lg px-3 py-2" href="#">
-                    <i class="ai-apple"></i>
+                    <i class="ai-apple me-2"></i>
+                    Coming soon
                   </a>
                 </div>
 
