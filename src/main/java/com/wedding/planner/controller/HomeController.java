@@ -9,11 +9,11 @@ public class HomeController {
 
 	@RequestMapping("/home")
 	public ModelAndView home() {
-		return new ModelAndView("index");
+		return new ModelAndView("home");
 	}
 	
 	@RequestMapping
-	public ModelAndView redirectToHome() {
-		return new ModelAndView("redirect:/home");
+	public ModelAndView redirectToLanding() {
+		return new ModelAndView("index");
 	}
 }
