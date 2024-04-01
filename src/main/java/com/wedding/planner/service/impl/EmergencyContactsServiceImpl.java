@@ -21,7 +21,7 @@ public class EmergencyContactsServiceImpl implements EmergencyContactsService {
 
 	@Override
 	public ResponseEntity<List<EmergencyContacts>> getcontacts(Users user) {
-		return ResponseEntity.ok(contactsRepo.findAll());
+		return ResponseEntity.ok(contactsRepo.findByUser(user));
 	}
 
 	@Override

@@ -109,7 +109,7 @@ public class WebSecurityConfig {
 				.dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
 				.requestMatchers("/api/**").denyAll()
 				.requestMatchers("/resources/api/**").authenticated()
-				.requestMatchers("/resources/**", "/static/**","/cities","/assets/**","/index.jsp","/",
+				.requestMatchers("/resources/**", "/static/**","/cities","/assets/**","/index.jsp","/","/offline.html",
 						"/sign-in.jsp","/sign-up/**","/sign-up.jsp","/forgetPassword","/forgot-password.jsp","/service-worker.js","webmanifest.json","/terms-of-service","/terms-of-service.jsp","favicon.ico")
 				.permitAll()
 				.anyRequest()

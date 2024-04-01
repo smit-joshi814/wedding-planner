@@ -14,7 +14,7 @@
 
 
     <!-- Webmanifest + Favicon / App icons -->
-    <link rel="manifest" href="manifest.json">
+	<link rel="manifest" href="webmanifest.json" >
     <link rel="icon" type="image/png" href="assets/app-icons/icon-32x32.png" sizes="32x32">
     <link rel="apple-touch-icon" href="assets/app-icons/icon-180x180.png">
         
@@ -700,7 +700,13 @@
     <!-- Bootstrap + Theme scripts -->
     <script src="assets/js/theme.min.js"></script>
 
-    <!-- Customizer -->
-    <script src="assets/js/customizer.min.js"></script>
+	<script type="text/javascript">
+	window.addEventListener("load", () => {
+		if ("serviceWorker" in navigator) {
+		navigator.serviceWorker.register("service-worker.js");
+		}
+	});
+	</script>
+
   </body>
 </html>

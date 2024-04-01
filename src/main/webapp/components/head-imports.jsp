@@ -3,6 +3,9 @@
 	content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+<!--  Manifest -->
+<link rel="manifest" href="webmanifest.json" >
+
 <!-- Drop Zone  -->
 <link href="resources/libs/dropzone/dist/dropzone.css" rel="stylesheet">
 
