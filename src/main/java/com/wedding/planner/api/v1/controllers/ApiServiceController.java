@@ -27,6 +27,11 @@ public class ApiServiceController {
     public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services() {
         return serviceService.services();
     }
+    
+    @GetMapping("{service}")
+    public ResponseEntity<ServiceDTO> service(@PathVariable("service") Long service){
+    	return serviceService.service(service);
+    }
 
     @GetMapping("/page/{page}/size/{size}")
     public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(@PathVariable("page") Integer page,

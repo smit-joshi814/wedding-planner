@@ -71,4 +71,11 @@ public interface ApiServiceService {
 	 */
 	ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category, Pageable page);
 
+	/**
+	 * Gets Service By Service id
+	 * @param service
+	 * @return
+	 */
+	ResponseEntity<ServiceDTO> service(Long service);
+
 }
