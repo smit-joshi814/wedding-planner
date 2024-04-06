@@ -115,12 +115,6 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 						</span> <span class="nav-link-title"> Users </span>
 					</a></li>
 					</sec:authorize>
-					<li class="nav-item" id="chats"><a class="nav-link"
-						href="/chats"> <span
-							class="nav-link-icon d-md-none d-lg-inline-block"> <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
-								<i class="ti icon ti-message-circle"></i>
-						</span> <span class="nav-link-title"> Chats </span>
-					</a></li>
 					<li class="nav-item dropdown" id="help"><a
 						class="nav-link dropdown-toggle" href="#navbar-help"
 						data-bs-toggle="dropdown" data-bs-auto-close="outside"

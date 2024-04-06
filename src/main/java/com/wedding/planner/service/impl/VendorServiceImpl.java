@@ -89,8 +89,13 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
-	public ResponseEntity<Vendor> getvendor(Users user) {
+	public ResponseEntity<Vendor> getVendor(Users user) {
 		return ResponseEntity.ok(vendorRepo.findByUser(user));
+	}
+	
+	@Override
+	public ResponseEntity<Vendor> getVendor(Integer vendorid) {
+		return ResponseEntity.ok(vendorRepo.findById(vendorid).get());
 	}
 
 	@Override

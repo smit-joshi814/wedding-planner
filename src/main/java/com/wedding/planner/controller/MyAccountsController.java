@@ -38,7 +38,7 @@ public class MyAccountsController {
 		Users user = userService.getUser(utility.getCurrentUsername()).getBody();
 
 		if (user.getRole().equals(UserRole.VENDOR)) {
-			Vendor vendor = vendorService.getvendor(user).getBody();
+			Vendor vendor = vendorService.getVendor(user).getBody();
 			mv.addObject("vendor", vendor);
 		}
 

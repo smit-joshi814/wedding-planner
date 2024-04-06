@@ -68,7 +68,7 @@ public class ServicesController {
 			@RequestParam("service-location") String serviceLocation, @RequestParam("service-status") boolean status) {
 		Services service = Services.builder().serviceName(serviceName).servicecategory(category)
 				.serviceLocation(serviceLocation).serviceDescription(serviceDescription).status(status)
-				.createdBy(vendorService.getvendor(userService.getUser(utility.getCurrentUsername()).getBody()).getBody()).build();
+				.createdBy(vendorService.getVendor(userService.getUser(utility.getCurrentUsername()).getBody()).getBody()).build();
 
 		return servicesService.add(service);
 	}

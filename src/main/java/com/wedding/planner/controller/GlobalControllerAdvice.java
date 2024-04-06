@@ -29,6 +29,6 @@ public class GlobalControllerAdvice {
 
 	@ModelAttribute("isVendor")
 	public Vendor getBank() {
-		return vendorService.getvendor(userService.getUser(utility.getCurrentUsername()).getBody()).getBody();
+		return vendorService.getVendor(userService.getUser(utility.getCurrentUsername()).getBody()).getBody();
 	}
 }

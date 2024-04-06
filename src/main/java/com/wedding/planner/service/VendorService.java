@@ -46,7 +46,14 @@ public interface VendorService {
 	 * @param user
 	 * @return
 	 */
-	ResponseEntity<Vendor> getvendor(Users user);
+	ResponseEntity<Vendor> getVendor(Users user);
+	
+	/**
+	 * Gets Vendor By Id
+	 * @param vendorId
+	 * @return
+	 */
+	ResponseEntity<Vendor> getVendor(Integer vendorId);
 	
 	/**
 	 * Searches for Vendor
