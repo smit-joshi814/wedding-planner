@@ -37,6 +37,11 @@ public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 				totalPages);
 		return ResponseEntity.ok(data);
 	}
+	
+	@Override
+	public ResponseEntity<ServiceItemDTO> serviceItem(Long item){
+		return ResponseEntity.ok(convertToDTO(serviceItemRepo.findById(item).get()));
+	}
 
 	@Override
 	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Pageable page) {

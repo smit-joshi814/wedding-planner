@@ -78,4 +78,13 @@ public interface ApiServiceItemService {
      * @return
      */
     ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service, Pageable page);
+
+    /**
+     * returns specified service item
+     * @param item
+     * @return
+     */
+	ResponseEntity<ServiceItemDTO> serviceItem(Long item);
+
+	
 }
