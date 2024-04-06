@@ -12,7 +12,7 @@ List<Booking> bookings = (List<Booking>) request.getAttribute("bookingsList");
 <html lang="en">
 <head>
 
-<title>My Notifications | <%=Configurations.NAME%>
+<title>My Bookings | <%=Configurations.NAME%>
 </title>
 <jsp:include page="components/head-imports.jsp" />
 </head>
