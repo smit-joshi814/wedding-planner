@@ -214,4 +214,14 @@ public class UserServiceImpl implements UserService {
 		}
 		return ResponseEntity.internalServerError().build();
 	}
+
+	@Override
+	public ResponseEntity<Boolean> updatePassword(String email, String password) {
+		Users dbUser = usersRepo.findByEmail(email);
+		if (Objects.nonNull(email) && !"".equalsIgnoreCase(password)) {
+			dbUser.setPassword(new BCryptPasswordEncoder().encode(password));
+		}
+		usersRepo.save(dbUser);
+		return ResponseEntity.ok(true);
+	}
 }

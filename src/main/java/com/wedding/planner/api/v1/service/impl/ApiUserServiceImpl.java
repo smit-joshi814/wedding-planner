@@ -1,6 +1,5 @@
 package com.wedding.planner.api.v1.service.impl;
 
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import com.wedding.planner.api.v1.dto.CoupleDTO;
 import com.wedding.planner.api.v1.dto.ImageDTO;
 import com.wedding.planner.api.v1.dto.UserDTO;
 import com.wedding.planner.api.v1.service.ApiUserService;
-import com.wedding.planner.entity.Address;
-import com.wedding.planner.entity.Cities;
 import com.wedding.planner.entity.Couple;
 import com.wedding.planner.entity.Users;
 import com.wedding.planner.enums.UserRole;
@@ -78,13 +75,7 @@ public class ApiUserServiceImpl implements ApiUserService {
 	public ResponseEntity<UserDTO> updateUser(UserDTO user) {
 		Users changes = Users.builder().userId(user.userId()).firstName(user.firstName()).lastName(user.lastName())
 				.email(user.email()).phone(
-						user.phone())
-				.address(List.of(Address.builder().addressId(user.addressInfo().addressId())
-						.addressLine1(user.addressInfo().addressLine1()).addressLine2(user.addressInfo().addressLine2())
-						.city(Cities.builder().cityId(user.addressInfo().cityInfo().cityId())
-								.cityName(user.addressInfo().cityInfo().cityName()).build())
-						.build()))
-				.build();
+						user.phone()).build();
 		return ResponseEntity.ok(convertToDTO(userService.updateUser(changes).getBody()));
 	}
 

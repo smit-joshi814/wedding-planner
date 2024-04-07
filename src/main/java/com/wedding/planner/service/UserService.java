@@ -107,4 +107,12 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Images> updateAvatarImage(String email, MultipartFile file);
+	
+	/**
+	 * Updates User password
+	 * @param email
+	 * @param password
+	 * @return
+	 */
+	ResponseEntity<Boolean> updatePassword(String email,String password);
 }

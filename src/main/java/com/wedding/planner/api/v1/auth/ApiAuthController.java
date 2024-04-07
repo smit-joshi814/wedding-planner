@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wedding.planner.api.v1.service.ApiUserService;
 import com.wedding.planner.config.auth.jwt.JwtHelper;
+import com.wedding.planner.service.ForgetPasswordService;
 import com.wedding.planner.service.impl.UserDetailsServiceImpl;
 
 @RestController
@@ -26,13 +27,15 @@ public class ApiAuthController {
 	private final UserDetailsService userDetailsService;
 	private final JwtHelper jwtHelper;
 	private final ApiUserService userService;
+	private final ForgetPasswordService forgetPasswordService;
 
 	public ApiAuthController(AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsService,
-			JwtHelper jwtHelper, ApiUserService userService) {
+			JwtHelper jwtHelper, ApiUserService userService, ForgetPasswordService forgetPasswordService) {
 		this.authenticationManager = authenticationManager;
 		this.userDetailsService = userDetailsService;
 		this.jwtHelper = jwtHelper;
 		this.userService = userService;
+		this.forgetPasswordService = forgetPasswordService;
 	}
 
 	@PostMapping("/login")
@@ -67,4 +70,8 @@ public class ApiAuthController {
 		return new ResponseEntity<>("Login Using Get Request Is Not Supported", HttpStatus.METHOD_NOT_ALLOWED);
 	}
 
+	@PostMapping("/forget-password")
+	public ResponseEntity<String> forgetPassword(@RequestBody AuthRequest request) {
+		return forgetPasswordService.sendPasswordResetMail(request.username());
+	}
 }

@@ -110,7 +110,7 @@ public class WebSecurityConfig {
 				.requestMatchers("/api/**").denyAll()
 				.requestMatchers("/resources/api/**").authenticated()
 				.requestMatchers("/resources/**", "/static/**","/cities","/assets/**","/index.jsp","/","/offline.html",
-						"/sign-in.jsp","/sign-up/**","/sign-up.jsp","/forgetPassword","/forgot-password.jsp","/service-worker.js","webmanifest.json","/terms-of-service","/terms-of-service.jsp","favicon.ico")
+						"/sign-in.jsp","/sign-up/**","/sign-up.jsp","/forgetPassword/**","/forgot-password.jsp","/service-worker.js","webmanifest.json","/terms-of-service","/terms-of-service.jsp","favicon.ico")
 				.permitAll()
 				.anyRequest()
 				.authenticated())

@@ -1,5 +1,6 @@
 package com.wedding.planner.api.v1.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,10 @@ import com.wedding.planner.api.v1.dto.AddressDTO;
 import com.wedding.planner.api.v1.service.ApiAddressService;
 import com.wedding.planner.entity.Address;
 import com.wedding.planner.entity.Cities;
+import com.wedding.planner.entity.Users;
 import com.wedding.planner.repository.AddressRepository;
+import com.wedding.planner.service.UserService;
+import com.wedding.planner.utils.UtilityService;
 
 @Service
 public class ApiAddressServiceImpl implements ApiAddressService {
@@ -18,11 +22,26 @@ public class ApiAddressServiceImpl implements ApiAddressService {
 	@Autowired
 	private AddressRepository addressRepository;
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UtilityService utility;
+
 	@Override
 	public ResponseEntity<AddressDTO> addAddress(AddressDTO addressData) {
 		Address address = Address.builder().addressLine1(addressData.addressLine1())
 				.addressLine2(addressData.addressLine2())
 				.city(Cities.builder().cityId(addressData.cityInfo().cityId()).build()).build();
+
+		Users dbUsers = userService.getUser(utility.getCurrentUsername()).getBody();
+		if (dbUsers.getAddress().isEmpty()) {
+			dbUsers.setAddress(List.of(address));
+		} else {
+			dbUsers.getAddress().add(address);
+		}
+		userService.updateUser(dbUsers);
+
 		return ResponseEntity.ok(convertToDTO(addressRepository.save(address)));
 	}
 
