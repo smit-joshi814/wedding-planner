@@ -1,5 +1,6 @@
 package com.wedding.planner.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +23,11 @@ public class Couple {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long coupleId;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "bride")
 	private Users bride;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "groom")
 	private Users groom;
 }
