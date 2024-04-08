@@ -9,6 +9,8 @@
 <!-- Drop Zone  -->
 <link href="resources/libs/dropzone/dist/dropzone.css" rel="stylesheet">
 
+<!-- csrf token -->
+<meta name="_csrf" content="${_csrf.token}">
 
 <!-- CSS files -->
 <link href="resources/css/tabler.min.css" rel="stylesheet" />

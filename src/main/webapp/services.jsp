@@ -141,6 +141,8 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 											</div>
 										</div>
 									</div>
+										<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 									<div class="d-flex align-items-center">
 										<button type="submit" class="btn btn-primary">Submit</button>
 										<div
@@ -223,6 +225,8 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 											</div>
 										</div>
 									</div>
+										<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 									<div class="d-flex align-items-center">
 										<button type="submit" class="btn btn-primary">Submit</button>
 										<div
@@ -306,7 +310,7 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 																data-category="<%=service.getServicecategory().getServiceCategoryId()%>"
 																class="btn edit-service" data-bs-toggle="modal"
 																data-bs-target="#modal-edit">Edit</button>
-															<button data-service-id="<%=service.getServiceId()%>"
+															<button data-service-id="<%=service.getServiceId()%>" data-csrf="${_csrf.token}"
 																class="btn delete-service">Delete</button>
 														</div></td>
 												</tr>
@@ -436,6 +440,8 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 						</div>
 					</div>
 					<div class="modal-footer">
+						<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 						<input type="hidden" id="edit-service-id" name="edit-service-id"
 							value="" />
 						<button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -551,6 +557,8 @@ List<Services> services = (List<Services>) request.getAttribute("services");
 						</div>
 					</div>
 					<div class="modal-footer">
+						<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 						<input type="hidden" id="edit-service-item-id"
 							name="edit-service-item-id" />
 						<button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>

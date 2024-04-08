@@ -86,6 +86,8 @@
 											</div>
 										</div>
 									</div>
+										<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 									<div class="d-flex align-items-center">
 										<button type="submit" class="btn btn-primary">Submit</button>
 										<div

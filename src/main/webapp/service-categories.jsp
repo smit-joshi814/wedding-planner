@@ -80,6 +80,8 @@
 										</div>
 									</div>
 								</div>
+									<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 								<div class="d-flex align-items-center">
 									<button type="submit" class="btn btn-primary">Submit</button> 
 									<div class="d-none spinner-show spinner-border spinner-border text-secondary ms-4" role="status"></div>
@@ -137,7 +139,7 @@
 															data-active="<%=category.isActive()%>"
 															class="btn edit-service-category" data-bs-toggle="modal" data-bs-target="#modal-edit" >Edit</button>
 														<button
-															data-id="<%=category.getServiceCategoryId()%>"
+															data-id="<%=category.getServiceCategoryId()%>" data-csrf="${_csrf.token}"
 															class="btn delete-service-category">Delete</button>
 													</div>
 												</td>
@@ -214,6 +216,8 @@
 			</div>
 		  </div>
 		</div>
+			<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 		<div class="modal-footer">
 			<input type="hidden" id="edit-service-category-id" name="edit-service-category-id" value="" />
 		  <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>

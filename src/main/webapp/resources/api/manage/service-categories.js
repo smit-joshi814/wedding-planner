@@ -39,10 +39,12 @@ $("#add-service-category").on("submit", function (e) {
 // DELETE SERVICE CATEGORY
 $(document).on("click", ".delete-service-category", function () {
     let id = $(this).data("id");
+    let csrf = $(this).data("csrf");
     let element = this;
     $.ajax({
         url: SERVICE_CATEGORY + "/delete-service-categories/" + id,
         type: "DELETE",
+        data: { _csrf: csrf },
         statusCode: {
             403: function (data) {
                 $(element).closest("tbody").append("<tr><td colspan='4' class='alert alert-danger' role='alert'>" + data.responseText + "</td></tr>");

@@ -60,7 +60,7 @@ public class ServiceCategoriesController {
 	@PutMapping("/edit-service-categories")
 	public ResponseEntity<ServiceCategories> editServiceCategories(
 			@RequestParam("edit-service-category-id") Integer serviceCategoryId,
-			@RequestParam("edit-service-category-NAME") String serviceCategoryName,
+			@RequestParam("edit-service-category-name") String serviceCategoryName,
 			@RequestParam(name = "edit-category-image", required = false) MultipartFile serviceCategoryIcon,
 			@RequestParam("edit-service-category-status") boolean isActive) {
 		return service.editServiceCategories(serviceCategoryId, serviceCategoryName, serviceCategoryIcon, isActive);

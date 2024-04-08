@@ -248,6 +248,8 @@ $(document).on("click", ".edit-service", function() {
 	let serviceDescription = $(this).data("service-description");
 	let serviceCategory = $(this).data("category");
 	let status = $(this).data("status");
+	let csrf = $('meta[name="_csrf"]').attr('content');
+
 
 	$("#edit-service-id").val(serviceId);
 	$("#edit-service-name").val(serviceName);
@@ -288,7 +290,7 @@ $(document).on("click", ".edit-service", function() {
 			            <td>
 			                <div class="btn-list flex-nowrap">
 			                	<button class="btn edit-service-item" data-bs-target="#modal-edit-item" data-bs-toggle="modal" data-service-item-id="${value.serviceItemId}">Edit</button>
-			                    <button class="btn delete-service-item" data-service-item-id="${value.serviceItemId}">Delete</button>
+			                    <button class="btn delete-service-item" data-csrf="${csrf}" data-service-item-id="${value.serviceItemId}">Delete</button>
 			                </div>
 			            </td>
 			        </tr>`
@@ -328,10 +330,12 @@ $("#update-service-btn").on("click", function() {
 // delete service
 $(document).on("click", ".delete-service", function() {
 	let id = $(this).data("service-id");
+	let csrf = $(this).data("csrf");
 	let element = this;
 	$.ajax({
 		url: SERVICES + "/delete/" + id,
 		type: "DELETE",
+		data: { _csrf: csrf },
 		statusCode: {
 			500: function(data) {
 				$(element).closest("tbody").append("<tr><td colspan='6' class='alert alert-danger' role='alert'>Please, delete service items before deleting service</td></tr>");
@@ -360,6 +364,7 @@ $(document).on("click", ".delete-service", function() {
 // delete service item
 $(document).on("click", ".delete-service-item", function() {
 	let id = $(this).data("service-item-id");
+	let csrf = $(this).data("csrf");
 	let element = this;
 	// let actionStatus;
 	$.ajax({
@@ -368,6 +373,7 @@ $(document).on("click", ".delete-service-item", function() {
 		},
 		url: SERVICES + "/delete-item/" + id,
 		type: "DELETE",
+		data: { _csrf: csrf },
 		statusCode: {
 			500: function(data) {
 				$(element).closest("tbody").append("<tr><td colspan='3' class='alert alert-danger' role='alert'>" + data.responseText + "</td></tr>");
@@ -398,6 +404,7 @@ $(document).on("click", ".delete-service-item", function() {
 // load Service Item Model
 $(document).on("click", ".edit-service-item", function() {
 	let serviceItem = $(this).data("service-item-id");
+	let csrf = $('meta[name="_csrf"]').attr('content');
 	$("#table-options-wrapper").hide();
 
 	$.ajax({
@@ -443,7 +450,7 @@ $(document).on("click", ".edit-service-item", function() {
 			            </td>
 			            <td>
 			                <div class="btn-list flex-nowrap">
-			                    <button class="btn delete-service-option" data-service-item-id="${serviceItem}" data-option-id="${value.variationOptionId}">Delete</button>
+			                    <button class="btn delete-service-option" data-service-item-id="${serviceItem}" data-csrf="${csrf}" data-option-id="${value.variationOptionId}">Delete</button>
 			                </div>
 			            </td>
 			        </tr>`
@@ -487,6 +494,7 @@ $("#update-service-item").on("click", function() {
 $(document).on("click", ".delete-service-option", function() {
 	let item = $(this).data("service-item-id");
 	let option = $(this).data("option-id");
+	let csrf = $(this).data("csrf");
 	let element = this;
 	// let actionStatus;
 	$.ajax({
@@ -495,6 +503,7 @@ $(document).on("click", ".delete-service-option", function() {
 		},
 		url: SERVICE_VARIATION + "/delete/item/" + item + "/option/" + option,
 		type: "DELETE",
+		data: { _csrf: csrf },
 		statusCode: {
 			500: function(data) {
 				$(element).closest("tbody").append("<tr><td colspan='3' class='alert alert-danger' role='alert'>" + data.responseText + "</td></tr>");

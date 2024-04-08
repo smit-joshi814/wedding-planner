@@ -73,6 +73,8 @@
 											</div>
 										</div>
 									</div>
+										<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 									<div class="d-flex align-items-center">
 										<button type="submit" class="btn btn-primary">Submit</button>
 										<div
@@ -115,6 +117,8 @@
 											</div>
 										</div>
 									</div>
+										<input type="hidden" name="${_csrf.parameterName}"
+										value="${_csrf.token}" />
 									<div class="d-flex align-items-center">
 										<button type="submit" class="btn btn-primary">Submit</button>
 										<div
@@ -197,7 +201,7 @@
 															data-variation-id="<%=variation.getVariationId()%>"
 															data-variation-name="<%=variation.getVariationName()%>"
 															data-bs-target="#modal-edit">Edit</button>
-														<button class="btn delete-variation" data-variation-id="<%=variation.getVariationId()%>">Delete</button>
+														<button class="btn delete-variation" data-csrf="${_csrf.token}" data-variation-id="<%=variation.getVariationId()%>">Delete</button>
 													</div>
 												</td>
 											</tr>
@@ -299,6 +303,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
+						<input type="hidden" name="${_csrf.parameterName}" id="#edit-csrf"
+										value="${_csrf.token}" />
 						<input type="hidden" id="edit-variation-id"
 							name="edit-variation-id" value="" />
 						<button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
