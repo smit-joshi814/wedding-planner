@@ -1,5 +1,6 @@
 package com.wedding.planner.api.v1.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,15 +35,20 @@ public class ApiAddressServiceImpl implements ApiAddressService {
 				.addressLine2(addressData.addressLine2())
 				.city(Cities.builder().cityId(addressData.cityInfo().cityId()).build()).build();
 
+		address = addressRepository.save(address);
+			
 		Users dbUsers = userService.getUser(utility.getCurrentUsername()).getBody();
-		if (dbUsers.getAddress().isEmpty()) {
-			dbUsers.setAddress(List.of(address));
-		} else {
-			dbUsers.getAddress().add(address);
-		}
-		userService.updateUser(dbUsers);
+		List<Address> addressList = dbUsers.getAddress(); // Get the address list
 
-		return ResponseEntity.ok(convertToDTO(addressRepository.save(address)));
+		if (addressList.isEmpty()) {
+		    addressList = new ArrayList<>(); // Initialize the list if it's empty
+		}
+
+		addressList.add(address); // Add the new address to the list
+		dbUsers.setAddress(addressList); // Set the updated address list back to the user object
+		userService.updateUser(dbUsers); // Update the user
+
+		return ResponseEntity.ok(convertToDTO(address)); // Return the converted DTO
 	}
 
 	@Override
