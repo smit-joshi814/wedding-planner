@@ -1,6 +1,7 @@
 package com.wedding.planner.service.impl;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -217,5 +218,15 @@ public class UserServiceImpl implements UserService {
 		}
 		usersRepo.save(dbUser);
 		return ResponseEntity.ok(true);
+	}
+
+	@Override
+	public Long getUsersCount(UserRole role) {
+		return usersRepo.countByRole(role);
+	}
+
+	@Override
+	public Integer getUserCount(UserRole role, LocalDateTime createdAt) {
+		return usersRepo.countByRoleAndCreatedAt(role, createdAt);
 	}
 }

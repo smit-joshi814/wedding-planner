@@ -61,4 +61,10 @@ public interface VendorService {
 	 * @return
 	 */
 	ResponseEntity<List<Vendor>> getVendors(String search);
+	
+	/**
+	 * Gets Approved vendors
+	 * @return
+	 */
+	Integer getApprovedVendors();
 }

@@ -13,6 +13,6 @@ public interface VendorRepository extends JpaRepository<Vendor, Integer> {
 	
 	List<Vendor> findByBusinessNameContainingIgnoringCase(String businessName);
 	
-	
+	Integer countByApproved(Boolean approved);
 
 }

@@ -66,7 +66,7 @@ List<Users> userList = (List<Users>) request.getAttribute("userList");
 										<span class="badge bg-green-lt">User</span>
 									</div>
 								</div>
-								<div class="d-flex">
+								<div class="d-flex flex-wrap">
 									<%
 									if (user.getEmail() != null) {
 									%>

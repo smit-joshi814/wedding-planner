@@ -40,5 +40,7 @@ public interface ServicesRepository extends JpaRepository<Services, Long> {
     List<Services> findByServicecategoryAndStatusAndCreatedBy(ServiceCategories servicecategory, Boolean status, Vendor vendor,Pageable page);
     
     List<Services> findByCreatedBy(Vendor createdBy);
+    
+    Long countByStatus(Boolean status);
 
 }

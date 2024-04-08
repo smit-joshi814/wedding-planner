@@ -92,4 +92,14 @@ public class ServicesServiceImpl implements ServicesService {
 		}
 	}
 
+	@Override
+	public Long getServices() {
+		return servicesRepo.count();
+	}
+
+	@Override
+	public Long getActiveServices() {
+		return servicesRepo.countByStatus(true);
+	}
+
 }

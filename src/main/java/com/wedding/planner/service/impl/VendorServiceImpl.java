@@ -103,4 +103,9 @@ public class VendorServiceImpl implements VendorService {
 		return ResponseEntity.ok(vendorRepo.findByBusinessNameContainingIgnoringCase(search));
 	}
 
+	@Override
+	public Integer getApprovedVendors() {
+		return vendorRepo.countByApproved(true);
+	}
+
 }

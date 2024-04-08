@@ -1,5 +1,7 @@
 package com.wedding.planner.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -115,4 +117,19 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Boolean> updatePassword(String email,String password);
+	
+	/**
+	 * Gets users count by {@link UserRole}
+	 * @param role
+	 * @return
+	 */
+	Long getUsersCount(UserRole role);
+	
+	/**
+	 * Gets User Count by {@link UserRole} and {@link LocalDate}
+	 * @param role
+	 * @param createdAt
+	 * @return
+	 */
+	Integer getUserCount(UserRole role,LocalDateTime createdAt);
 }

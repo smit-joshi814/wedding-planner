@@ -1,6 +1,11 @@
+<%@page import="com.wedding.planner.dto.StatisticsDTO"%>
 <%@page import="com.wedding.planner.config.general.Configurations"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%
+StatisticsDTO statistics= (StatisticsDTO) request.getAttribute("statistics");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,179 +34,7 @@ pageEncoding="UTF-8"%>
         <!-- Page body -->
         <div class="page-body">
           <div class="container-xl">
-            <div class="row row-deck row-cards">
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Sales</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a
-                            class="dropdown-toggle text-secondary"
-                            href="#"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            >Last 7 days</a
-                          >
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#"
-                              >Last 7 days</a
-                            >
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="h1 mb-3">75%</div>
-                    <div class="d-flex mb-2">
-                      <div>Conversion rate</div>
-                      <div class="ms-auto">
-                        <span
-                          class="text-green d-inline-flex align-items-center lh-1">
-                          7%
-                          <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                          <i class="ti-trending-up ti icon"></i>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="progress progress-sm">
-                      <div
-                        class="progress-bar bg-primary progress-bar-striped progress-bar-animated"
-                        style="width: 75%"
-                        role="progressbar"
-                        aria-valuenow="75"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        aria-label="75% Complete">
-                        <span class="visually-hidden">75% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Revenue</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a
-                            class="dropdown-toggle text-secondary"
-                            href="#"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            >Last 7 days</a
-                          >
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#"
-                              >Last 7 days</a
-                            >
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-0 me-2"><i class="ti-currency-rupee ti"></i>4,300</div>
-                      <div class="me-auto">
-                        <span
-                          class="text-green d-inline-flex align-items-center lh-1">
-                          8%
-                          <!-- Download SVG icon from http://tabler-icons.io/i/trending-up -->
-                          <i class="ti-trending-up ti icon"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="chart-revenue-bg" class="chart-sm"></div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">New clients</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a
-                            class="dropdown-toggle text-secondary"
-                            href="#"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            >Last 7 days</a
-                          >
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#"
-                              >Last 7 days</a
-                            >
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-3 me-2">6,782</div>
-                      <div class="me-auto">
-                        <span
-                          class="text-red d-inline-flex align-items-center lh-1">
-                          10%
-                          <!-- Download SVG icon from http://tabler-icons.io/i/trending-down -->
-                          <i class="ti-trending-down ti icon"></i>
-                        </span>
-                      </div>
-                    </div>
-                    <div id="chart-new-clients" class="chart-sm"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex align-items-center">
-                      <div class="subheader">Active users</div>
-                      <div class="ms-auto lh-1">
-                        <div class="dropdown">
-                          <a
-                            class="dropdown-toggle text-secondary"
-                            href="#"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                            >Last 7 days</a
-                          >
-                          <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item active" href="#"
-                              >Last 7 days</a
-                            >
-                            <a class="dropdown-item" href="#">Last 30 days</a>
-                            <a class="dropdown-item" href="#">Last 3 months</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="d-flex align-items-baseline">
-                      <div class="h1 mb-3 me-2">2,986</div>
-                      <div class="me-auto">
-                        <span
-                          class="text-yellow d-inline-flex align-items-center lh-1">
-                          0%
-                          <!-- Download SVG icon from http://tabler-icons.io/i/minus -->
-                          <i class="ti-minus ti icon"></i>
-                        </span>
-                      </div>
-                    </div>
-                    <div id="chart-active-users" class="chart-sm"></div>
-                  </div>
-                </div>
-              </div>
+            <div class="row row-deck row-cards">              
               <div class="col-12">
                 <div class="row row-cards">
                   <div class="col-sm-6 col-lg-3">
@@ -211,13 +44,13 @@ pageEncoding="UTF-8"%>
                           <div class="col-auto">
                             <span class="bg-primary text-white avatar">
                               <!-- Download SVG icon from http://tabler-icons.io/i/currency-rupee -->
-                              <i class="ti-currency-rupee ti icon"></i>
+                              <i class="ti-users ti icon"></i>
                             </span>
                           </div>
                           <div class="col">
-                            <div class="font-weight-medium">132 Sales</div>
+                            <div class="font-weight-medium"><%=statistics.users() %> Users</div>
                             <div class="text-secondary">
-                              12 waiting payments
+                              <%=statistics.newUsers() %> new users
                             </div>
                           </div>
                         </div>
@@ -231,12 +64,12 @@ pageEncoding="UTF-8"%>
                           <div class="col-auto">
                             <span class="bg-green text-white avatar">
                               <!-- Download SVG icon from http://tabler-icons.io/i/shopping-cart -->
-                              <i class="ti-shopping-cart ti icon"></i>
+                              <i class="ti-briefcase ti icon"></i>
                             </span>
                           </div>
                           <div class="col">
-                            <div class="font-weight-medium">78 Orders</div>
-                            <div class="text-secondary">32 Complete</div>
+                            <div class="font-weight-medium"><%=statistics.vendors() %> Vendor</div>
+                            <div class="text-secondary"><%=statistics.approvedVendors() %> Approved</div>
                           </div>
                         </div>
                       </div>
@@ -249,12 +82,12 @@ pageEncoding="UTF-8"%>
                           <div class="col-auto">
                             <span class="bg-primary text-white avatar">
                               <!-- Download SVG icon from http://tabler-icons.io/i/share -->
-                              <i class="ti-share ti icon"></i>
+                              <i class="ti-settings ti icon"></i>
                             </span>
                           </div>
                           <div class="col">
-                            <div class="font-weight-medium">623 Shares</div>
-                            <div class="text-secondary">16 today</div>
+                            <div class="font-weight-medium"><%=statistics.services() %> Services</div>
+                            <div class="text-secondary"><%=statistics.activeServices() %> Active</div>
                           </div>
                         </div>
                       </div>

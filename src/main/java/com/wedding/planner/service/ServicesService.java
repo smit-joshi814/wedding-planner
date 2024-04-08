@@ -45,5 +45,17 @@ public interface ServicesService {
 	 * @return {@link ResponseEntity<String>} response text
 	 */
 	ResponseEntity<String> delete(Services service);
+	
+	/**
+	 * Gets Count of services Available
+	 * @return
+	 */
+	Long getServices();
+	
+	/**
+	 * Gets Active Services
+	 * @return
+	 */
+	Long getActiveServices();
 
 }
