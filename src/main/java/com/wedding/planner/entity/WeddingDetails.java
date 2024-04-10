@@ -2,6 +2,7 @@ package com.wedding.planner.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class WeddingDetails {
 	private Long weddingDetailsId;
 	private String weddingEventName;
 	private LocalDateTime eventDate;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user")
 	private Users user;
 }
