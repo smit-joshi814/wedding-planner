@@ -23,11 +23,11 @@ public class Couple {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long coupleId;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "bride")
 	private Users bride;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "groom")
 	private Users groom;
 }

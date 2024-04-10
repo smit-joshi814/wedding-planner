@@ -22,14 +22,10 @@ public class CoupleServiceImpl implements CoupleService {
 	@Override
 	public ResponseEntity<Couple> addCouple(Users user, CoupleRole role) {
 		try {
-			Couple couple;
 			if (role.equals(CoupleRole.BRIDE)) {
-				couple = Couple.builder().bride(user).build();
-			} else {
-				couple = Couple.builder().groom(user).build();
+				return ResponseEntity.ok(coupleRepo.save(Couple.builder().bride(user).build()));
 			}
-			return ResponseEntity.ok(coupleRepo.save(couple));
-
+			return ResponseEntity.ok(coupleRepo.save(Couple.builder().groom(user).build()));
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
 		}
