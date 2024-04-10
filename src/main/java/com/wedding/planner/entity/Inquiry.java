@@ -1,5 +1,6 @@
 package com.wedding.planner.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +23,11 @@ public class Inquiry {
 	private Long inquiryId;
 	private String description;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "service_item")
 	private ServiceItem serviceItem;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user")
 	private Users user;
 }
