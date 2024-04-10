@@ -2,6 +2,7 @@ package com.wedding.planner.entity;
 
 import com.wedding.planner.enums.ChecklistStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Checklist {
 
 	private String listItem;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user")
 	private Users user;
 
