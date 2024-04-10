@@ -1,5 +1,6 @@
 package com.wedding.planner.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,6 @@ public class EmergencyContacts {
 	private RelationshipStatus status;
 	
 	@JoinColumn(name = "user")
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Users user;
 }
