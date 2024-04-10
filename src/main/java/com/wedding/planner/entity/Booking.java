@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Booking {
 	private ServiceItem bookedService;
 
 	@JoinColumn(name = "booked_by")
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Users bookedBy;
 
 	@CreationTimestamp
