@@ -27,7 +27,7 @@ public class ApiUserController {
 	private ApiUserService userService;
 
 	@PostMapping("/couple")
-	public ResponseEntity<Boolean> addCouple(@RequestBody SignUpRequest request) {
+	public ResponseEntity<CoupleDTO> addCouple(@RequestBody SignUpRequest request) {
 		return userService.registerUser(request);
 	}
 

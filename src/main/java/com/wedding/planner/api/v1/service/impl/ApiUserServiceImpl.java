@@ -3,7 +3,6 @@ package com.wedding.planner.api.v1.service.impl;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,9 +32,8 @@ public class ApiUserServiceImpl implements ApiUserService {
 	private UtilityService utility;
 
 	@Override
-	public ResponseEntity<Boolean> registerUser(SignUpRequest request) {
+	public ResponseEntity<CoupleDTO> registerUser(SignUpRequest request) {
 		try {
-			Boolean status = false;
 			Users user = Users.builder().firstName(request.firstName()).lastName(request.lastName())
 					.email(request.email()).password(request.password()).role(UserRole.USER).build();
 
@@ -50,11 +48,10 @@ public class ApiUserServiceImpl implements ApiUserService {
 				if (Objects.isNull(couple.getGroom())) {
 					couple.setGroom(user);
 				}
-				status = coupleService.updateCouple(couple).getStatusCode().equals(HttpStatus.OK);
-			} else {
-				status = coupleService.addCouple(user, request.couple()).getStatusCode().equals(HttpStatus.OK);
+				return ResponseEntity.ok(convertToDTO(coupleService.updateCouple(couple).getBody()));
 			}
-			return ResponseEntity.ok(status);
+			return ResponseEntity.ok(convertToDTO(coupleService.addCouple(user, request.couple()).getBody()));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().build();
@@ -74,8 +71,7 @@ public class ApiUserServiceImpl implements ApiUserService {
 	@Override
 	public ResponseEntity<UserDTO> updateUser(UserDTO user) {
 		Users changes = Users.builder().userId(user.userId()).firstName(user.firstName()).lastName(user.lastName())
-				.email(user.email()).phone(
-						user.phone()).build();
+				.email(user.email()).phone(user.phone()).build();
 		return ResponseEntity.ok(convertToDTO(userService.updateUser(changes).getBody()));
 	}
 

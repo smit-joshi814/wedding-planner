@@ -79,7 +79,7 @@ public interface ApiUserService {
 	 * @param user
 	 * @return
 	 */
-	ResponseEntity<Boolean> registerUser(SignUpRequest request);
+	ResponseEntity<CoupleDTO> registerUser(SignUpRequest request);
 
 	/**
 	 * gets current logged in user
