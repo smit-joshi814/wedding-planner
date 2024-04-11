@@ -7,6 +7,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,11 +37,13 @@ public class UserServiceImpl implements UserService {
 	private StorageService storage;
 
 	@Override
+	@Cacheable(value = "usersCache")
 	public ResponseEntity<List<Users>> getUsers() {
 		return ResponseEntity.ok(usersRepo.findAll());
 	}
 
 	@Override
+	@Cacheable(value = "usersCache", key = "#role")
 	public ResponseEntity<List<Users>> getUsers(UserRole role) {
 		return ResponseEntity.ok(usersRepo.findByRole(role));
 	}
@@ -66,6 +71,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Cacheable(value = "usersCache", key = "#email")
 	public ResponseEntity<Users> getUser(String email) {
 		try {
 			Users user = usersRepo.findByEmail(email);
@@ -76,6 +82,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Cacheable(value = "usersCache", key = "#userId")
 	public ResponseEntity<Users> getUser(Long userId) {
 		try {
 			Users user = usersRepo.findById(userId).get();
@@ -86,6 +93,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@CachePut(value = "usersCache", key = "#user.userId")
 	public ResponseEntity<Users> addUser(Users user) {
 		try {
 			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
@@ -100,6 +108,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@CachePut(value = "usersCache", key = "#user.userId")
 	public ResponseEntity<Users> updateUser(Users user) {
 		Optional<Users> dbUserOpt = usersRepo.findById(user.getUserId());
 
@@ -159,6 +168,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@CacheEvict(value = "usersCache", key = "#user.userId")
 	public ResponseEntity<Boolean> deleteUser(Users user) {
 		Optional<Users> dbuser = usersRepo.findById(user.getUserId());
 		if (dbuser.isPresent()) {
@@ -201,6 +211,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@CachePut(value = "usersCache", key = "#userId")
 	public ResponseEntity<Users> updateUserStatus(Long userId, Boolean status) {
 		Optional<Users> user = usersRepo.findById(userId);
 		if (user.isPresent()) {
