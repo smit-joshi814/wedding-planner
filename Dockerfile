@@ -1,5 +1,5 @@
 # Use an official GraalVM image as a parent image
-FROM oracle/graalvm-ce:21
+FROM graalvm/jdk:21
 
 # Set the working directory in the container
 WORKDIR /app
