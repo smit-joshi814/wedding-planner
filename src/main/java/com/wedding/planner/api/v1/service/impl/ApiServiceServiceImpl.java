@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,30 +33,28 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 	private ServiceItemRepository serviceItemRepo;
 
 	@Override
+	@Cacheable(value = "servicesCache")
 	public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services() {
-	    List<Services> services = serviceRepo.findByStatus(true);
-	    if (services.isEmpty()) {
-	        throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-	    }
+		List<Services> services = serviceRepo.findByStatus(true);
+		if (services.isEmpty()) {
+			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+		}
 
-	    List<String> images = services.parallelStream()
-	            .map(service -> serviceItemRepo.findRandomByService(service))
-	            .filter(Optional::isPresent)
-	            .map(Optional::get)
-	            .map(item -> item.getImages().get(0).getUrl())
-	            .collect(Collectors.toList());
-	    
-	    Long totalRecords = serviceRepo.count();
-	    Integer page = 0;
-	    Integer perPage = 10;
-	    Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-	    ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords, page,
-	            perPage, totalPages);
-	    return ResponseEntity.ok(res);
+		List<String> images = services.parallelStream().map(service -> serviceItemRepo.findRandomByService(service))
+				.filter(Optional::isPresent).map(Optional::get).map(item -> item.getImages().get(0).getUrl())
+				.collect(Collectors.toList());
+
+		Long totalRecords = serviceRepo.count();
+		Integer page = 0;
+		Integer perPage = 10;
+		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
+		ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords, page,
+				perPage, totalPages);
+		return ResponseEntity.ok(res);
 	}
 
-
 	@Override
+	@Cacheable(value = "servicesCache", key = "serviceId")
 	public ResponseEntity<ServiceDTO> service(Long serviceId) {
 		Services service = serviceRepo.findById(serviceId).get();
 
@@ -68,18 +67,16 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 	}
 
 	@Override
+	@Cacheable(value = "servicesCache", key = "#page")
 	public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(Pageable page) {
 		List<Services> services = serviceRepo.findByStatus(true, page);
 		if (services.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		 List<String> images = services.parallelStream()
-		            .map(service -> serviceItemRepo.findRandomByService(service))
-		            .filter(Optional::isPresent)
-		            .map(Optional::get)
-		            .map(item -> item.getImages().get(0).getUrl())
-		            .collect(Collectors.toList());
-		 
+		List<String> images = services.parallelStream().map(service -> serviceItemRepo.findRandomByService(service))
+				.filter(Optional::isPresent).map(Optional::get).map(item -> item.getImages().get(0).getUrl())
+				.collect(Collectors.toList());
+
 		Long totalRecords = serviceRepo.count();
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
 		ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords,
@@ -88,18 +85,16 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 	}
 
 	@Override
+	@Cacheable(value = "servicesCache", key = "#category")
 	public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category) {
 		List<Services> services = serviceRepo.findByServicecategoryAndStatus(category, true);
 		if (services.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		 List<String> images = services.parallelStream()
-		            .map(service -> serviceItemRepo.findRandomByService(service))
-		            .filter(Optional::isPresent)
-		            .map(Optional::get)
-		            .map(item -> item.getImages().get(0).getUrl())
-		            .collect(Collectors.toList());
-		 
+		List<String> images = services.parallelStream().map(service -> serviceItemRepo.findRandomByService(service))
+				.filter(Optional::isPresent).map(Optional::get).map(item -> item.getImages().get(0).getUrl())
+				.collect(Collectors.toList());
+
 		Long totalRecords = serviceRepo.countByServicecategory(category);
 		Integer page = 0;
 		Integer perPage = 10;
@@ -110,18 +105,16 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 	}
 
 	@Override
+	@Cacheable(value = "servicesCache", key = "#category")
 	public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category, Pageable page) {
 		List<Services> services = serviceRepo.findByServicecategoryAndStatus(category, true, page);
 		if (services.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		 List<String> images = services.parallelStream()
-		            .map(service -> serviceItemRepo.findRandomByService(service))
-		            .filter(Optional::isPresent)
-		            .map(Optional::get)
-		            .map(item -> item.getImages().get(0).getUrl())
-		            .collect(Collectors.toList());
-		 
+		List<String> images = services.parallelStream().map(service -> serviceItemRepo.findRandomByService(service))
+				.filter(Optional::isPresent).map(Optional::get).map(item -> item.getImages().get(0).getUrl())
+				.collect(Collectors.toList());
+
 		Long totalRecords = serviceRepo.countByServicecategory(category);
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
 		ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords,

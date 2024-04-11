@@ -3,6 +3,7 @@ package com.wedding.planner.api.v1.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class ApiVariationOptionServiceImpl implements ApiVariationOptionService 
 	private VariationOptionRepository optionRepo;
 
 	@Override
+	@Cacheable(value = "variationOptionCache")
 	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions() {
 		List<VariationOption> options = optionRepo.findAll();
 		if (options.isEmpty()) {
@@ -41,6 +43,7 @@ public class ApiVariationOptionServiceImpl implements ApiVariationOptionService 
 	}
 
 	@Override
+	@Cacheable(value = "variationOptionCache", key = "#page")
 	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Pageable page) {
 		List<VariationOption> options = optionRepo.findAll(page).toList();
 		if (options.isEmpty()) {
@@ -56,6 +59,7 @@ public class ApiVariationOptionServiceImpl implements ApiVariationOptionService 
 	}
 
 	@Override
+	@Cacheable(value = "variationOptionCache", key = "#variation.variationId")
 	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation) {
 		List<VariationOption> options = optionRepo.findByVariation(variation);
 		if (options.isEmpty()) {
@@ -73,6 +77,7 @@ public class ApiVariationOptionServiceImpl implements ApiVariationOptionService 
 	}
 
 	@Override
+	@Cacheable(value = "variationOptionCache", key = "#variation.variationId")
 	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation, Pageable page) {
 		List<VariationOption> options = optionRepo.findByVariation(variation, page);
 		if (options.isEmpty()) {

@@ -3,6 +3,7 @@ package com.wedding.planner.api.v1.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 	private VariationRepository variationRepo;
 
 	@Override
+	@Cacheable(value = "variationCache")
 	public ResponseEntity<ResponseDTO<List<VariationDTO>>> variations() {
 		List<Variation> variations = variationRepo.findAll();
 		if (variations.isEmpty()) {
@@ -33,12 +35,13 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		Integer page = 0;
 		Integer perPage = 10;
 		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
-				totalRecords, page, perPage, totalPages);
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations), totalRecords, page, perPage,
+				totalPages);
 		return ResponseEntity.ok(dto);
 	}
 
 	@Override
+	@Cacheable(value = "variationCache", key = "#page")
 	public ResponseEntity<ResponseDTO<List<VariationDTO>>> variations(Pageable page) {
 		List<Variation> variations = variationRepo.findAll(page).toList();
 		if (variations.isEmpty()) {
@@ -46,12 +49,13 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		}
 		Long totalRecords = variationRepo.count();
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
-				totalRecords, page.getPageNumber(), page.getPageSize(), totalPages);
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations), totalRecords,
+				page.getPageNumber(), page.getPageSize(), totalPages);
 		return ResponseEntity.ok(dto);
 	}
 
 	@Override
+	@Cacheable(value = "variationCache", key = "#category.serviceCategoryId")
 	public ResponseEntity<ResponseDTO<List<VariationDTO>>> variations(ServiceCategories category) {
 		List<Variation> variations = variationRepo.findByServiceCategory(category);
 		if (variations.isEmpty()) {
@@ -61,12 +65,13 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		Integer page = 0;
 		Integer perPage = 10;
 		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
-				totalRecords, page, perPage, totalPages);
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations), totalRecords, page, perPage,
+				totalPages);
 		return ResponseEntity.ok(dto);
 	}
 
 	@Override
+	@Cacheable(value = "variationCache", key = "#category.serviceCategoryId")
 	public ResponseEntity<ResponseDTO<List<VariationDTO>>> variations(ServiceCategories category, Pageable page) {
 		List<Variation> variations = variationRepo.findByServiceCategory(category, page);
 		if (variations.isEmpty()) {
@@ -74,8 +79,8 @@ public class ApiVariationServiceImpl implements ApiVariationService {
 		}
 		Long totalRecords = variationRepo.countByServiceCategory(category);
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations),
-				totalRecords, page.getPageNumber(), page.getPageSize(), totalPages);
+		ResponseDTO<List<VariationDTO>> dto = new ResponseDTO<>(convertToDTO(variations), totalRecords,
+				page.getPageNumber(), page.getPageSize(), totalPages);
 		return ResponseEntity.ok(dto);
 	}
 }

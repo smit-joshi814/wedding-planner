@@ -3,8 +3,6 @@ package com.wedding.planner.api.v1.service.impl;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -84,13 +82,11 @@ public class ApiUserServiceImpl implements ApiUserService {
 	}
 
 	@Override
-	@Cacheable(value = "usersApi", key = "#userId")
 	public ResponseEntity<UserDTO> getUser(Long userId) {
 		return ResponseEntity.ok(convertToDTO(userService.getUser(userId).getBody()));
 	}
 
 	@Override
-	@CachePut(value = "userApi", key = "#user.userId")
 	public ResponseEntity<UserDTO> updateUser(UserDTO user) {
 		Users changes = Users.builder().userId(user.userId()).firstName(user.firstName()).lastName(user.lastName())
 				.email(user.email()).phone(user.phone()).build();

@@ -1,6 +1,7 @@
 package com.wedding.planner.api.v1.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -26,17 +27,20 @@ public class ApiVendorServiceImpl implements ApiVendorService {
 	private ServiceItemService serviceItemService;
 
 	@Override
+	@Cacheable(value = "vendorsCache", key = "#serviceId")
 	public ResponseEntity<VendorDTO> getVendorByService(Long serviceId) {
 		Services service = serviceService.get(serviceId).getBody();
 		return ResponseEntity.ok(convertToDTO(service.getCreatedBy()));
 	}
 
 	@Override
+	@Cacheable(value = "vendorsCache", key = "#userId")
 	public ResponseEntity<VendorDTO> getVendorByUser(Long userId) {
 		return ResponseEntity.ok(convertToDTO(vendorRepo.findByUser(Users.builder().userId(userId).build())));
 	}
 
 	@Override
+	@Cacheable(value = "vendorsCache", key = "#serviceItemId")
 	public ResponseEntity<VendorDTO> getVendorByServiceItem(Long serviceItemId) {
 		ServiceItem item = serviceItemService.get(serviceItemId).getBody();
 		return ResponseEntity.ok(convertToDTO(item.getService().getCreatedBy()));

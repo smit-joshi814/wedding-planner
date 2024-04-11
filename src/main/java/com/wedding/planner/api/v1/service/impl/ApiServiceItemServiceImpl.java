@@ -3,6 +3,7 @@ package com.wedding.planner.api.v1.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 	private ServiceItemRepository serviceItemRepo;
 
 	@Override
+	@Cacheable(value = "itemsCache")
 	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems() {
 		List<ServiceItem> items = serviceItemRepo.findByStatus(true);
 		if (items.isEmpty()) {
@@ -37,13 +39,15 @@ public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 				totalPages);
 		return ResponseEntity.ok(data);
 	}
-	
+
 	@Override
-	public ResponseEntity<ServiceItemDTO> serviceItem(Long item){
+	@Cacheable(value = "itemsCache", key = "#item")
+	public ResponseEntity<ServiceItemDTO> serviceItem(Long item) {
 		return ResponseEntity.ok(convertToDTO(serviceItemRepo.findById(item).get()));
 	}
 
 	@Override
+	@Cacheable(value = "itemsCache", key = "#page")
 	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Pageable page) {
 		List<ServiceItem> items = serviceItemRepo.findByStatus(true, page);
 		if (items.isEmpty()) {
@@ -57,6 +61,7 @@ public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 	}
 
 	@Override
+	@Cacheable(value = "itemsCache", key = "#service.serviceId")
 	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service) {
 		List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true);
 		if (items.isEmpty()) {
@@ -72,6 +77,7 @@ public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 	}
 
 	@Override
+	@Cacheable(value = "itemsCache", key = "#service.serviceId")
 	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service, Pageable page) {
 		List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true, page);
 		if (items.isEmpty()) {
