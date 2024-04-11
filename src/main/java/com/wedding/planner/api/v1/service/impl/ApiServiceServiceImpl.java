@@ -1,8 +1,8 @@
 package com.wedding.planner.api.v1.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -33,29 +33,27 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 
 	@Override
 	public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services() {
-		List<Services> services = serviceRepo.findByStatus(true);
-		if (services.isEmpty()) {
-			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
-		}
-		List<String> images = new ArrayList<>();
-		List<Services> toRemove = new ArrayList<>();
-		services.forEach(service -> {
-			Optional<ServiceItem> item = serviceItemRepo.findRandomByService(service);
-			if (item.isPresent()) {
-				images.add(item.get().getImages().get(0).getUrl());
-			} else {
-				toRemove.add(service);
-			}
-		});
-		services.removeAll(toRemove);
-		Long totalRecords = serviceRepo.count();
-		Integer page = 0;
-		Integer perPage = 10;
-		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-		ResponseDTO<List<ServiceDTO>> Res = new ResponseDTO<>(convertToDTO(services, images), totalRecords, page,
-				perPage, totalPages);
-		return ResponseEntity.ok(Res);
+	    List<Services> services = serviceRepo.findByStatus(true);
+	    if (services.isEmpty()) {
+	        throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
+	    }
+
+	    List<String> images = services.parallelStream()
+	            .map(service -> serviceItemRepo.findRandomByService(service))
+	            .filter(Optional::isPresent)
+	            .map(Optional::get)
+	            .map(item -> item.getImages().get(0).getUrl())
+	            .collect(Collectors.toList());
+	    
+	    Long totalRecords = serviceRepo.count();
+	    Integer page = 0;
+	    Integer perPage = 10;
+	    Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
+	    ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords, page,
+	            perPage, totalPages);
+	    return ResponseEntity.ok(res);
 	}
+
 
 	@Override
 	public ResponseEntity<ServiceDTO> service(Long serviceId) {
@@ -75,22 +73,18 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 		if (services.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		List<String> images = new ArrayList<>();
-		List<Services> toRemove = new ArrayList<>();
-		services.forEach(service -> {
-			Optional<ServiceItem> item = serviceItemRepo.findRandomByService(service);
-			if (item.isPresent()) {
-				images.add(item.get().getImages().get(0).getUrl());
-			} else {
-				toRemove.add(service);
-			}
-		});
-		services.removeAll(toRemove);
+		 List<String> images = services.parallelStream()
+		            .map(service -> serviceItemRepo.findRandomByService(service))
+		            .filter(Optional::isPresent)
+		            .map(Optional::get)
+		            .map(item -> item.getImages().get(0).getUrl())
+		            .collect(Collectors.toList());
+		 
 		Long totalRecords = serviceRepo.count();
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-		ResponseDTO<List<ServiceDTO>> Res = new ResponseDTO<>(convertToDTO(services, images), totalRecords,
+		ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords,
 				page.getPageNumber(), page.getPageSize(), totalPages);
-		return ResponseEntity.ok(Res);
+		return ResponseEntity.ok(res);
 	}
 
 	@Override
@@ -99,24 +93,20 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 		if (services.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		List<String> images = new ArrayList<>();
-		List<Services> toRemove = new ArrayList<>();
-		services.forEach(service -> {
-			Optional<ServiceItem> item = serviceItemRepo.findRandomByService(service);
-			if (item.isPresent()) {
-				images.add(item.get().getImages().get(0).getUrl());
-			} else {
-				toRemove.add(service);
-			}
-		});
-		services.removeAll(toRemove);
+		 List<String> images = services.parallelStream()
+		            .map(service -> serviceItemRepo.findRandomByService(service))
+		            .filter(Optional::isPresent)
+		            .map(Optional::get)
+		            .map(item -> item.getImages().get(0).getUrl())
+		            .collect(Collectors.toList());
+		 
 		Long totalRecords = serviceRepo.countByServicecategory(category);
 		Integer page = 0;
 		Integer perPage = 10;
 		Integer totalPages = (int) Math.ceil((double) totalRecords / perPage);
-		ResponseDTO<List<ServiceDTO>> Res = new ResponseDTO<>(convertToDTO(services, images), totalRecords, page,
+		ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords, page,
 				perPage, totalPages);
-		return ResponseEntity.ok(Res);
+		return ResponseEntity.ok(res);
 	}
 
 	@Override
@@ -125,21 +115,17 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 		if (services.isEmpty()) {
 			throw new ApiException(new ApiErrorResponse("", HttpStatus.NO_CONTENT));
 		}
-		List<String> images = new ArrayList<>();
-		List<Services> toRemove = new ArrayList<>();
-		services.forEach(service -> {
-			Optional<ServiceItem> item = serviceItemRepo.findRandomByService(service);
-			if (item.isPresent()) {
-				images.add(item.get().getImages().get(0).getUrl());
-			} else {
-				toRemove.add(service);
-			}
-		});
-		services.removeAll(toRemove);
+		 List<String> images = services.parallelStream()
+		            .map(service -> serviceItemRepo.findRandomByService(service))
+		            .filter(Optional::isPresent)
+		            .map(Optional::get)
+		            .map(item -> item.getImages().get(0).getUrl())
+		            .collect(Collectors.toList());
+		 
 		Long totalRecords = serviceRepo.countByServicecategory(category);
 		Integer totalPages = (int) Math.ceil((double) totalRecords / page.getPageSize());
-		ResponseDTO<List<ServiceDTO>> Res = new ResponseDTO<>(convertToDTO(services, images), totalRecords,
+		ResponseDTO<List<ServiceDTO>> res = new ResponseDTO<>(convertToDTO(services, images), totalRecords,
 				page.getPageNumber(), page.getPageSize(), totalPages);
-		return ResponseEntity.ok(Res);
+		return ResponseEntity.ok(res);
 	}
 }
