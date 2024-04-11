@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import com.wedding.planner.enums.UserRole;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +35,7 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
 
+	@Column(unique = true)
 	private String email;
 
 	private String firstName;
