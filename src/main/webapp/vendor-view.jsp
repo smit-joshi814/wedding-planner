@@ -205,7 +205,7 @@ List<States> states = (List<States>) request.getAttribute("states");
 												<label class="form-label">Address Line 2</label> <input
 													type="text" class="form-control" name="address_line_2"
 													value="<%=vendor.getUser().getAddress().get(0).getAddressLine2()%>"
-													placeholder="Address Line 2" required>
+													placeholder="Address Line 2">
 											</div>
 										</div>
 									</div>
