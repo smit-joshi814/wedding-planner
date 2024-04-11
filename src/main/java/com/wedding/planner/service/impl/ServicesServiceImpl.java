@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,20 +35,23 @@ public class ServicesServiceImpl implements ServicesService {
 	private UtilityService utility;
 
 	@Override
+	@Cacheable(value = "services")
 	public ResponseEntity<List<Services>> getAll() {
 		Users user = userService.getUser(utility.getCurrentUsername()).getBody();
-		if (user!=null && user.getRole().equals(UserRole.VENDOR)) {
+		if (user != null && user.getRole().equals(UserRole.VENDOR)) {
 			return ResponseEntity.ok(servicesRepo.findByCreatedBy(vendorService.getVendor(user).getBody()));
 		}
 		return ResponseEntity.ok(servicesRepo.findAll());
 	}
-	
+
 	@Override
+	@Cacheable(value = "categories", key = "#serviceId")
 	public ResponseEntity<Services> get(Long serviceId) {
 		return ResponseEntity.ok(servicesRepo.findById(serviceId).get());
 	}
-	
+
 	@Override
+	@CachePut(value = "services", key = "#service.serviceId")
 	public ResponseEntity<Services> add(Services service) {
 		try {
 			return ResponseEntity.ok(servicesRepo.save(service));
@@ -56,6 +62,7 @@ public class ServicesServiceImpl implements ServicesService {
 	}
 
 	@Override
+	@CachePut(value = "services")
 	public ResponseEntity<Services> update(Services service) {
 		Services dbService = servicesRepo.findById(service.getServiceId()).get();
 		if (Objects.nonNull(service.getServiceName()) && !"".equalsIgnoreCase(service.getServiceName())) {
@@ -83,6 +90,7 @@ public class ServicesServiceImpl implements ServicesService {
 	}
 
 	@Override
+	@CacheEvict(value = "services", key = "#service.serviceId")
 	public ResponseEntity<String> delete(Services service) {
 		try {
 			servicesRepo.delete(service);

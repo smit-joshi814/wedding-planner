@@ -5,6 +5,9 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +28,7 @@ public class VendorServiceImpl implements VendorService {
 	private UserService userService;
 
 	@Override
+	@CachePut("vendors")
 	public ResponseEntity<Vendor> addVendor(Users user, Vendor vendor) {
 		try {
 			user.setRole(UserRole.VENDOR);
@@ -38,6 +42,7 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
+	@CachePut("vendors")
 	public ResponseEntity<Vendor> updatevendor(Vendor vendor) {
 		Optional<Vendor> dbVendorOpt = vendorRepo.findById(vendor.getVendorId());
 
@@ -74,11 +79,13 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
+	@Cacheable(value = "vendors")
 	public ResponseEntity<List<Vendor>> getVendors() {
 		return ResponseEntity.ok(vendorRepo.findAll());
 	}
 
 	@Override
+	@CacheEvict(value = "vendors", key = "#vendor.vendorId")
 	public ResponseEntity<Boolean> deleteVendor(Vendor vendor) {
 		Optional<Vendor> dbVendor = vendorRepo.findById(vendor.getVendorId());
 		if (dbVendor.isPresent()) {
@@ -89,11 +96,13 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
+	@Cacheable(value = "vendors", key = "#user.userId")
 	public ResponseEntity<Vendor> getVendor(Users user) {
 		return ResponseEntity.ok(vendorRepo.findByUser(user));
 	}
-	
+
 	@Override
+	@Cacheable(value = "vendors", key = "#vendorId")
 	public ResponseEntity<Vendor> getVendor(Integer vendorid) {
 		return ResponseEntity.ok(vendorRepo.findById(vendorid).get());
 	}

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,12 +34,14 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 	private ImageService imageService;
 
 	@Override
+	@Cacheable(value = "categories")
 	public ResponseEntity<List<ServiceCategories>> getAllServiceCategories() {
 
 		return ResponseEntity.ok().body(dao.findAll());
 	}
 
 	@Override
+	@CachePut(value = "categories")
 	public ResponseEntity<ServiceCategories> addServiceCategories(String serviceCategoryName, MultipartFile icon,
 			boolean isActive) {
 		String path = icon.getOriginalFilename();
@@ -54,6 +59,7 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 	}
 
 	@Override
+	@CacheEvict(value = "categories", key = "#servicecategoryId")
 	public ResponseEntity<String> deleteServiceCategories(int serviceCategoryId) {
 		try {
 			ServiceCategories category = dao.findById(serviceCategoryId).get();
@@ -72,6 +78,7 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 	}
 
 	@Override
+	@CachePut(value = "categories")
 	public ResponseEntity<ServiceCategories> editServiceCategories(Integer serviceCategoryId,
 			String serviceCategoryName, MultipartFile serviceCategoryIcon, boolean isActive) {
 
@@ -97,5 +104,4 @@ public class ServicecategoryServiceImpl implements ServicecategoryService {
 		}
 		return ResponseEntity.ok().body(dao.save(dbCategory));
 	}
-
 }

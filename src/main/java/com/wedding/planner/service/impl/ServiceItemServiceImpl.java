@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,7 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 	private StorageService storage;
 
 	@Override
+	@Cacheable(value = "items", key = "#serviceItemId")
 	public ResponseEntity<ServiceItem> get(Long serviceItemId) {
 		try {
 			return ResponseEntity.ok(itemRepo.findById(serviceItemId).get());
@@ -38,11 +41,13 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 	}
 
 	@Override
+	@Cacheable(value = "items")
 	public ResponseEntity<List<ServiceItem>> getAll() {
 		return ResponseEntity.ok(itemRepo.findAll());
 	}
 
 	@Override
+	@Cacheable(value = "items", key = "#service.serviceId")
 	public ResponseEntity<List<ServiceItem>> getAll(Services service) {
 		try {
 			List<ServiceItem> services = itemRepo.findByService(service);
@@ -73,6 +78,7 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 	}
 
 	@Override
+	@Cacheable(value = "items")
 	public ResponseEntity<ServiceItem> update(ServiceItem item) {
 		try {
 			ServiceItem dbItem = itemRepo.findById(item.getServiceItemId()).get();
@@ -130,6 +136,7 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 	}
 
 	@Override
+	@CacheEvict(value = "items", key = "#item.serviceItemId")
 	public ResponseEntity<String> delete(ServiceItem item) {
 		try {
 			ServiceItem dbItem = itemRepo.findById(item.getServiceItemId()).get();

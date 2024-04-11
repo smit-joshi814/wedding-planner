@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,11 +28,13 @@ public class VariationServiceImpl implements VariationService {
 	VariationOptionService optionService;
 
 	@Override
+	@Cacheable(value = "variations")
 	public ResponseEntity<List<Variation>> getVariations() {
 		return ResponseEntity.ok().body(variationRepo.findAll());
 	}
 
 	@Override
+	@Cacheable(value = "variations", key = "#service.serviceId")
 	public ResponseEntity<List<Variation>> getVariations(Services service) {
 		try {
 			List<Variation> variations = variationRepo.findByServiceCategory(service.getServicecategory());
@@ -53,6 +58,7 @@ public class VariationServiceImpl implements VariationService {
 	}
 
 	@Override
+	@CachePut(value = "variations")
 	public ResponseEntity<Variation> editVariation(Integer variationId, String variationName) {
 		Variation dbVariation = variationRepo.findById(variationId).get();
 		if (Objects.nonNull(variationName) && !"".equals(variationName)) {
@@ -62,6 +68,7 @@ public class VariationServiceImpl implements VariationService {
 	}
 
 	@Override
+	@CacheEvict(value = "variations", key = "#variation.variationId")
 	public ResponseEntity<String> deleteVariation(Variation variation) {
 		try {
 			optionService.deleteVariationOptionsBy(variation);

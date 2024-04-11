@@ -3,6 +3,7 @@ package com.wedding.planner.service.impl;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class HomeServiceImpl implements HomeService {
 	private ServicesService service;
 
 	@Override
+	@Cacheable(value = "statistics")
 	public ResponseEntity<StatisticsDTO> getStatistics() {
 
 		LocalDateTime dateBefore15Days = LocalDateTime.now().minusDays(15);
