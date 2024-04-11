@@ -3,6 +3,8 @@ package com.wedding.planner.api.v1.service.impl;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,19 +59,19 @@ public class ApiUserServiceImpl implements ApiUserService {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
-	
+
 	@Override
 	public ResponseEntity<CoupleDTO> addCouple(String email) {
 		Users currentUser = userService.getUser(utility.getCurrentUsername()).getBody();
 		coupleService.deleteCouple(coupleService.getCouple(currentUser).getBody());
-		
+
 		Users user = userService.getUser(email).getBody();
 		Couple couple = coupleService.getCouple(user).getBody();
-		
-		if(Objects.isNull(couple.getBride())) {
+
+		if (Objects.isNull(couple.getBride())) {
 			couple.setBride(currentUser);
 			System.out.println(couple);
-		}else {
+		} else {
 			couple.setGroom(currentUser);
 		}
 		couple = coupleService.updateCouple(couple).getBody();
@@ -82,11 +84,13 @@ public class ApiUserServiceImpl implements ApiUserService {
 	}
 
 	@Override
+	@Cacheable(value = "usersApi", key = "#userId")
 	public ResponseEntity<UserDTO> getUser(Long userId) {
 		return ResponseEntity.ok(convertToDTO(userService.getUser(userId).getBody()));
 	}
 
 	@Override
+	@CachePut(value = "userApi", key = "#user.userId")
 	public ResponseEntity<UserDTO> updateUser(UserDTO user) {
 		Users changes = Users.builder().userId(user.userId()).firstName(user.firstName()).lastName(user.lastName())
 				.email(user.email()).phone(user.phone()).build();
@@ -111,5 +115,5 @@ public class ApiUserServiceImpl implements ApiUserService {
 		return ResponseEntity.ok(convertToDTO(
 				coupleService.getCouple(userService.getUser(utility.getCurrentUsername()).getBody()).getBody()));
 	}
-	
+
 }
