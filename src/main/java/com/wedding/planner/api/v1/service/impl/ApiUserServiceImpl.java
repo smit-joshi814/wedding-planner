@@ -57,6 +57,24 @@ public class ApiUserServiceImpl implements ApiUserService {
 			return ResponseEntity.internalServerError().build();
 		}
 	}
+	
+	@Override
+	public ResponseEntity<CoupleDTO> addCouple(String email) {
+		Users currentUser = userService.getUser(utility.getCurrentUsername()).getBody();
+		coupleService.deleteCouple(coupleService.getCouple(currentUser).getBody());
+		
+		Users user = userService.getUser(email).getBody();
+		Couple couple = coupleService.getCouple(user).getBody();
+		
+		if(Objects.isNull(couple.getBride())) {
+			couple.setBride(currentUser);
+			System.out.println(couple);
+		}else {
+			couple.setGroom(currentUser);
+		}
+		couple = coupleService.updateCouple(couple).getBody();
+		return ResponseEntity.ok(convertToDTO(couple));
+	}
 
 	@Override
 	public ResponseEntity<UserDTO> getUser() {
@@ -93,4 +111,5 @@ public class ApiUserServiceImpl implements ApiUserService {
 		return ResponseEntity.ok(convertToDTO(
 				coupleService.getCouple(userService.getUser(utility.getCurrentUsername()).getBody()).getBody()));
 	}
+	
 }

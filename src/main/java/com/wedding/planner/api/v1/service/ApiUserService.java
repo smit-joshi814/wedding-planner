@@ -80,6 +80,13 @@ public interface ApiUserService {
 	 * @return
 	 */
 	ResponseEntity<CoupleDTO> registerUser(SignUpRequest request);
+	
+	/**
+	 * Adds Couple
+	 * @param email
+	 * @return
+	 */
+	ResponseEntity<CoupleDTO> addCouple(String email);
 
 	/**
 	 * gets current logged in user

@@ -30,6 +30,11 @@ public class ApiUserController {
 	public ResponseEntity<CoupleDTO> addCouple(@RequestBody SignUpRequest request) {
 		return userService.registerUser(request);
 	}
+	
+	@PostMapping("/couple/{email}")
+	public ResponseEntity<CoupleDTO> addCouple(@PathVariable("email") String email){
+		return userService.addCouple(email);
+	}
 
 	@GetMapping("/couple")
 	public ResponseEntity<CoupleDTO> getCouple() {
