@@ -34,7 +34,7 @@ public class ServicesServiceImpl implements ServicesService {
 	@Override
 	public ResponseEntity<List<Services>> getAll() {
 		Users user = userService.getUser(utility.getCurrentUsername()).getBody();
-		if (user.getRole().equals(UserRole.VENDOR)) {
+		if (user!=null && user.getRole().equals(UserRole.VENDOR)) {
 			return ResponseEntity.ok(servicesRepo.findByCreatedBy(vendorService.getVendor(user).getBody()));
 		}
 		return ResponseEntity.ok(servicesRepo.findAll());
