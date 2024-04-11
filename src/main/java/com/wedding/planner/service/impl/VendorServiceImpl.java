@@ -96,7 +96,7 @@ public class VendorServiceImpl implements VendorService {
 	}
 
 	@Override
-	@Cacheable(value = "vendors", key = "#user.userId")
+	@Cacheable(value = "vendors")
 	public ResponseEntity<Vendor> getVendor(Users user) {
 		return ResponseEntity.ok(vendorRepo.findByUser(user));
 	}
