@@ -26,7 +26,7 @@ public class Checklist {
 
 	private String listItem;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user")
 	private Users user;
 
