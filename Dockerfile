@@ -1,5 +1,5 @@
 # Use an official GraalVM image as a parent image
-FROM ghcr.io/graalvm/graalvm-community:21
+FROM ghcr.io/graalvm/jdk-community:21
 
 # Set the working directory in the container
 WORKDIR /app
