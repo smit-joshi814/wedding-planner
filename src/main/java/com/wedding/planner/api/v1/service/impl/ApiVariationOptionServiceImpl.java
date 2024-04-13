@@ -59,7 +59,7 @@ public class ApiVariationOptionServiceImpl implements ApiVariationOptionService 
 	}
 
 	@Override
-	@Cacheable(value = "variationOptionCache", key = "#variation.variationId")
+	@Cacheable(value = "variationCache", key = "#variation.variationId")
 	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation) {
 		List<VariationOption> options = optionRepo.findByVariation(variation);
 		if (options.isEmpty()) {
@@ -77,7 +77,7 @@ public class ApiVariationOptionServiceImpl implements ApiVariationOptionService 
 	}
 
 	@Override
-	@Cacheable(value = "variationOptionCache", key = "#variation.variationId")
+	@Cacheable(value = "variationCache", key = "#variation.variationId")
 	public ResponseEntity<ResponseDTO<List<VariationOptionDTO>>> variationOptions(Variation variation, Pageable page) {
 		List<VariationOption> options = optionRepo.findByVariation(variation, page);
 		if (options.isEmpty()) {

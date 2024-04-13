@@ -85,7 +85,7 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 	}
 
 	@Override
-	@Cacheable(value = "servicesCache", key = "#category")
+	@Cacheable(value = "categoryCache", key = "#category.serviceCategoryId")
 	public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category) {
 		List<Services> services = serviceRepo.findByServicecategoryAndStatus(category, true);
 		if (services.isEmpty()) {
@@ -105,7 +105,7 @@ public class ApiServiceServiceImpl implements ApiServiceService {
 	}
 
 	@Override
-	@Cacheable(value = "servicesCache", key = "#category")
+	@Cacheable(value = "categoryCache", key = "#category.serviceCategoryId")
 	public ResponseEntity<ResponseDTO<List<ServiceDTO>>> services(ServiceCategories category, Pageable page) {
 		List<Services> services = serviceRepo.findByServicecategoryAndStatus(category, true, page);
 		if (services.isEmpty()) {

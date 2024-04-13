@@ -61,7 +61,7 @@ public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 	}
 
 	@Override
-	@Cacheable(value = "itemsCache", key = "#service.serviceId")
+	@Cacheable(value = "servicesCache", key = "#service.serviceId")
 	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service) {
 		List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true);
 		if (items.isEmpty()) {
@@ -77,7 +77,7 @@ public class ApiServiceItemServiceImpl implements ApiServiceItemService {
 	}
 
 	@Override
-	@Cacheable(value = "itemsCache", key = "#service.serviceId")
+	@Cacheable(value = "servicesCache", key = "#service.serviceId")
 	public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems(Services service, Pageable page) {
 		List<ServiceItem> items = serviceItemRepo.findByServiceAndStatus(service, true, page);
 		if (items.isEmpty()) {
