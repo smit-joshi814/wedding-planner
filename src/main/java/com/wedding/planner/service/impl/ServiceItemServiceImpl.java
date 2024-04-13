@@ -47,7 +47,7 @@ public class ServiceItemServiceImpl implements ServiceItemService {
 	}
 
 	@Override
-	@Cacheable(value = "items", key = "#service.serviceId")
+	@Cacheable(value = "services", key = "#service.serviceId")
 	public ResponseEntity<List<ServiceItem>> getAll(Services service) {
 		try {
 			List<ServiceItem> services = itemRepo.findByService(service);

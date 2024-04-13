@@ -25,7 +25,7 @@ public class WeddingDetails {
 	private Long weddingDetailsId;
 	private String weddingEventName;
 	private LocalDateTime eventDate;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "user")
 	private Users user;
 }

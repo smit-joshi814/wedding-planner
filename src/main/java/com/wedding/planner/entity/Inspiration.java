@@ -24,7 +24,7 @@ public class Inspiration {
 	private Long inspirationId;
 	
 	@JoinColumn(name = "posted_by")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Users postedBy;
 	
 	@OneToOne(cascade = CascadeType.MERGE)

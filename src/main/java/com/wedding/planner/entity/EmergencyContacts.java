@@ -30,6 +30,6 @@ public class EmergencyContacts {
 	private RelationshipStatus status;
 	
 	@JoinColumn(name = "user")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Users user;
 }

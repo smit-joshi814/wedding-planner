@@ -35,7 +35,7 @@ public class Booking {
 	private ServiceItem bookedService;
 
 	@JoinColumn(name = "booked_by")
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Users bookedBy;
 
 	@CreationTimestamp

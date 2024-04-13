@@ -15,7 +15,7 @@ public class CahceConfig {
 	@Autowired
 	private CacheManager cacheManager;
 
-	@Scheduled(fixedRate = 90000, initialDelay = 20000)
+	@Scheduled(fixedRate = 300000, initialDelay = 30000)
 	public void clearCache() {
 		cacheManager.getCacheNames().parallelStream().forEach(name -> cacheManager.getCache(name).clear());
 	}
