@@ -6,8 +6,5 @@
 			Account</a> <a href="/my-bookings" id="my-bookings"
 			class="list-group-item list-group-item-action d-flex align-items-center">My
 			Bookings</a>
-		<a href="#"
-			class="list-group-item list-group-item-action d-flex align-items-center">Billing
-			& Invoices</a>
 	</div>
 </div>

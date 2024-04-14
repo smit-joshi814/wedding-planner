@@ -131,7 +131,6 @@ Users user = (Users) pageContext.getRequest().getAttribute("currentUser");
 								<sec:authorize access="hasRole('ADMIN')">
 									<button class="dropdown-item" id="reset-cache"> Reset Cache
 									</button>
-									<a class="dropdown-item" href="logs" id="logs"> Logs </a>
 								</sec:authorize>
 							</div></li>
 					</ul>
