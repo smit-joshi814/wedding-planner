@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -35,6 +37,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private StorageService storage;
+
+	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Override
 	@Cacheable(value = "users")
@@ -224,11 +228,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public ResponseEntity<Boolean> updatePassword(String email, String password) {
 		Users dbUser = usersRepo.findByEmail(email);
-		if (Objects.nonNull(email) && !"".equalsIgnoreCase(password)) {
+		if (Objects.nonNull(password) && !"".equalsIgnoreCase(password)) {
 			dbUser.setPassword(new BCryptPasswordEncoder().encode(password));
+			logger.info("Password updated for {}: " + email);
+			usersRepo.save(dbUser);
+			return ResponseEntity.ok(true);
 		}
-		usersRepo.save(dbUser);
-		return ResponseEntity.ok(true);
+		return ResponseEntity.ok(false);
 	}
 
 	@Override
