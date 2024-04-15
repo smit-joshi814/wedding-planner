@@ -15,7 +15,7 @@ public interface CoupleService {
 	 * @return
 	 */
 	ResponseEntity<Couple> addCouple(Users user, CoupleRole role);
-	
+
 	/**
 	 * Gets Couple By User
 	 * @param user

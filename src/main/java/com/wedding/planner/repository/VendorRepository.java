@@ -10,9 +10,9 @@ import com.wedding.planner.entity.Vendor;
 public interface VendorRepository extends JpaRepository<Vendor, Integer> {
 
 	Vendor findByUser(Users user);
-	
+
 	List<Vendor> findByBusinessNameContainingIgnoringCase(String businessName);
-	
+
 	Integer countByApproved(Boolean approved);
 
 }

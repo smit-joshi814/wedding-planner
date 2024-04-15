@@ -24,11 +24,11 @@ public class EmergencyContacts {
 	private Long contactId;
 	private String contactName;
 	private String[] numbers;
-	
+
 	@JoinColumn(name = "status")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private RelationshipStatus status;
-	
+
 	@JoinColumn(name = "user")
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Users user;

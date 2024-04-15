@@ -19,6 +19,7 @@ public class ImageServiceImpl implements ImageService {
 	@Autowired
 	private ImagesRepository imageRepo;
 
+	@Override
 	public ResponseEntity<Images> getImage(Long imageId) {
 		try {
 			return ResponseEntity.ok(imageRepo.findById(imageId).get());

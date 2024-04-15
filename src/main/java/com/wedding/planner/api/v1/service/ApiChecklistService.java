@@ -30,7 +30,7 @@ public interface ApiChecklistService {
 		return checklists.stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
 
-	/** 
+	/**
 	 * Adds {@link Checklist} Item
 	 * @param checklist
 	 * @return

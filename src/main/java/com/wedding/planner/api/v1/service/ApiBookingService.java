@@ -14,7 +14,7 @@ public interface ApiBookingService {
 
 	/**
 	 * Converts {@link Booking} to {@link BookingDTO}
-	 * 
+	 *
 	 * @param booking
 	 * @return
 	 */
@@ -27,7 +27,7 @@ public interface ApiBookingService {
 	/**
 	 * Converts {@link List} of {@link Booking} to {@link List} of
 	 * {@link BookingDTO}
-	 * 
+	 *
 	 * @param bookings
 	 * @return
 	 */
@@ -37,14 +37,14 @@ public interface ApiBookingService {
 
 	/**
 	 * Gets All the Bookings
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<List<BookingDTO>> getBookings(Optional<Long> user);
 
 	/**
 	 * Adds Booking
-	 * 
+	 *
 	 * @param bookingDto
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public interface ApiBookingService {
 
 	/**
 	 * Updates Booking
-	 * 
+	 *
 	 * @param bookingDto
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public interface ApiBookingService {
 
 	/**
 	 * Deletes booking
-	 * 
+	 *
 	 * @param bookingId
 	 * @return
 	 */

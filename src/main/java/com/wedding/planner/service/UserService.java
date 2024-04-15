@@ -28,7 +28,7 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Users> updateUser(Users user);
-	
+
 	/**
 	 * Updates User Status
 	 * @param status
@@ -45,7 +45,7 @@ public interface UserService {
 
 	/**
 	 * Gets Users By Role
-	 * 
+	 *
 	 * @param role
 	 * @return
 	 */
@@ -78,7 +78,7 @@ public interface UserService {
 
 	/**
 	 * Gets User By UserId
-	 * 
+	 *
 	 * @param userId
 	 * @return
 	 */
@@ -94,7 +94,7 @@ public interface UserService {
 
 	/**
 	 * updates user's avatar
-	 * 
+	 *
 	 * @param email
 	 * @param file
 	 * @return
@@ -103,13 +103,13 @@ public interface UserService {
 
 	/**
 	 * updates user's avatar
-	 * 
+	 *
 	 * @param email
 	 * @param file
 	 * @return
 	 */
 	ResponseEntity<Images> updateAvatarImage(String email, MultipartFile file);
-	
+
 	/**
 	 * Updates User password
 	 * @param email
@@ -117,14 +117,14 @@ public interface UserService {
 	 * @return
 	 */
 	ResponseEntity<Boolean> updatePassword(String email,String password);
-	
+
 	/**
 	 * Gets users count by {@link UserRole}
 	 * @param role
 	 * @return
 	 */
 	Long getUsersCount(UserRole role);
-	
+
 	/**
 	 * Gets User Count by {@link UserRole} and {@link LocalDate}
 	 * @param role

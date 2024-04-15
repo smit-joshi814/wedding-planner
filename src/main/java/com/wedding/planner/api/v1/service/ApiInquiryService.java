@@ -29,14 +29,14 @@ public interface ApiInquiryService {
 	default List<InquiryDTO> convertToDTO(List<Inquiry> inquiries) {
 		return inquiries.stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
-	
+
 	/**
 	 * Gets All the Inquiries
 	 * @return
 	 */
 	ResponseEntity<List<InquiryDTO>> getInquiries(Optional<Long> userId);
 
-	/** 
+	/**
 	 * Adds Inquiry
 	 * @param inquiryDto
 	 * @return

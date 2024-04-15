@@ -14,7 +14,7 @@ public interface ApiWeddingDetailsService {
 
 	/**
 	 * Converts {@link WeddingDetails} to {@link WeddingDetailsDTO}
-	 * 
+	 *
 	 * @param weddingDetails
 	 * @return
 	 */
@@ -27,7 +27,7 @@ public interface ApiWeddingDetailsService {
 	/**
 	 * Converts {@link List} {@link WeddingDetails} to {@link List} of
 	 * {@link WeddingDetailsDTO}
-	 * 
+	 *
 	 * @param weddingDetails
 	 * @return
 	 */
@@ -37,14 +37,14 @@ public interface ApiWeddingDetailsService {
 
 	/**
 	 * gets All the {@link WeddingDetailsDTO}
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<List<WeddingDetailsDTO>> getweddingDetails(Optional<Long> user);
 
 	/**
 	 * Adds {@link WeddingDetails}
-	 * 
+	 *
 	 * @param weddingDto
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public interface ApiWeddingDetailsService {
 
 	/**
 	 * Updates {@link WeddingDetails}
-	 * 
+	 *
 	 * @param weddingDto
 	 * @return
 	 */
@@ -60,7 +60,7 @@ public interface ApiWeddingDetailsService {
 
 	/**
 	 * Deletes {@link WeddingDetails}
-	 * 
+	 *
 	 * @param weddingDetailsId
 	 * @return
 	 */

@@ -32,7 +32,7 @@ public class VendorsController {
 		mv.setViewName("vendors");
 		if(search!=null) {
 			mv.addObject("vendorList", vendorService.getVendors(search).getBody());
-		}else {			
+		}else {
 			mv.addObject("vendorList", vendorService.getVendors().getBody());
 		}
 		return mv;

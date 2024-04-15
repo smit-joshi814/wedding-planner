@@ -1,7 +1,6 @@
 package com.wedding.planner.api.v1.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +35,7 @@ public class ApiAddressController {
 	public ResponseEntity<AddressDTO> updateAddress(@RequestBody AddressDTO address) {
 		return addressService.updateAddress(address);
 	}
-	
+
 	@DeleteMapping("{address}")
 	public ResponseEntity<Boolean> deleteAddress(@PathVariable("address") Long addressId){
 		return addressService.deleteAddress(addressId);

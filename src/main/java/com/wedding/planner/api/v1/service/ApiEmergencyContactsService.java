@@ -20,7 +20,7 @@ public interface ApiEmergencyContactsService {
 		return new EmergencyContactsDTO(contact.getContactId(), contact.getContactName(), contact.getNumbers(),
 				contact.getStatus().getRelationshipName(), contact.getUser().getUserId());
 	}
-	
+
 	/**
 	 * Converts {@link List} {@link EmergencyContacts} of {@link List} {@link EmergencyContactsDTO}
 	 * @param contacts
@@ -29,28 +29,28 @@ public interface ApiEmergencyContactsService {
 	default List<EmergencyContactsDTO> convertToDTO(List<EmergencyContacts> contacts){
 		return contacts.stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
-	
+
 	/**
 	 * gets {@link List} {@link EmergencyContactsDTO}
 	 * @param user
 	 * @return
 	 */
 	ResponseEntity<List<EmergencyContactsDTO>> getContacts(Optional<Long> user);
-	
+
 	/**
 	 * adds {@link EmergencyContactsDTO}
 	 * @param contact
 	 * @return
 	 */
 	ResponseEntity<EmergencyContactsDTO> addContact(EmergencyContactsDTO contact);
-	
+
 	/**
 	 * Updates {@link EmergencyContacts} and returns updated {@link EmergencyContactsDTO}
 	 * @param contact
 	 * @return
 	 */
 	ResponseEntity<EmergencyContactsDTO> updateContact(EmergencyContactsDTO contact);
-	
+
 	/**
 	 * Deletes {@link EmergencyContacts}
 	 * @param contactId

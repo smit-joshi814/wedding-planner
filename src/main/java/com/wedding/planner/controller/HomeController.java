@@ -9,7 +9,7 @@ import com.wedding.planner.service.HomeService;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	private HomeService homeService;
 
@@ -19,7 +19,7 @@ public class HomeController {
 		mv.addObject("statistics", homeService.getStatistics().getBody());
 		return mv;
 	}
-	
+
 	@RequestMapping
 	public ModelAndView redirectToLanding() {
 		return new ModelAndView("index");

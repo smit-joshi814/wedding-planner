@@ -26,7 +26,7 @@ public interface ApiBudgetService {
 
 	/**
 	 * Converts {@link Budget} to {@link BudgetDTO}
-	 * 
+	 *
 	 * @param budget
 	 * @return
 	 */
@@ -37,7 +37,7 @@ public interface ApiBudgetService {
 
 	/**
 	 * Converts {@link List} {@link Budget} to {@link List} {@link BudgetDTO}
-	 * 
+	 *
 	 * @param budget
 	 * @return
 	 */
@@ -47,14 +47,14 @@ public interface ApiBudgetService {
 
 	/**
 	 * Gets Available Budget details in {@link List} {@link BudgetDTO}
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<List<BudgetDTO>> getBudget(Optional<Long> user);
 
 	/**
 	 * Adds Budget
-	 * 
+	 *
 	 * @param budgetDto
 	 * @return
 	 */
@@ -62,7 +62,7 @@ public interface ApiBudgetService {
 
 	/**
 	 * Updates {@link Budget}
-	 * 
+	 *
 	 * @param budgetDto
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public interface ApiBudgetService {
 
 	/**
 	 * Deletes {@link Budget}
-	 * 
+	 *
 	 * @param budgetId
 	 * @return
 	 */

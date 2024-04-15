@@ -19,7 +19,7 @@ public interface ApiUserService {
 
 	/**
 	 * converts {@link Images} to {@link ImageDTO}
-	 * 
+	 *
 	 * @param image
 	 * @return
 	 */
@@ -63,7 +63,7 @@ public interface ApiUserService {
 
 	/**
 	 * Converts {@link Couple} to {@link CoupleDTO}
-	 * 
+	 *
 	 * @param couple
 	 * @return
 	 */
@@ -80,7 +80,7 @@ public interface ApiUserService {
 	 * @return
 	 */
 	ResponseEntity<CoupleDTO> registerUser(SignUpRequest request);
-	
+
 	/**
 	 * Adds Couple
 	 * @param email
@@ -97,7 +97,7 @@ public interface ApiUserService {
 
 	/**
 	 * Gets user by userId
-	 * 
+	 *
 	 * @param userId
 	 * @return
 	 */
@@ -121,7 +121,7 @@ public interface ApiUserService {
 
 	/**
 	 * updates Avatar
-	 * 
+	 *
 	 * @param file
 	 * @return
 	 */
@@ -129,7 +129,7 @@ public interface ApiUserService {
 
 	/**
 	 * Get {@link CoupleDTO}
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<CoupleDTO> getCouple();

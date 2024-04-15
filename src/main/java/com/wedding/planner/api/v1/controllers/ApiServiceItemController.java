@@ -27,7 +27,7 @@ public class ApiServiceItemController {
     public ResponseEntity<ResponseDTO<List<ServiceItemDTO>>> serviceItems() {
         return itemService.serviceItems();
     }
-    
+
     @GetMapping("{item}")
     public ResponseEntity<ServiceItemDTO> serviceItem(@PathVariable("item") Long item){
     	return itemService.serviceItem(item);

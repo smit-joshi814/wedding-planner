@@ -21,7 +21,7 @@ public interface ApiAddressService {
 
 	/**
 	 * Converts {@link Address} to {@link AddressDTO}
-	 * 
+	 *
 	 * @param address
 	 * @return
 	 */
@@ -32,7 +32,7 @@ public interface ApiAddressService {
 
 	/**
 	 * adds {@link Address} to Database & returns {@link AddressDTO}
-	 * 
+	 *
 	 * @param address
 	 * @return
 	 */
@@ -40,7 +40,7 @@ public interface ApiAddressService {
 
 	/**
 	 * Gets {@link AddressDTO} based on addressId
-	 * 
+	 *
 	 * @param addressId
 	 * @return
 	 */
@@ -48,7 +48,7 @@ public interface ApiAddressService {
 
 	/**
 	 * updates {@link Address}
-	 * 
+	 *
 	 * @param addressData
 	 * @return
 	 */
@@ -56,7 +56,7 @@ public interface ApiAddressService {
 
 	/**
 	 * Deletes {@link Address} based on addresId
-	 * 
+	 *
 	 * @param addressId
 	 * @return
 	 */

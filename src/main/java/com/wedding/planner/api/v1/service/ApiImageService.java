@@ -28,30 +28,30 @@ public interface ApiImageService {
 	default List<ImageDTO> convertToDTO(List<Images> images) {
 		return images.stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
-	
+
 	/**
-	 * gets {@link ImageDTO} based in imageId 
+	 * gets {@link ImageDTO} based in imageId
 	 * @param imageId
 	 * @return
 	 */
 	ResponseEntity<ImageDTO> getImage(Long imageId);
-	
+
 	/**
-	 * adds {@link MultipartFile} and Returns {@link ImageDTO} 
+	 * adds {@link MultipartFile} and Returns {@link ImageDTO}
 	 * @param file
 	 * @param path
 	 * @return
 	 */
 	ResponseEntity<ImageDTO> addImage(MultipartFile file,String path);
-	
+
 	/**
-	 * Updates Old {@link Images} With New Based on imageId and {@link MultipartFile} file 
+	 * Updates Old {@link Images} With New Based on imageId and {@link MultipartFile} file
 	 * @param imageId
 	 * @param file
 	 * @return
 	 */
 	ResponseEntity<ImageDTO> updateImage(Long imageId,MultipartFile file,String path);
-	
+
 	/**
 	 * Deletes {@link Images} associated with imageId
 	 * @param imageId

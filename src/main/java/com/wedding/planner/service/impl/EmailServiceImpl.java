@@ -8,7 +8,6 @@ import com.wedding.planner.service.EmailService;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMessage.RecipientType;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -19,7 +18,7 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendEmail(String to, String subject, String body) throws MessagingException {
 		MimeMessage message = mailSender.createMimeMessage();
-		message.setRecipients(RecipientType.TO, to);
+		message.setRecipients(jakarta.mail.Message.RecipientType.TO, to);
 		message.setSubject(subject);
 		message.setContent(body, "text/html; charset=utf-8");
 		mailSender.send(message);

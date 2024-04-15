@@ -13,7 +13,7 @@ public interface ApiCitiesService {
 
 	/**
 	 * Converts {@link Cities} to {@link CitiesDTO}
-	 * 
+	 *
 	 * @param city
 	 * @return
 	 */
@@ -29,12 +29,12 @@ public interface ApiCitiesService {
 	default List<CitiesDTO> convertToDTO(List<Cities> cities) {
 		return cities.stream().map(this::convertToDTO).collect(Collectors.toList());
 	}
-	
+
 	/**
 	 * Gets {@link List} of {@link CitiesDTO} based on {@link States} Provided
 	 * @param state
 	 * @return
 	 */
 	ResponseEntity<List<CitiesDTO>> getCities(States state);
-	
+
 }

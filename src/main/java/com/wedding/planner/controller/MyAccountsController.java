@@ -1,7 +1,5 @@
 package com.wedding.planner.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.wedding.planner.entity.Address;
 import com.wedding.planner.entity.Users;
 import com.wedding.planner.entity.Vendor;
 import com.wedding.planner.enums.UserRole;
@@ -69,12 +66,18 @@ public class MyAccountsController {
 			@RequestParam("address_line_2") String addressLine2, @RequestParam("address_id") Long addressId,
 			@RequestParam(name = "accepting_orders", required = false, defaultValue = "false") Boolean acceptingOrders,
 			@RequestParam("vendor_id") Integer vendorId) {
-
-		Address address = Address.builder().addressLine1(addressLine1).addressLine2(addressLine2).addressId(addressId)
-				.build();
-		Users user = Users.builder().userId(userId).firstName(firstName).lastName(lastName).email(email)
-				.address(List.of(address)).password(password != null ? password : null).build();
-		Vendor vendor = Vendor.builder().user(user).gstNumber(gstNumber).acceptOrders(acceptingOrders)
+		Users dbUser = userService.getUser(userId).getBody();
+		if (!dbUser.getAddress().isEmpty()) {
+			dbUser.getAddress().get(0).setAddressLine1(addressLine1);
+			dbUser.getAddress().get(0).setAddressLine2(addressLine2);
+		}
+		dbUser.setFirstName(firstName);
+		dbUser.setLastName(lastName);
+		dbUser.setEmail(email);
+		if (password != null) {
+			dbUser.setPassword(password);
+		}
+		Vendor vendor = Vendor.builder().user(dbUser).gstNumber(gstNumber).acceptOrders(acceptingOrders)
 				.vendorId(vendorId).build();
 		return vendorService.updatevendor(vendor);
 	}

@@ -47,21 +47,21 @@ public interface VendorService {
 	 * @return
 	 */
 	ResponseEntity<Vendor> getVendor(Users user);
-	
+
 	/**
 	 * Gets Vendor By Id
 	 * @param vendorId
 	 * @return
 	 */
 	ResponseEntity<Vendor> getVendor(Integer vendorId);
-	
+
 	/**
 	 * Searches for Vendor
 	 * @param search
 	 * @return
 	 */
 	ResponseEntity<List<Vendor>> getVendors(String search);
-	
+
 	/**
 	 * Gets Approved vendors
 	 * @return

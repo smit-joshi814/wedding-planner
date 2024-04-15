@@ -11,14 +11,14 @@ public interface BookingService {
 
 	/**
 	 * Gets All the Bookings for vendor
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<List<Booking>> getBookings(Optional<Long> user);
 
 	/**
 	 * Adds Booking
-	 * 
+	 *
 	 * @param bookingDto
 	 * @return
 	 */
@@ -26,7 +26,7 @@ public interface BookingService {
 
 	/**
 	 * Updates Booking
-	 * 
+	 *
 	 * @param bookingDto
 	 * @return
 	 */
@@ -34,7 +34,7 @@ public interface BookingService {
 
 	/**
 	 * Deletes booking
-	 * 
+	 *
 	 * @param bookingId
 	 * @return
 	 */

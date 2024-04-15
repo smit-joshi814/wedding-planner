@@ -28,7 +28,7 @@ public class MailSenderConfig {
 		mailSender.setPort(465);
 		mailSender.setUsername(username);
 		mailSender.setPassword(password);
-		
+
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.ssl.enable", "true");

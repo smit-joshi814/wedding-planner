@@ -36,7 +36,7 @@ public class ApiAddressServiceImpl implements ApiAddressService {
 				.city(Cities.builder().cityId(addressData.cityInfo().cityId()).build()).build();
 
 		address = addressRepository.save(address);
-			
+
 		Users dbUsers = userService.getUser(utility.getCurrentUsername()).getBody();
 		List<Address> addressList = dbUsers.getAddress(); // Get the address list
 

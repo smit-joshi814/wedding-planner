@@ -6,19 +6,19 @@ public interface ForgetPasswordService {
 
 	/**
 	 * Send Password Reset Email
-	 * 
+	 *
 	 * @param email
 	 * @return
 	 */
 	ResponseEntity<String> sendPasswordResetMail(String email);
-	
+
 	/**
 	 * Validates that the token is valid or not
 	 * @param token
 	 * @return
 	 */
 	ResponseEntity<Boolean> validateResetPasswordToken(String token);
-	
+
 	/**
 	 * Resets The User's Password
 	 * @param token

@@ -59,7 +59,7 @@ public class EmergencyContactsServiceImpl implements EmergencyContactsService {
 			return ResponseEntity.internalServerError().body(false);
 		}
 	}
-	
+
 	@Override
 	public ResponseEntity<Boolean> deleteContact(Long contactId) {
 		try {

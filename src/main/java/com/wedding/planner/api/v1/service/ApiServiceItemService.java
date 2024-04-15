@@ -86,5 +86,5 @@ public interface ApiServiceItemService {
      */
 	ResponseEntity<ServiceItemDTO> serviceItem(Long item);
 
-	
+
 }

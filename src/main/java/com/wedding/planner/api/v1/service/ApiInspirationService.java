@@ -1,7 +1,6 @@
 package com.wedding.planner.api.v1.service;
 
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ public interface ApiInspirationService {
 
 	/**
 	 * Converts {@link Inspiration} to {@link InspirationDTO}
-	 * 
+	 *
 	 * @param inspiration
 	 * @return
 	 */
@@ -28,7 +27,7 @@ public interface ApiInspirationService {
 	/**
 	 * Converts {@link List} of {@link Inspiration} to {@link List}
 	 * {@link InspirationDTO}
-	 * 
+	 *
 	 * @param inspirations
 	 * @return
 	 */
@@ -38,7 +37,7 @@ public interface ApiInspirationService {
 
 	/**
 	 * Adds {@link Inspiration} To database
-	 * 
+	 *
 	 * @param file
 	 * @param description
 	 * @param tags
@@ -48,7 +47,7 @@ public interface ApiInspirationService {
 
 	/**
 	 * updates Old {@link Inspiration}
-	 * 
+	 *
 	 * @param file
 	 * @param description
 	 * @param tags
@@ -59,7 +58,7 @@ public interface ApiInspirationService {
 
 	/**
 	 * Gets Specified inspiration
-	 * 
+	 *
 	 * @param inspirationId
 	 * @return
 	 */
@@ -67,12 +66,12 @@ public interface ApiInspirationService {
 
 	/**
 	 * Deletes Given Inspiration
-	 * 
+	 *
 	 * @param inspirationId
 	 * @return
 	 */
 	ResponseEntity<Boolean> deleteInspiration(Long inspirationId);
-	
+
 	/**
 	 * gets inspirations with paging
 	 * @param page

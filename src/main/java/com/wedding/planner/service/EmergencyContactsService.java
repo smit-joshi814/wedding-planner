@@ -15,28 +15,28 @@ public interface EmergencyContactsService {
 	 * @return
 	 */
 	ResponseEntity<List<EmergencyContacts>> getcontacts(Users user);
-	
+
 	/**
 	 * Adds {@link EmergencyContacts}
 	 * @param contact
 	 * @return
 	 */
 	ResponseEntity<EmergencyContacts> addContact(EmergencyContacts contact);
-	
+
 	/**
 	 * Updates {@link EmergencyContacts}
 	 * @param contact
 	 * @return
 	 */
 	ResponseEntity<EmergencyContacts> updateContact(EmergencyContacts contact);
-	
+
 	/**
 	 * Deletes {@link EmergencyContacts}
 	 * @param contact
 	 * @return
 	 */
 	ResponseEntity<Boolean> deleteContact(EmergencyContacts contact);
-	
+
 	/**
 	 * Deletes Contact By Id
 	 * @param contactId

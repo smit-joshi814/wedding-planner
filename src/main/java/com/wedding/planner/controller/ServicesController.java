@@ -36,7 +36,7 @@ public class ServicesController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private VendorService vendorService;
 

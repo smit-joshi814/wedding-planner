@@ -12,7 +12,7 @@ public interface ApiStatesService {
 
 	/**
 	 * Converts {@link States} to {@link StatesDTO}
-	 * 
+	 *
 	 * @param state
 	 * @return
 	 */
@@ -22,7 +22,7 @@ public interface ApiStatesService {
 
 	/**
 	 * Converts {@link List} of {@link States} to {@link StatesDTO}
-	 * 
+	 *
 	 * @param states
 	 * @return
 	 */
@@ -32,7 +32,7 @@ public interface ApiStatesService {
 
 	/**
 	 * Gets the {@link List} of {@link StatesDTO}
-	 * 
+	 *
 	 * @return
 	 */
 	ResponseEntity<List<StatesDTO>> getStates();
