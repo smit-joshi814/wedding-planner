@@ -296,15 +296,10 @@
 
             <!-- Market buttons -->
             <div class="d-flex justify-content-center justify-content-lg-start">
-              <a class="btn btn-dark btn-lg px-3 py-2 me-3" href="#">
-                <i class="d-dark-mode-none mx-1 ai-google-play me-2"></i>
-                <i class="d-none d-dark-mode-block mx-1 ai-google-play me-2"></i>
-                Coming soon
-              </a>
-              <a class="btn btn-dark btn-lg px-3 py-2" href="#">
-                <i class="d-dark-mode-none mx-1 ai-apple me-2"></i>
-                <i class="d-none d-dark-mode-block mx-1 ai-apple me-2"></i>
-                Coming soon
+              <a class="btn btn-dark btn-lg px-3 py-2 me-3" href="/resources/apk/wedding-planner.apk" download>
+                <i class="d-dark-mode-none mx-1 ai-download me-2"></i>
+                <i class="d-none d-dark-mode-block mx-1 ai-download me-2"></i>
+                Download Now
               </a>
             </div>
             
@@ -604,13 +599,9 @@
 
                 <!-- Market buttons -->
                 <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-md-start">
-                  <a class="btn btn-light btn-lg px-3 py-2 me-sm-3 mb-3 mb-sm-0" href="#">
-                    <i class="ai-google-play me-2"></i>
-                    Coming soon
-                  </a>
-                  <a class="btn btn-light btn-lg px-3 py-2" href="#">
-                    <i class="ai-apple me-2"></i>
-                    Coming soon
+                  <a class="btn btn-light btn-lg px-3 py-2 me-sm-3 mb-3 mb-sm-0" href="/resources/apk/wedding-planner.apk">
+                    <i class="ai-download me-2"></i>
+                    Download Now
                   </a>
                 </div>
 
@@ -643,16 +634,17 @@
     <footer class="footer bg-secondary py-5">
       <div class="container pt-md-2 pt-lg-3 pt-xl-4">
         <div class="row pb-4 pb-md-5 pt-sm-2 mb-lg-2">
-          <div class="col-md-4 pb-2 pb-md-0 mb-4 mb-md-0 d-flex justify-content-center">
+          <div class="col-md-6 pb-2 pb-md-0 mb-4 mb-md-0 d-flex justify-content-start">
             <a class="navbar-brand text-nav py-0 mb-3 mb-md-4" data-scroll href="#top">
               <span class="text-primary flex-shrink-0 me-2">
                 <img src="assets/app-icons/logo.png" width="150" alt="Wedding Planner" />
               </span>
             </a>
             </div>
-            <div class="col-md-4 pb-2 pb-md-0 mb-4 mb-md-0 d-flex justify-content-center">
+            <div class="col-md-6 pb-2 pb-md-0 mb-4 mb-md-0 d-flex justify-content-end">
             <p class="fs-sm pb-2 pb-md-3 mb-3">Let's Make Your Wedding Epic.</p>
           </div>
+          <!-- 
           <div class="col-md-4 pb-2 pb-md-0 mb-4 mb-md-0">
             <div class="d-flex gap-5 justify-content-center">
               <a class="btn btn-icon btn-sm btn-secondary btn-facebook rounded-circle" href="#" aria-label="Facebook">
@@ -666,11 +658,14 @@
               </a>
             </div>
           </div>
+           -->
         </div>
-        <p class="nav fs-sm mb-0">
-          <span class="text-body-secondary">&copy; All rights reserved. </span>
-          <a class="nav-link d-inline fw-normal p-0 ms-1" data-scroll href="#top">Wedding Planner</a>
-        </p>
+        <div class="d-flex justify-content-center">
+	        <p class="nav fs-sm mb-0">
+	          <span class="text-body-secondary">&copy; All rights reserved. </span>
+	          <a class="nav-link d-inline fw-normal p-0 ms-1" data-scroll href="#top">Wedding Planner</a>
+	        </p>
+        </div>
       </div>
     </footer>
   
