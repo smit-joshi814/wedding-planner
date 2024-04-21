@@ -68,7 +68,7 @@ Welcome to Wedding Planner, a project built using Java with Spring Boot and data
 
 
 ## Glimpse of the Project
-
+![Wedding planner dashboard](https://github.com/smit-joshi814/wedding-planner/assets/45530965/9d859af3-4f88-449c-b87d-7b863e59a39b)
 
 
 ## Contributing
